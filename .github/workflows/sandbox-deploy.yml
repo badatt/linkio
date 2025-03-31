@@ -1,0 +1,33 @@
+name: Sandbox Deploy
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  deploy-backend-infrastructure:
+    name: Deploy backend infrastructure
+    runs-on: ubuntu-latest
+    environment: sandbox
+    env:
+      CI: true
+      FORCE_COLOR: true
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./infra
+
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v4
+
+      - uses: ./.github/actions/setup.yml
+        with:
+          aws_role_to_assume: ${{ env.AWS_GITHUB_OIDC_DEPLOYMENT_ROLE_ARN }}
+          aws_region: ${{ env.AWS_DEFAULT_REGION }}
+      
+      - uses: ./.github/actions/deploy.yml
+        with:
+          aws_account_id: ${{ env.AWS_ACCOUNT_ID }}
+          aws_default_region: ${{ env.AWS_DEFAULT_REGION }}
