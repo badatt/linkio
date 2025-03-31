@@ -23,7 +23,8 @@ runs:
         registry-url: https://registry.npmjs.org/
         cache: 'pnpm'
     
-    - uses: pnpm/action-setup@v4
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v4
       with:
         version: 10
     
