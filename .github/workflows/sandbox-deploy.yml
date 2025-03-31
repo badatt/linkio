@@ -9,7 +9,8 @@ jobs:
   deploy-backend-infrastructure:
     name: Deploy backend infrastructure
     runs-on: ubuntu-latest
-    environment: sandbox
+    environment:
+      name: sandbox
     env:
       CI: true
       FORCE_COLOR: true
@@ -21,6 +22,13 @@ jobs:
     steps:
       - name: Check out the code
         uses: actions/checkout@v4
+      
+      - name: Print environment variables for debugging
+        run: |
+          echo "AWS_DEFAULT_REGION=${{ env.AWS_DEFAULT_REGION }}"
+          echo "AWS_GITHUB_OIDC_DEPLOYMENT_ROLE_ARN=${{ env.AWS_GITHUB_OIDC_DEPLOYMENT_ROLE_ARN }}"
+          echo "AWS_ACCOUNT_ID=${{ env.AWS_ACCOUNT_ID }}"
+        shell: bash
 
       - name: Setup
         uses: ./.github/actions/setup
