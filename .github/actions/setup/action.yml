@@ -23,8 +23,8 @@ runs:
         registry-url: https://registry.npmjs.org/
         cache: 'pnpm'
     
-    - name: Install pnpm  # ✅ Install pnpm explicitly
-      run: npm install -g pnpm
+    - name: Enable pnpm via corepack
+      run: corepack enable
       shell: bash
     
     - name: Configure AWS Credentials
