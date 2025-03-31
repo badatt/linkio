@@ -24,7 +24,9 @@ runs:
         cache: 'pnpm'
     
     - name: Enable pnpm via corepack
-      run: corepack enable
+      run: |
+        corepack enable
+        corepack prepare pnpm@latest --activate
       shell: bash
     
     - name: Configure AWS Credentials
