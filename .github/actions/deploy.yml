@@ -1,0 +1,25 @@
+name: Deployment
+description: |
+  This workflow deploys the backend infrastructure using AWS CDK.
+  It is designed to be reusable and can be called from other workflows.
+  The workflow is triggered by a workflow call, which means it can be invoked from other workflows.
+
+inputs:
+  aws_account_id:
+    description: The AWS account ID to configure.
+    required: true
+  aws_default_region:
+    description: The AWS region to configure.
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    
+    - name: Synth AWS CDK
+      env:
+        AWS_ACCOUNT_ID: ${{ inputs.aws_account_id }}
+        AWS_DEFAULT_REGION: ${{ inputs.aws_default_region }}
+      run: |
+        echo "Synth AWS stack ..."
+        pnpm run synth
