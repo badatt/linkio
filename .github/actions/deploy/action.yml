@@ -19,6 +19,7 @@ runs:
     
     - name: Synth AWS CDK
       shell: bash
+      working-directory: ./infra
       env:
         AWS_ACCOUNT_ID: ${{ inputs.aws_account_id }}
         AWS_DEFAULT_REGION: ${{ inputs.aws_default_region }}
