@@ -5,14 +5,19 @@
     "infra": "bin/infra.js"
   },
   "scripts": {
-    "build": "tsc",
     "watch": "tsc -w",
     "test": "jest",
-    "cdk": "cdk"
+    "deploy": "cdk deploy",
+    "deploy:sandbox": "dotenv -e .sandbox.env -- cdk deploy",
+    "deploy:PROD": "dotenv -e .PROD.env -- cdk deploy",
+    "synth": "cdk synth",
+    "synth:sandbox": "dotenv -e .sandbox.env -- cdk synth",
+    "synth:PROD": "dotenv -e .PROD.env -- cdk synth"
   },
   "devDependencies": {
     "@types/jest": "^29.5.14",
     "@types/node": "22.7.9",
+    "dotenv-cli": "^8.0.0",
     "jest": "^29.7.0",
     "ts-jest": "^29.2.5",
     "aws-cdk": "2.1006.0",
