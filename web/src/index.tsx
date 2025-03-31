@@ -4,7 +4,7 @@ import { createRoot } from "react-dom/client";
 const App = () => {
   return (
     <StrictMode>
-      <h1>Building a fullstack TypeScript project with Turbo repo</h1>
+      <h1>Building a fullstack TypeScript project</h1>
       <h2>Workspaces</h2>
     </StrictMode>
   );
