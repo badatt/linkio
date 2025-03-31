@@ -1,0 +1,31 @@
+name: Setup
+description: |
+  This workflow sets up the environment for the project by installing dependencies and configuring AWS credentials.
+  It is designed to be reusable and can be called from other workflows.
+  The workflow is triggered by a workflow call, which means it can be invoked from other workflows.
+inputs:
+  aws_role_to_assume:
+    description: The ARN of the role to assume for AWS credentials.
+    required: true
+  aws_default_region:
+    description: The AWS region to configure.
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18.16.0'
+        registry-url: https://registry.npmjs.org/
+    
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        role-to-assume: ${{ inputs.aws_role_to_assume }}
+        aws-region: ${{ inputs.aws_default_region }}
+    
+    - name: Install Dependencies
+      run: pnpm install
