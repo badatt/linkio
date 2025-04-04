@@ -28,7 +28,6 @@ runs:
       env:
         AWS_ACCOUNT_ID: ${{ inputs.aws_account_id }}
         AWS_DEFAULT_REGION: ${{ inputs.aws_default_region }}
-        CDK_COMMAND: ${{ inputs.command }}
       run: |
-        echo "${CDK_COMMAND} AWS stack ..."
-        npm run ${CDK_COMMAND}
+        echo "${{ inputs.command }} AWS stack ..."
+        npm run ${{ inputs.command }}
