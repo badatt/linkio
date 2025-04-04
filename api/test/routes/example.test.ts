@@ -8,5 +8,6 @@ test('example is loaded', async (t) => {
   const res = await app.inject({
     url: '/example'
   })
+
   assert.equal(res.payload, 'this is an example')
 })

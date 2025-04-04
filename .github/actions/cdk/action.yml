@@ -1,9 +1,8 @@
-name: Deployment
+name: CDK action
 description: |
-  This workflow deploys the backend infrastructure using AWS CDK.
+  This action runs a specified AWS CDK command in the infra directory.
   It is designed to be reusable and can be called from other workflows.
-  The workflow is triggered by a workflow call, which means it can be invoked from other workflows.
-
+  The action is triggered by a workflow call, which means it can be invoked from other workflows.
 inputs:
   aws_account_id:
     description: The AWS account ID to configure.
@@ -11,18 +10,22 @@ inputs:
   aws_default_region:
     description: The AWS region to configure.
     required: true
+  command:
+    description: The command to run for the CDK action.
+    required: true
 
 runs:
   using: "composite"
 
   steps:
     
-    - name: Synth AWS CDK
+    - name:  Run CDK command
       shell: bash
       working-directory: ./infra
       env:
         AWS_ACCOUNT_ID: ${{ inputs.aws_account_id }}
         AWS_DEFAULT_REGION: ${{ inputs.aws_default_region }}
+        CDK_COMMAND: ${{ inputs.command }}
       run: |
-        echo "Synth AWS stack ..."
-        pnpm run synth
+        echo "${CDK_COMMAND} AWS stack ..."
+        npm run ${CDK_COMMAND}
