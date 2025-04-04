@@ -22,7 +22,7 @@ export const handler = async (event, context) => {
   };
 };  
       `),
-      handler: 'handler',
+      handler: 'index.handler',
       runtime: Runtime.NODEJS_22_X,
       timeout: Duration.seconds(30),
     });
