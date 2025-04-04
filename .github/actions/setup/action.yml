@@ -4,9 +4,6 @@ description: |
   It is designed to be reusable and can be called from other workflows.
   The workflow is triggered by a workflow call, which means it can be invoked from other workflows.
 inputs:
-  working_directory:
-    description: The working directory for the action.
-    required: false
   aws_role_to_assume:
     description: The ARN of the role to assume for AWS credentials.
     required: true
@@ -24,8 +21,6 @@ runs:
       with:
         node-version: '22.11.0'
         registry-url: https://registry.npmjs.org/
-        cache: 'npm'
-        cache-dependency-path: ${{ inputs.working_directory }}/package-lock.json
     
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v4
@@ -35,6 +30,6 @@ runs:
     
     - name: Install Dependencies
       shell: bash
-      working-directory: ${{ inputs.working_directory }}
       run: |
-        echo "Installing dependencies ... from ${{ inputs.working_directory }}" 
+        echo "Installing dependencies ... from ${{ inputs.working_directory }}"
+        npm install
