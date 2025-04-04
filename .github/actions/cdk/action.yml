@@ -13,6 +13,9 @@ inputs:
   aws_default_region:
     description: The AWS region to configure.
     required: true
+  app_name:
+    description: The name of the app to deploy.
+    required: true
   command:
     description: The command to run for the CDK action.
     required: true
@@ -28,6 +31,7 @@ runs:
       env:
         AWS_ACCOUNT_ID: ${{ inputs.aws_account_id }}
         AWS_DEFAULT_REGION: ${{ inputs.aws_default_region }}
+        APP_NAME: ${{ inputs.app_name }}
       run: |
         echo "${{ inputs.command }} AWS stack"
         npm run ${{ inputs.command }}
