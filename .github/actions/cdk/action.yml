@@ -34,7 +34,7 @@ runs:
         APP_NAME: ${{ inputs.app_name }}
       run: |
         echo "Bootstrap CDK"
-        cdk bootstrap
+        npm run bootstrap
     
     - name:  Run CDK command
       shell: bash
