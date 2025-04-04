@@ -10,6 +10,9 @@
     "deploy": "cdk deploy",
     "deploy:sandbox": "dotenv -e .sandbox.env -- cdk deploy",
     "deploy:PROD": "dotenv -e .PROD.env -- cdk deploy",
+    "diff": "cdk diff",
+    "diff:sandbox": "dotenv -e .sandbox.env -- cdk diff",
+    "diff:PROD": "dotenv -e .PROD.env -- cdk diff",
     "synth": "cdk synth",
     "synth:sandbox": "dotenv -e .sandbox.env -- cdk synth",
     "synth:PROD": "dotenv -e .PROD.env -- cdk synth"
