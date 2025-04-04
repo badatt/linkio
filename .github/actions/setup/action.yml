@@ -4,6 +4,9 @@ description: |
   It is designed to be reusable and can be called from other workflows.
   The workflow is triggered by a workflow call, which means it can be invoked from other workflows.
 inputs:
+  working_directory:
+    description: The working directory for the action.
+    required: true
   aws_role_to_assume:
     description: The ARN of the role to assume for AWS credentials.
     required: true
@@ -29,6 +32,7 @@ runs:
         aws-region: ${{ inputs.aws_default_region }}
     
     - name: Install Dependencies
+      working-directory: ${{ inputs.working_directory }}
       shell: bash
       run: |
         echo "Installing dependencies in from ${{ inputs.working_directory }}"
