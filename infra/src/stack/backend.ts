@@ -12,7 +12,7 @@ export class BackendStack extends Stack {
 
     const apiFunction = new NodejsFunction(this, `${ctx.props.appName}ApiFunction`, {
       code: Code.fromInline(`
-export const handler = async (event, context) => {
+exports.handler = async (event, context) => {
   console.log('Event:', JSON.stringify(event, null, 2));
   console.log('Context:', JSON.stringify(context, null, 2));
 
@@ -22,7 +22,7 @@ export const handler = async (event, context) => {
   };
 };  
       `),
-      handler: 'index.handler',
+      handler: 'lambda.handler',
       runtime: Runtime.NODEJS_22_X,
       timeout: Duration.seconds(30),
     });
