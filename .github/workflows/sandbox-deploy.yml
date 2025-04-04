@@ -36,10 +36,11 @@ jobs:
       - name: Diff
         uses: ./.github/actions/cdk
         with:
-          aws_account_id: ${{ vars.AWS_ACCOUNT_ID }}
-          aws_default_region: ${{ vars.AWS_DEFAULT_REGION }}
           working_directory: ./infra
           command: diff
+          aws_account_id: ${{ vars.AWS_ACCOUNT_ID }}
+          aws_default_region: ${{ vars.AWS_DEFAULT_REGION }}
+          app_name: ${{ vars.APP_NAME }}
 
   deploy-backend-infrastructure:
     name: Deploy backend infrastructure
@@ -71,7 +72,8 @@ jobs:
       - name: Deployment
         uses: ./.github/actions/cdk
         with:
-          aws_account_id: ${{ vars.AWS_ACCOUNT_ID }}
-          aws_default_region: ${{ vars.AWS_DEFAULT_REGION }}
           working_directory: ./infra
           command: deploy
+          aws_account_id: ${{ vars.AWS_ACCOUNT_ID }}
+          aws_default_region: ${{ vars.AWS_DEFAULT_REGION }}
+          app_name: ${{ vars.APP_NAME }}
