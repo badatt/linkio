@@ -35,4 +35,6 @@ runs:
     - name: Install Dependencies
       shell: bash
       working-directory: ${{ inputs.working_directory }}
-      run: npm install
+      run: |
+        echo "Installing dependencies ... from ${{ inputs.working_directory }}" 
+        npm install
