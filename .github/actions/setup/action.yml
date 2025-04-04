@@ -34,7 +34,7 @@ runs:
     
     - name: Install Dependencies
       shell: bash
-      working-directory: ${{ inputs.working_directory }}
+      working-directory: ./infra
       run: |
         echo "Installing dependencies ... from ${{ inputs.working_directory }}" 
         npm install
