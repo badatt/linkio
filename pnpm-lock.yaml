@@ -86,20 +86,20 @@ importers:
     dependencies:
       '@tidy-ui/all':
         specifier: ^0.48.0
-        version: 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
+        version: 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
       react:
-        specifier: ^18.2.0
-        version: 18.3.1
+        specifier: ^19.1.0
+        version: 19.1.0
       react-dom:
         specifier: ^18.2.0
-        version: 18.3.1(react@18.3.1)
+        version: 18.3.1(react@19.1.0)
     devDependencies:
       '@types/react':
-        specifier: ^18.2.45
-        version: 18.3.20
+        specifier: ^19.1.0
+        version: 19.1.0
       '@types/react-dom':
         specifier: ^18.2.18
-        version: 18.3.5(@types/react@18.3.20)
+        version: 18.3.5(@types/react@19.1.0)
       '@vitejs/plugin-react':
         specifier: ^4.2.1
         version: 4.3.4(vite@5.4.16(@types/node@22.13.14))
@@ -1019,16 +1019,13 @@ packages:
   '@types/node@22.7.9':
     resolution: {integrity: sha512-jrTfRC7FM6nChvU7X2KqcrgquofrWLFDeYC1hKfwNWomVvrn7JIksqf344WN2X/y8xrgqBd2dJATZV4GbatBfg==}
 
-  '@types/prop-types@15.7.14':
-    resolution: {integrity: sha512-gNMvNH49DJ7OJYv+KAKn0Xp45p8PLl6zo2YnvDIbTd4J6MER2BmWN49TG7n9LvkyihINxeKW8+3bfS2yDC9dzQ==}
-
   '@types/react-dom@18.3.5':
     resolution: {integrity: sha512-P4t6saawp+b/dFrUr2cvkVsfvPguwsxtH6dNIYRllMsefqFzkZk5UIjzyDOv5g1dXIPdG4Sp1yCR4Z6RCUsG/Q==}
     peerDependencies:
       '@types/react': ^18.0.0
 
-  '@types/react@18.3.20':
-    resolution: {integrity: sha512-IPaCZN7PShZK/3t6Q87pfTkRm6oLTd4vztyoj+cbHUF1g3FfVb2tFIL79uCRKEfv16AhqDMBywP2VW3KIZUvcg==}
+  '@types/react@19.1.0':
+    resolution: {integrity: sha512-UaicktuQI+9UKyA4njtDOGBD/67t8YEBt2xdfqu8+gP9hqPUPsiXlNPcpS2gVdjmis5GKPG3fCxbQLVgxsQZ8w==}
 
   '@types/stack-utils@2.0.3':
     resolution: {integrity: sha512-9aEbYZ3TbYMznPdcdr3SmIrLXwC/AKZXQeCf9Pgao5CKb8CyHuEX5jzWPTkvregvhRJHcpRO6BFoGW9ycaOkYw==}
@@ -2083,8 +2080,8 @@ packages:
     resolution: {integrity: sha512-jCvmsr+1IUSMUyzOkRcvnVbX3ZYC6g9TDrDbFuFmRDq7PD4yaGbLKNQL6k2jnArV8hjYxh7hVhAZB6s9HDGpZA==}
     engines: {node: '>=0.10.0'}
 
-  react@18.3.1:
-    resolution: {integrity: sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==}
+  react@19.1.0:
+    resolution: {integrity: sha512-FS+XFBNvn3GTAWq26joslQgWNoFu08F4kl0J4CgdNKADkdSGXQyTCnKteIAJy96Br6YbpEU1LSzV5dYtjMkMDg==}
     engines: {node: '>=0.10.0'}
 
   readable-stream@3.6.2:
@@ -3113,297 +3110,297 @@ snapshots:
     dependencies:
       '@sinonjs/commons': 3.0.1
 
-  '@tidy-ui/alert@0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))':
+  '@tidy-ui/alert@0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))':
     dependencies:
-      '@tidy-ui/commons': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      react: 18.3.1
-      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)
+      '@tidy-ui/commons': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      react: 19.1.0
+      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0)
 
-  '@tidy-ui/all@0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))':
+  '@tidy-ui/all@0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))':
     dependencies:
-      '@tidy-ui/commons': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      '@tidy-ui/feedback': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      '@tidy-ui/form': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      '@tidy-ui/layout': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      '@tidy-ui/navigation': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      '@tidy-ui/presentation': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      react: 18.3.1
-      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)
+      '@tidy-ui/commons': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      '@tidy-ui/feedback': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      '@tidy-ui/form': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      '@tidy-ui/layout': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      '@tidy-ui/navigation': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      '@tidy-ui/presentation': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      react: 19.1.0
+      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0)
 
-  '@tidy-ui/avatar@0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))':
+  '@tidy-ui/avatar@0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))':
     dependencies:
-      '@tidy-ui/commons': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      react: 18.3.1
-      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)
+      '@tidy-ui/commons': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      react: 19.1.0
+      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0)
 
-  '@tidy-ui/badge@0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))':
+  '@tidy-ui/badge@0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))':
     dependencies:
-      '@tidy-ui/commons': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      react: 18.3.1
-      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)
+      '@tidy-ui/commons': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      react: 19.1.0
+      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0)
 
-  '@tidy-ui/border@0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))':
+  '@tidy-ui/border@0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))':
     dependencies:
-      '@tidy-ui/commons': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      react: 18.3.1
-      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)
+      '@tidy-ui/commons': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      react: 19.1.0
+      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0)
 
-  '@tidy-ui/breadcrumb@0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))':
+  '@tidy-ui/breadcrumb@0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))':
     dependencies:
-      '@tidy-ui/commons': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      react: 18.3.1
-      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)
+      '@tidy-ui/commons': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      react: 19.1.0
+      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0)
 
-  '@tidy-ui/button@0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))':
+  '@tidy-ui/button@0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))':
     dependencies:
-      '@tidy-ui/commons': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      react: 18.3.1
-      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)
+      '@tidy-ui/commons': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      react: 19.1.0
+      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0)
 
-  '@tidy-ui/card@0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))':
+  '@tidy-ui/card@0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))':
     dependencies:
-      '@tidy-ui/commons': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      react: 18.3.1
-      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)
+      '@tidy-ui/commons': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      react: 19.1.0
+      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0)
 
-  '@tidy-ui/checkbox@0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))':
+  '@tidy-ui/checkbox@0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))':
     dependencies:
-      '@tidy-ui/commons': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      react: 18.3.1
-      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)
+      '@tidy-ui/commons': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      react: 19.1.0
+      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0)
 
-  '@tidy-ui/chip@0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))':
+  '@tidy-ui/chip@0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))':
     dependencies:
-      '@tidy-ui/commons': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      react: 18.3.1
-      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)
+      '@tidy-ui/commons': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      react: 19.1.0
+      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0)
 
-  '@tidy-ui/code@0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))':
+  '@tidy-ui/code@0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))':
     dependencies:
-      '@tidy-ui/commons': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      react: 18.3.1
-      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)
+      '@tidy-ui/commons': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      react: 19.1.0
+      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0)
 
-  '@tidy-ui/commons@0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))':
+  '@tidy-ui/commons@0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))':
     dependencies:
-      '@tidy-ui/types': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      react: 18.3.1
-      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)
+      '@tidy-ui/types': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      react: 19.1.0
+      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0)
 
-  '@tidy-ui/container@0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))':
+  '@tidy-ui/container@0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))':
     dependencies:
-      '@tidy-ui/commons': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      react: 18.3.1
-      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)
+      '@tidy-ui/commons': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      react: 19.1.0
+      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0)
 
-  '@tidy-ui/divider@0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))':
+  '@tidy-ui/divider@0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))':
     dependencies:
-      '@tidy-ui/commons': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      react: 18.3.1
-      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)
+      '@tidy-ui/commons': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      react: 19.1.0
+      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0)
 
-  '@tidy-ui/drawer@0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))':
+  '@tidy-ui/drawer@0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))':
     dependencies:
-      '@tidy-ui/commons': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      react: 18.3.1
-      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)
+      '@tidy-ui/commons': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      react: 19.1.0
+      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0)
 
-  '@tidy-ui/feedback@0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))':
+  '@tidy-ui/feedback@0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))':
     dependencies:
-      '@tidy-ui/notification': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      '@tidy-ui/progress': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      '@tidy-ui/toaster': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      react: 18.3.1
-      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)
+      '@tidy-ui/notification': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      '@tidy-ui/progress': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      '@tidy-ui/toaster': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      react: 19.1.0
+      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0)
 
-  '@tidy-ui/flexbox@0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))':
+  '@tidy-ui/flexbox@0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))':
     dependencies:
-      '@tidy-ui/commons': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      react: 18.3.1
-      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)
+      '@tidy-ui/commons': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      react: 19.1.0
+      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0)
 
-  '@tidy-ui/form@0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))':
+  '@tidy-ui/form@0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))':
     dependencies:
-      '@tidy-ui/checkbox': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      '@tidy-ui/input': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      '@tidy-ui/radio': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      '@tidy-ui/select': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      '@tidy-ui/switch': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      react: 18.3.1
-      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)
+      '@tidy-ui/checkbox': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      '@tidy-ui/input': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      '@tidy-ui/radio': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      '@tidy-ui/select': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      '@tidy-ui/switch': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      react: 19.1.0
+      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0)
 
-  '@tidy-ui/frame@0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))':
+  '@tidy-ui/frame@0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))':
     dependencies:
-      '@tidy-ui/commons': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      react: 18.3.1
-      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)
+      '@tidy-ui/commons': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      react: 19.1.0
+      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0)
 
-  '@tidy-ui/grid@0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))':
+  '@tidy-ui/grid@0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))':
     dependencies:
-      '@tidy-ui/commons': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      react: 18.3.1
-      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)
+      '@tidy-ui/commons': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      react: 19.1.0
+      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0)
 
-  '@tidy-ui/input@0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))':
+  '@tidy-ui/input@0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))':
     dependencies:
-      '@tidy-ui/commons': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      react: 18.3.1
-      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)
+      '@tidy-ui/commons': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      react: 19.1.0
+      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0)
 
-  '@tidy-ui/layout@0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))':
+  '@tidy-ui/layout@0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))':
     dependencies:
-      '@tidy-ui/border': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      '@tidy-ui/container': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      '@tidy-ui/divider': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      '@tidy-ui/flexbox': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      '@tidy-ui/frame': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      '@tidy-ui/grid': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      '@tidy-ui/loader': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      '@tidy-ui/stack': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      react: 18.3.1
-      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)
+      '@tidy-ui/border': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      '@tidy-ui/container': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      '@tidy-ui/divider': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      '@tidy-ui/flexbox': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      '@tidy-ui/frame': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      '@tidy-ui/grid': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      '@tidy-ui/loader': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      '@tidy-ui/stack': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      react: 19.1.0
+      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0)
 
-  '@tidy-ui/loader@0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))':
+  '@tidy-ui/loader@0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))':
     dependencies:
-      '@tidy-ui/commons': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      react: 18.3.1
-      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)
+      '@tidy-ui/commons': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      react: 19.1.0
+      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0)
 
-  '@tidy-ui/message@0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))':
+  '@tidy-ui/message@0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))':
     dependencies:
-      '@tidy-ui/commons': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      react: 18.3.1
-      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)
+      '@tidy-ui/commons': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      react: 19.1.0
+      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0)
 
-  '@tidy-ui/modal@0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))':
+  '@tidy-ui/modal@0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))':
     dependencies:
-      '@tidy-ui/commons': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      react: 18.3.1
-      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)
+      '@tidy-ui/commons': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      react: 19.1.0
+      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0)
 
-  '@tidy-ui/navigation@0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))':
+  '@tidy-ui/navigation@0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))':
     dependencies:
-      '@tidy-ui/breadcrumb': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      '@tidy-ui/drawer': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      '@tidy-ui/modal': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      '@tidy-ui/tabs': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      react: 18.3.1
-      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)
+      '@tidy-ui/breadcrumb': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      '@tidy-ui/drawer': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      '@tidy-ui/modal': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      '@tidy-ui/tabs': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      react: 19.1.0
+      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0)
 
-  '@tidy-ui/note@0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))':
+  '@tidy-ui/note@0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))':
     dependencies:
-      '@tidy-ui/commons': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      react: 18.3.1
-      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)
+      '@tidy-ui/commons': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      react: 19.1.0
+      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0)
 
-  '@tidy-ui/notification@0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))':
+  '@tidy-ui/notification@0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))':
     dependencies:
-      '@tidy-ui/commons': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      react: 18.3.1
-      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)
+      '@tidy-ui/commons': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      react: 19.1.0
+      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0)
 
-  '@tidy-ui/panel@0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))':
+  '@tidy-ui/panel@0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))':
     dependencies:
-      '@tidy-ui/commons': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      react: 18.3.1
-      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)
+      '@tidy-ui/commons': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      react: 19.1.0
+      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0)
 
-  '@tidy-ui/paper@0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))':
+  '@tidy-ui/paper@0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))':
     dependencies:
-      '@tidy-ui/commons': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      react: 18.3.1
-      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)
+      '@tidy-ui/commons': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      react: 19.1.0
+      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0)
 
-  '@tidy-ui/presentation@0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))':
+  '@tidy-ui/presentation@0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))':
     dependencies:
-      '@tidy-ui/alert': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      '@tidy-ui/avatar': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      '@tidy-ui/badge': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      '@tidy-ui/button': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      '@tidy-ui/card': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      '@tidy-ui/chip': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      '@tidy-ui/code': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      '@tidy-ui/message': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      '@tidy-ui/note': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      '@tidy-ui/panel': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      '@tidy-ui/paper': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      '@tidy-ui/table': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      '@tidy-ui/tag': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      '@tidy-ui/text': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      '@tidy-ui/tooltip': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      react: 18.3.1
-      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)
+      '@tidy-ui/alert': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      '@tidy-ui/avatar': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      '@tidy-ui/badge': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      '@tidy-ui/button': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      '@tidy-ui/card': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      '@tidy-ui/chip': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      '@tidy-ui/code': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      '@tidy-ui/message': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      '@tidy-ui/note': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      '@tidy-ui/panel': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      '@tidy-ui/paper': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      '@tidy-ui/table': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      '@tidy-ui/tag': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      '@tidy-ui/text': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      '@tidy-ui/tooltip': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      react: 19.1.0
+      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0)
 
-  '@tidy-ui/progress@0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))':
+  '@tidy-ui/progress@0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))':
     dependencies:
-      '@tidy-ui/commons': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      react: 18.3.1
-      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)
+      '@tidy-ui/commons': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      react: 19.1.0
+      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0)
 
-  '@tidy-ui/radio@0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))':
+  '@tidy-ui/radio@0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))':
     dependencies:
-      '@tidy-ui/commons': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      react: 18.3.1
-      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)
+      '@tidy-ui/commons': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      react: 19.1.0
+      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0)
 
-  '@tidy-ui/select@0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))':
+  '@tidy-ui/select@0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))':
     dependencies:
-      '@tidy-ui/commons': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      react: 18.3.1
-      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)
+      '@tidy-ui/commons': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      react: 19.1.0
+      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0)
 
-  '@tidy-ui/stack@0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))':
+  '@tidy-ui/stack@0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))':
     dependencies:
-      '@tidy-ui/commons': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      react: 18.3.1
-      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)
+      '@tidy-ui/commons': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      react: 19.1.0
+      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0)
 
-  '@tidy-ui/switch@0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))':
+  '@tidy-ui/switch@0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))':
     dependencies:
-      '@tidy-ui/commons': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      react: 18.3.1
-      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)
+      '@tidy-ui/commons': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      react: 19.1.0
+      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0)
 
-  '@tidy-ui/table@0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))':
+  '@tidy-ui/table@0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))':
     dependencies:
-      '@tidy-ui/commons': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      react: 18.3.1
-      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)
+      '@tidy-ui/commons': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      react: 19.1.0
+      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0)
 
-  '@tidy-ui/tabs@0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))':
+  '@tidy-ui/tabs@0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))':
     dependencies:
-      '@tidy-ui/commons': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      react: 18.3.1
-      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)
+      '@tidy-ui/commons': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      react: 19.1.0
+      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0)
 
-  '@tidy-ui/tag@0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))':
+  '@tidy-ui/tag@0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))':
     dependencies:
-      '@tidy-ui/commons': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      react: 18.3.1
-      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)
+      '@tidy-ui/commons': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      react: 19.1.0
+      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0)
 
-  '@tidy-ui/text@0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))':
+  '@tidy-ui/text@0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))':
     dependencies:
-      '@tidy-ui/commons': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      react: 18.3.1
-      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)
+      '@tidy-ui/commons': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      react: 19.1.0
+      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0)
 
-  '@tidy-ui/toaster@0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))':
+  '@tidy-ui/toaster@0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))':
     dependencies:
-      '@tidy-ui/commons': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      react: 18.3.1
-      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)
+      '@tidy-ui/commons': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      react: 19.1.0
+      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0)
 
-  '@tidy-ui/tooltip@0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))':
+  '@tidy-ui/tooltip@0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))':
     dependencies:
-      '@tidy-ui/commons': 0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))
-      react: 18.3.1
-      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)
+      '@tidy-ui/commons': 0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))
+      react: 19.1.0
+      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0)
 
-  '@tidy-ui/types@0.48.0(react@18.3.1)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))':
+  '@tidy-ui/types@0.48.0(react@19.1.0)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))':
     dependencies:
-      react: 18.3.1
-      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)
+      react: 19.1.0
+      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0)
 
   '@tsconfig/node10@1.0.11': {}
 
@@ -3464,15 +3461,12 @@ snapshots:
     dependencies:
       undici-types: 6.19.8
 
-  '@types/prop-types@15.7.14': {}
-
-  '@types/react-dom@18.3.5(@types/react@18.3.20)':
+  '@types/react-dom@18.3.5(@types/react@19.1.0)':
     dependencies:
-      '@types/react': 18.3.20
+      '@types/react': 19.1.0
 
-  '@types/react@18.3.20':
+  '@types/react@19.1.0':
     dependencies:
-      '@types/prop-types': 15.7.14
       csstype: 3.1.3
 
   '@types/stack-utils@2.0.3': {}
@@ -3590,14 +3584,14 @@ snapshots:
       '@types/babel__core': 7.20.5
       '@types/babel__traverse': 7.20.7
 
-  babel-plugin-styled-components@2.1.4(@babel/core@7.26.10)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))(supports-color@5.5.0):
+  babel-plugin-styled-components@2.1.4(@babel/core@7.26.10)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))(supports-color@5.5.0):
     dependencies:
       '@babel/helper-annotate-as-pure': 7.25.9
       '@babel/helper-module-imports': 7.25.9(supports-color@5.5.0)
       '@babel/plugin-syntax-jsx': 7.25.9(@babel/core@7.26.10)
       lodash: 4.17.21
       picomatch: 2.3.1
-      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)
+      styled-components: 5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0)
     transitivePeerDependencies:
       - '@babel/core'
       - supports-color
@@ -4718,10 +4712,10 @@ snapshots:
 
   quick-format-unescaped@4.0.4: {}
 
-  react-dom@18.3.1(react@18.3.1):
+  react-dom@18.3.1(react@19.1.0):
     dependencies:
       loose-envify: 1.4.0
-      react: 18.3.1
+      react: 19.1.0
       scheduler: 0.23.2
 
   react-is@16.13.1: {}
@@ -4730,9 +4724,7 @@ snapshots:
 
   react-refresh@0.14.2: {}
 
-  react@18.3.1:
-    dependencies:
-      loose-envify: 1.4.0
+  react@19.1.0: {}
 
   readable-stream@3.6.2:
     dependencies:
@@ -4902,18 +4894,18 @@ snapshots:
 
   strip-json-comments@3.1.1: {}
 
-  styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1):
+  styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0):
     dependencies:
       '@babel/helper-module-imports': 7.25.9(supports-color@5.5.0)
       '@babel/traverse': 7.27.0(supports-color@5.5.0)
       '@emotion/is-prop-valid': 1.3.1
       '@emotion/stylis': 0.8.5
       '@emotion/unitless': 0.7.5
-      babel-plugin-styled-components: 2.1.4(@babel/core@7.26.10)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1))(supports-color@5.5.0)
+      babel-plugin-styled-components: 2.1.4(@babel/core@7.26.10)(styled-components@5.3.11(@babel/core@7.26.10)(react-dom@18.3.1(react@19.1.0))(react-is@18.3.1)(react@19.1.0))(supports-color@5.5.0)
       css-to-react-native: 3.2.0
       hoist-non-react-statics: 3.3.2
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
+      react: 19.1.0
+      react-dom: 18.3.1(react@19.1.0)
       react-is: 18.3.1
       shallowequal: 1.1.0
       supports-color: 5.5.0
