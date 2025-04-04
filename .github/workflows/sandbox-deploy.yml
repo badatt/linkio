@@ -20,6 +20,7 @@ jobs:
     defaults:
       run:
         shell: bash
+        working-directory: ./infra
 
     steps:
       - name: Check out the code
@@ -51,6 +52,7 @@ jobs:
     defaults:
       run:
         shell: bash
+        working-directory: ./infra
 
     steps:
       - name: Check out the code
