@@ -4,6 +4,9 @@ description: |
   It is designed to be reusable and can be called from other workflows.
   The action is triggered by a workflow call, which means it can be invoked from other workflows.
 inputs:
+  working_directory:
+    description: The working directory for the action.
+    required: false
   aws_account_id:
     description: The AWS account ID to configure.
     required: true
@@ -20,7 +23,7 @@ runs:
   steps:
     
     - name:  Run CDK command
-      shell: bash
+      working-directory: ${{ inputs.working_directory }}
       env:
         AWS_ACCOUNT_ID: ${{ inputs.aws_account_id }}
         AWS_DEFAULT_REGION: ${{ inputs.aws_default_region }}
