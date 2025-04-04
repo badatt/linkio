@@ -24,6 +24,7 @@ runs:
     
     - name:  Run CDK command
       working-directory: ${{ inputs.working_directory }}
+      shell: bash
       env:
         AWS_ACCOUNT_ID: ${{ inputs.aws_account_id }}
         AWS_DEFAULT_REGION: ${{ inputs.aws_default_region }}
