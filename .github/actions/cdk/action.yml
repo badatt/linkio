@@ -25,5 +25,5 @@ runs:
         AWS_ACCOUNT_ID: ${{ inputs.aws_account_id }}
         AWS_DEFAULT_REGION: ${{ inputs.aws_default_region }}
       run: |
-        echo "${{ inputs.command }} AWS stack ..."
+        echo "${{ inputs.command }} AWS stack"
         npm run ${{ inputs.command }}
