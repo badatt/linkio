@@ -31,12 +31,14 @@ jobs:
         with:
           aws_role_to_assume: ${{ vars.AWS_GITHUB_OIDC_DEPLOYMENT_ROLE_ARN }}
           aws_default_region: ${{ vars.AWS_DEFAULT_REGION }}
+          working_directory: ./infra
       
       - name: Diff
         uses: ./.github/actions/cdk
         with:
           aws_account_id: ${{ vars.AWS_ACCOUNT_ID }}
           aws_default_region: ${{ vars.AWS_DEFAULT_REGION }}
+          working_directory: ./infra
           command: diff
 
   deploy-backend-infrastructure:
@@ -64,10 +66,12 @@ jobs:
         with:
           aws_role_to_assume: ${{ vars.AWS_GITHUB_OIDC_DEPLOYMENT_ROLE_ARN }}
           aws_default_region: ${{ vars.AWS_DEFAULT_REGION }}
+          working_directory: ./infra
       
       - name: Deployment
         uses: ./.github/actions/cdk
         with:
           aws_account_id: ${{ vars.AWS_ACCOUNT_ID }}
           aws_default_region: ${{ vars.AWS_DEFAULT_REGION }}
+          working_directory: ./infra
           command: deploy
