@@ -1,19 +1,21 @@
 name: _deploy
-description:
-    This workflow deploys the API to the specified environment.
-    It is designed to be reusable and can be called from other workflows.
-    The workflow is triggered by a workflow call, which means it can be invoked from other workflows.
+description: This workflow deploys the API to the specified environment.
+  It is designed to be reusable and can be called from other workflows.
+  The workflow is triggered by a workflow call, which means it can be invoked from other workflows.
 
 on:
   workflow_call:
     inputs:
       environment:
-          description: "The environment to deploy to"
-          required: true
-          type: string
-        
+        description: "The environment to deploy to"
+        required: true
+        type: string
+      api_function_arn:
+        description: "The ARN of the API function"
+        required: true
+        type: string
+
 jobs:
-  
   build-api:
     name: Build API
     runs-on: ubuntu-latest
@@ -29,8 +31,7 @@ jobs:
         shell: bash
 
     steps:
-    
-      - name: Download API build artifact  
+      - name: Download API build artifact
         uses: actions/download-artifact@v4
         with:
           name: api-build
@@ -45,5 +46,5 @@ jobs:
         run: |
           ls -all
           echo "Updating backend services..."
-          echo "Function is available at ${{ needs.deploy-backend-infrastructure.outputs.api_function_arn }}"
-          aws lambda update-function-code --function-name ${{ needs.deploy-backend-infrastructure.outputs.api_function_arn }} --zip-file fileb://build.zip
+          echo "Function is available at ${{ inputs.api_function_arn }}"
+          aws lambda update-function-code --function-name ${{ inputs.api_function_arn }} --zip-file fileb://build.zip
