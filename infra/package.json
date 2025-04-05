@@ -8,7 +8,7 @@
     "bootstrap": "cdk bootstrap",
     "watch": "tsc -w",
     "test": "jest",
-    "deploy": "cdk deploy --require-approval never",
+    "deploy": "cdk deploy --require-approval never --outputs-file ./cdk-outputs.json",
     "diff": "cdk diff",
     "diff:sandbox": "dotenv -e .sandbox.env -- cdk diff",
     "diff:PROD": "dotenv -e .PROD.env -- cdk diff",
