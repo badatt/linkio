@@ -1,4 +1,4 @@
-name: Build API
+name: _build_api
 description: |
   This workflow builds the API code and uploads the build output as an artifact.
   It is designed to be reusable and can be called from other workflows.
