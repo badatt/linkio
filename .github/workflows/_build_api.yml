@@ -6,19 +6,12 @@ description: |
 
 on:
   workflow_call:
-    inputs:
-      environment:
-          description: "The environment to deploy to"
-          required: true
-          type: string
         
 jobs:
   
   build-api:
     name: Build API
     runs-on: ubuntu-latest
-    environment:
-      name: ${{ inputs.environment }}
     env:
       CI: true
       FORCE_COLOR: true
