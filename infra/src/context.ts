@@ -1,3 +1,6 @@
+import { CfnOutput } from 'aws-cdk-lib';
+import { Construct } from 'constructs';
+
 export interface Props {
     account: string;
     region: string;
@@ -29,5 +32,11 @@ export class Context {
           throw new Error(`Missing required environment variable: ${name}`);
         }
         return value;
+    }
+
+    public out(scope: Construct, name: string, value: string): void {
+        new CfnOutput(scope, `${this.props.appName}${name}`, {
+            value: value,
+        }); 
     }
 }

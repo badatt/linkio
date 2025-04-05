@@ -27,6 +27,7 @@ exports.handler = async (event, context) => {
       timeout: Duration.seconds(30),
       logRetention: 30,
     });
+    ctx.out(this, 'ApiFunction', apiFunction.functionArn);
 
 
     const httpApi = new HttpApi(this, `${ctx.props.appName}Api`, {
@@ -35,21 +36,12 @@ exports.handler = async (event, context) => {
 
     const lambdaIntegration = new HttpLambdaIntegration(`${ctx.props.appName}LambdaIntegration`, apiFunction);
 
-
     httpApi.addRoutes({
       path: '/{proxy+}',
       methods: [HttpMethod.ANY],
       integration: lambdaIntegration,
     });
 
-    /* httpApi.addRoutes({
-      path: `/`,
-      methods: [HttpMethod.ANY],
-      integration: lambdaIntegration,
-    }); */
-
-    new CfnOutput(this, `${ctx.props.appName}ApiEndpoint`, {
-      value: httpApi.apiEndpoint,
-    });
+    ctx.out(this, 'ApiEndpoint', httpApi.apiEndpoint);
   }
 }
