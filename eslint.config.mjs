@@ -17,8 +17,8 @@ export default [
       '@typescript-eslint': eslintPluginTs,
     },
     rules: {
-      semi: ['error', 'never'],
-      quotes: ['error', 'single'],
+      semi: ['error', 'always'],
+      quotes: ['error', 'single', { avoidEscape: true }],
     },
   },
   {
