@@ -15,6 +15,10 @@ on:
         description: "The environment to deploy to"
         required: true
         type: string
+    outputs:
+      api_function_arn:
+        description: "The ARN of the API function"
+        value: ${{ jobs.infra-cdk.outputs.api_function_arn }}
 
 jobs:
 
@@ -61,4 +65,4 @@ jobs:
           cat cdk-outputs.json
           API_FUNCTION_ARN=$(jq -r '.[].ApiFunctionOut' cdk-outputs.json)
           echo "$API_FUNCTION_ARN"
-          echo "api_function_arn=$API_FUNCTION_ARN" >> $GITHUB_OUTPUT
+          echo "api_function_arn=$API_FUNCTION_ARN" >> "$GITHUB_OUTPUT"
