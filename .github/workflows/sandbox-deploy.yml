@@ -6,6 +6,7 @@ on:
       - develop
 
 jobs:
+  
   diff-backend-infrastructure:
     name: Diff backend infrastructure
     uses: ./.github/workflows/_infra.yml
@@ -22,11 +23,11 @@ jobs:
       environment: sandbox
 
   build:
-    name: Build API
+    name: Build
     uses: ./.github/workflows/_build.yml
 
   deploy:
-    name: Deploy API
+    name: Deploy
     needs: [deploy-backend-infrastructure, build]
     uses: ./.github/workflows/_deploy.yml
     with:
