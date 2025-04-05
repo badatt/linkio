@@ -1,4 +1,4 @@
-import { Stack, StackProps, Duration, CfnOutput } from 'aws-cdk-lib';
+import { Stack, StackProps, Duration } from 'aws-cdk-lib';
 import { Context } from '../context';
 import { Construct } from 'constructs';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
