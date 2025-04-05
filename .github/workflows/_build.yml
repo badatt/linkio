@@ -3,9 +3,13 @@ description:
 
 on:
   workflow_call:
+    inputs:
+      environment:
+        description: 'The environment to build for'
+        required: true
+        type: string
 
 jobs:
-
   build-api:
     name: Build API
     runs-on: ubuntu-latest
@@ -36,7 +40,7 @@ jobs:
         with:
           name: api-build
           path: ./api/build
-  
+
   build-web:
     name: Build Web
     runs-on: ubuntu-latest
@@ -47,7 +51,7 @@ jobs:
       run:
         shell: bash
         working-directory: ./web
-    
+
     steps:
       - name: Check out the code
         uses: actions/checkout@v4
@@ -56,12 +60,13 @@ jobs:
         uses: ./.github/actions/setup
         with:
           working_directory: ./web
-      
+
       - name: Build Web code
         run: |
           echo "Building Web code ..."
-          npm run build
-      
+          export BUILD_TARGET=${{ inputs.environment }}
+          npm run build:$BUILD_TARGET
+
       - name: Upload Web build artifact
         uses: actions/upload-pages-artifact@v3
         with:
