@@ -32,6 +32,8 @@ jobs:
       run:
         shell: bash
         working-directory: ./infra
+    outputs:
+      api_function_arn: ${{ steps.read-cdk-output.outputs.api_function_arn }}
     
     steps:
       - name: Check out the code
@@ -57,3 +59,5 @@ jobs:
         id: read-cdk-output
         run: |
           cat cdk-outputs.json
+          API_FUNCTION_ARN=$(jq -r '.[].ApiFunctionOut' cdk-outputs.json)
+          echo "api_function_arn=$API_FUNCTION_ARN" >> $GITHUB_OUTPUT

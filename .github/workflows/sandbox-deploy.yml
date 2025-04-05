@@ -27,3 +27,18 @@ jobs:
     with:
       cdk_command: deploy
       environment: sandbox
+  
+  update-backend-services:
+    name: Update backend services
+    needs: deploy-backend-infrastructure
+    runs-on: ubuntu-latest
+    
+    steps:
+
+      - name: Update backend services
+        run: |
+          echo "Updating backend services..."
+          echo "Function is available at ${{ needs.deploy-backend-infrastructure.outputs.api_function_arn }}"
+          # Add your update commands here
+          # For example, you can use AWS CLI or any other tool to update your services
+          # aws lambda update-function-code --function-name my-function --zip-file fileb://my-function.zip
