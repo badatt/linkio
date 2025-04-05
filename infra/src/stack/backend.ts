@@ -2,7 +2,7 @@ import { Stack, StackProps, Duration } from 'aws-cdk-lib';
 import { Context } from '../context';
 import { Construct } from 'constructs';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
-import { Code , Runtime} from 'aws-cdk-lib/aws-lambda';
+import { Code, Runtime } from 'aws-cdk-lib/aws-lambda';
 import { HttpApi, HttpMethod } from 'aws-cdk-lib/aws-apigatewayv2';
 import { HttpLambdaIntegration } from 'aws-cdk-lib/aws-apigatewayv2-integrations';
 
@@ -29,9 +29,8 @@ exports.handler = async (event, context) => {
     });
     ctx.out(this, 'ApiFunction', apiFunction.functionArn);
 
-
     const httpApi = new HttpApi(this, `${ctx.props.appName}Api`, {
-      apiName: `${ctx.props.appName}Api`
+      apiName: `${ctx.props.appName}Api`,
     });
 
     const lambdaIntegration = new HttpLambdaIntegration(`${ctx.props.appName}LambdaIntegration`, apiFunction);

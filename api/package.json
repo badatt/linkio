@@ -2,7 +2,9 @@
   "type": "module",
   "name": "api",
   "version": "1.0.0",
-  "description": "This project was bootstrapped with Fastify-CLI.",
+  "description": "Rest API for linkio",
+  "author": "badatt <dev.badatt@gmail.com>",
+  "private": true,
   "main": "app.js",
   "directories": {
     "test": "test"
@@ -16,7 +18,6 @@
     "dev:start": "fastify start --ignore-watch=.ts$ -w -l info -P dist/app.js"
   },
   "keywords": [],
-  "author": "",
   "license": "ISC",
   "dependencies": {
     "@fastify/autoload": "^6.0.0",
