@@ -10,6 +10,9 @@ inputs:
   aws_account_id:
     description: The AWS account ID to configure.
     required: true
+  aws_role_to_assume:
+    description: The ARN of the role to assume for AWS credentials.
+    required: true
   aws_default_region:
     description: The AWS region to configure.
     required: true
@@ -24,6 +27,12 @@ runs:
   using: "composite"
 
   steps:
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        role-to-assume: ${{ inputs.aws_role_to_assume }}
+        aws-region: ${{ inputs.aws_default_region }}
 
     - name:  Run CDK bootstrap
       shell: bash
