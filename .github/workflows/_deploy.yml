@@ -1,0 +1,46 @@
+name: _deploy
+description:
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+          description: "The environment to deploy to"
+          required: true
+          type: string
+        
+jobs:
+  
+  build-api:
+    name: Build API
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ inputs.environment }}
+    env:
+      CI: true
+      FORCE_COLOR: true
+    permissions:
+      id-token: write
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+    
+      - name: Download API build artifact  
+        uses: actions/download-artifact@v4
+        with:
+          name: api-build
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.AWS_GITHUB_OIDC_DEPLOYMENT_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_DEFAULT_REGION }}
+
+      - name: Update backend services
+        run: |
+          ls -all
+          echo "Updating backend services..."
+          echo "Function is available at ${{ needs.deploy-backend-infrastructure.outputs.api_function_arn }}"
+          aws lambda update-function-code --function-name ${{ needs.deploy-backend-infrastructure.outputs.api_function_arn }} --zip-file fileb://build.zip
