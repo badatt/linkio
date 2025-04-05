@@ -27,14 +27,13 @@ runs:
   using: "composite"
 
   steps:
-
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v4
       with:
         role-to-assume: ${{ inputs.aws_role_to_assume }}
         aws-region: ${{ inputs.aws_default_region }}
 
-    - name:  Run CDK bootstrap
+    - name: Run CDK bootstrap
       shell: bash
       working-directory: ${{ inputs.working_directory }}
       env:
@@ -44,8 +43,8 @@ runs:
       run: |
         echo "Bootstrap CDK"
         npm run bootstrap
-    
-    - name:  Run CDK command
+
+    - name: Run CDK command
       shell: bash
       working-directory: ${{ inputs.working_directory }}
       env:
