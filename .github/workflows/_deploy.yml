@@ -45,7 +45,6 @@ jobs:
 
       - name: Update backend services
         run: |
-          ls -all
           echo "Updating backend services..."
           echo "Function is available at ${{ inputs.api_function_arn }}"
           zip -rq build.zip ./*
