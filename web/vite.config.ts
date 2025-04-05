@@ -9,4 +9,10 @@ export default defineConfig({
     outDir: isSandbox ? 'dist/sbx' : 'dist',
   },
   plugins: [react()],
+  server: {
+    open: true, // auto opens browser
+    watch: {
+      usePolling: true, // useful in WSL, Docker, or network drives
+    },
+  },
 });
