@@ -1,5 +1,8 @@
 name: _deploy
 description:
+    This workflow deploys the API to the specified environment.
+    It is designed to be reusable and can be called from other workflows.
+    The workflow is triggered by a workflow call, which means it can be invoked from other workflows.
 
 on:
   workflow_call:
