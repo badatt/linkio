@@ -1,0 +1,39 @@
+name: PROD Deploy
+
+on:
+  push:
+    branches:
+      - release/*
+      - main
+    tags:
+      - 'v*'
+
+jobs:
+  diff-backend-infrastructure:
+    name: Diff backend infrastructure
+    uses: ./.github/workflows/_infra.yml
+    with:
+      cdk_command: diff
+      environment: PROD
+
+  deploy-backend-infrastructure:
+    name: Deploy backend infrastructure
+    needs: diff-backend-infrastructure
+    uses: ./.github/workflows/_infra.yml
+    with:
+      cdk_command: deploy
+      environment: PROD
+
+  build:
+    name: Build
+    uses: ./.github/workflows/_build.yml
+    with:
+      environment: PROD
+
+  deploy:
+    name: Deploy
+    needs: [deploy-backend-infrastructure, build]
+    uses: ./.github/workflows/_deploy.yml
+    with:
+      environment: PROD
+      api_function_arn: ${{ needs.deploy-backend-infrastructure.outputs.api_function_arn }}

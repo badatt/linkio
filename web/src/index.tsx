@@ -1,11 +1,21 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
+import { FlexBox, FlexItem, Text, orchidLight, TidyUiProvider, Stack } from '@tidy-ui/all';
 
 const App = () => {
   return (
     <StrictMode>
-      <h1>Building a fullstack TypeScript project</h1>
-      <h2>Workspaces sandbox</h2>
+      <TidyUiProvider theme={orchidLight}>
+        <FlexBox ctr fld="column" ali="center">
+          <FlexItem>
+            <Text.h2>We're getting things ready !</Text.h2>
+          </FlexItem>
+          <FlexItem>
+            <Text.h5>We are working hard to get everything ready for you.</Text.h5>
+          </FlexItem>
+        </FlexBox>
+        <Stack></Stack>
+      </TidyUiProvider>
     </StrictMode>
   );
 };
