@@ -1,5 +1,5 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 
 const App = () => {
   return (
@@ -10,5 +10,5 @@ const App = () => {
   );
 };
 
-const app = document.querySelector("#app");
+const app = document.querySelector('#app');
 if (app) createRoot(app).render(<App />);
