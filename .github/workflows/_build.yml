@@ -1,0 +1,69 @@
+name: _build
+description:
+
+on:
+  workflow_call:
+
+jobs:
+
+  build-api:
+    name: Build API
+    runs-on: ubuntu-latest
+    env:
+      CI: true
+      FORCE_COLOR: true
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./api
+
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v4
+
+      - name: Setup
+        uses: ./.github/actions/setup
+        with:
+          working_directory: ./api
+
+      - name: Build API code
+        run: |
+          echo "Building API code ..."
+          sh build.sh
+
+      - name: Upload API build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-build
+          path: ./api/build
+  
+  build-web:
+    name: Build Web
+    runs-on: ubuntu-latest
+    env:
+      CI: true
+      FORCE_COLOR: true
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./web
+    
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v4
+
+      - name: Setup
+        uses: ./.github/actions/setup
+        with:
+          working_directory: ./web
+      
+      - name: Build Web code
+        run: |
+          echo "Building Web code ..."
+          npm run build
+      
+      - name: Upload Web build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-build
+          path: ./web/dist
