@@ -25,17 +25,28 @@ exports.handler = async (event, context) => {
       handler: 'lambda.handler',
       runtime: Runtime.NODEJS_22_X,
       timeout: Duration.seconds(30),
+      logRetention: 30,
     });
+
 
     const httpApi = new HttpApi(this, `${ctx.props.appName}Api`, {
-      apiName: `${ctx.props.appName}Api`,
+      apiName: `${ctx.props.appName}Api`
     });
 
+    const lambdaIntegration = new HttpLambdaIntegration(`${ctx.props.appName}LambdaIntegration`, apiFunction);
+
+
     httpApi.addRoutes({
-      path: '/api/{proxy+}',
+      path: '/{proxy+}',
       methods: [HttpMethod.ANY],
-      integration: new HttpLambdaIntegration(`${ctx.props.appName}LambdaIntegration`, apiFunction),
+      integration: lambdaIntegration,
     });
+
+    /* httpApi.addRoutes({
+      path: `/`,
+      methods: [HttpMethod.ANY],
+      integration: lambdaIntegration,
+    }); */
 
     new CfnOutput(this, `${ctx.props.appName}ApiEndpoint`, {
       value: httpApi.apiEndpoint,
