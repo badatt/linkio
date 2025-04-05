@@ -34,6 +34,14 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: sandbox
+    env:
+      CI: true
+      FORCE_COLOR: true
+    permissions:
+      id-token: write
+    defaults:
+      run:
+        shell: bash
     
     steps:
 
