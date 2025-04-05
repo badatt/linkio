@@ -35,7 +35,7 @@ export class Context {
     }
 
     public out(scope: Construct, name: string, value: string): void {
-        new CfnOutput(scope, `${this.props.appName}${name}Out`, {
+        new CfnOutput(scope, `${name}Out`, {
             value: value,
         }); 
     }
