@@ -7,11 +7,11 @@ on:
   workflow_call:
     inputs:
       environment:
-        description: "The environment to deploy to"
+        description: 'The environment to deploy to'
         required: true
         type: string
       api_function_arn:
-        description: "The ARN of the API function"
+        description: 'The ARN of the API function'
         required: true
         type: string
 

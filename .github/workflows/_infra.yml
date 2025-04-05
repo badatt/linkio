@@ -8,16 +8,16 @@ on:
   workflow_call:
     inputs:
       cdk_command:
-        description: "The CDK command to execute"
+        description: 'The CDK command to execute'
         required: true
         type: string
       environment:
-        description: "The environment to deploy to"
+        description: 'The environment to deploy to'
         required: true
         type: string
     outputs:
       api_function_arn:
-        description: "The ARN of the API function"
+        description: 'The ARN of the API function'
         value: ${{ jobs.infra-cdk.outputs.api_function_arn }}
 
 jobs:
