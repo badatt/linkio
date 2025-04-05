@@ -9,13 +9,13 @@ jobs:
 
   build-api:
     name: Build API
-    uses: ./.github/workflows/reusable/_api.yml
+    uses: ./.github/workflows/_api.yml
     with:
       environment: sandbox
 
   diff-backend-infrastructure:
     name: Diff backend infrastructure
-    uses: ./.github/workflows/reusable/_infra.yml
+    uses: ./.github/workflows/_infra.yml
     with:
       cdk_command: diff
       environment: sandbox
@@ -23,7 +23,7 @@ jobs:
   deploy-backend-infrastructure:
     name: Deploy backend infrastructure
     needs: diff-backend-infrastructure
-    uses: ./.github/workflows/reusable/_infra.yml
+    uses: ./.github/workflows/_infra.yml
     with:
       cdk_command: deploy
       environment: sandbox

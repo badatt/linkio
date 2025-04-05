@@ -6,10 +6,11 @@ description: |
 
 on:
   workflow_call:
-    environment:
-        description: "The environment to deploy to"
-        required: true
-        type: string
+    inputs:
+      environment:
+          description: "The environment to deploy to"
+          required: true
+          type: string
         
 jobs:
   
