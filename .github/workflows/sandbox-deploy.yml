@@ -44,7 +44,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: build.zip
-          path: ./build
+          path: ./api/build.zip
 
   diff-backend-infrastructure:
     name: Diff backend infrastructure
