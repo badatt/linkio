@@ -21,13 +21,13 @@ jobs:
       cdk_command: deploy
       environment: sandbox
 
-  build-api:
+  build:
     name: Build API
-    uses: ./.github/workflows/_build_api.yml
+    uses: ./.github/workflows/_build.yml
 
-  deploy-api:
+  deploy:
     name: Deploy API
-    needs: [deploy-backend-infrastructure, build-api]
+    needs: [deploy-backend-infrastructure, build]
     uses: ./.github/workflows/_deploy.yml
     with:
       environment: sandbox
