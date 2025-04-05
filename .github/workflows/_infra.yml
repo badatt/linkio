@@ -42,7 +42,7 @@ jobs:
         with:
           working_directory: ./infra
       
-      - name: Diff
+      - name: Run CDK command ${{ inputs.cdk_command }}
         uses: ./.github/actions/cdk
         with:
           working_directory: ./infra
@@ -51,3 +51,9 @@ jobs:
           aws_role_to_assume: ${{ vars.AWS_GITHUB_OIDC_DEPLOYMENT_ROLE_ARN }}
           aws_default_region: ${{ vars.AWS_DEFAULT_REGION }}
           app_name: ${{ vars.APP_NAME }}
+      
+      - name: Read CDK output
+        if: ${{ inputs.cdk_command == 'deploy' }}
+        id: read-cdk-output
+        run: |
+          cat cdk-outputs.json
