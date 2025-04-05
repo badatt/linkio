@@ -64,7 +64,7 @@ jobs:
         run: |
           echo "### 🚀 Infra deployment completed" >> $GITHUB_STEP_SUMMARY
           echo '```json' >> $GITHUB_STEP_SUMMARY
-          echo $(cat cdk-outputs.json) >> $GITHUB_STEP_SUMMARY
+          jq . cdk-outputs.json >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
           API_FUNCTION_ARN=$(jq -r '.[].ApiFunctionOut' cdk-outputs.json)
           echo "$API_FUNCTION_ARN"
