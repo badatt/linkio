@@ -60,4 +60,5 @@ jobs:
         run: |
           cat cdk-outputs.json
           API_FUNCTION_ARN=$(jq -r '.[].ApiFunctionOut' cdk-outputs.json)
+          echo "$API_FUNCTION_ARN"
           echo "api_function_arn=$API_FUNCTION_ARN" >> $GITHUB_OUTPUT
