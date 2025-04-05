@@ -6,9 +6,8 @@ description: |
 
 on:
   workflow_call:
-        
+
 jobs:
-  
   build-api:
     name: Build API
     runs-on: ubuntu-latest
@@ -28,18 +27,18 @@ jobs:
         uses: ./.github/actions/setup
         with:
           working_directory: ./api
-      
+
       - name: Build API code
         run: |
           echo "Building API code ..."
           sh build.sh
-      
+
       - name: Zip build output
         shell: bash
         run: |
           cd build
           zip -rq ../build.zip .
-      
+
       - name: Upload build.zip as artifact
         uses: actions/upload-artifact@v4
         with:

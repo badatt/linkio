@@ -21,7 +21,6 @@ on:
         value: ${{ jobs.infra-cdk.outputs.api_function_arn }}
 
 jobs:
-
   infra-cdk:
     name: CDK ${{ inputs.cdk_command }}
     runs-on: ubuntu-latest
@@ -38,7 +37,7 @@ jobs:
         working-directory: ./infra
     outputs:
       api_function_arn: ${{ steps.read-cdk-output.outputs.api_function_arn }}
-    
+
     steps:
       - name: Check out the code
         uses: actions/checkout@v4
@@ -47,7 +46,7 @@ jobs:
         uses: ./.github/actions/setup
         with:
           working_directory: ./infra
-      
+
       - name: Run CDK command ${{ inputs.cdk_command }}
         uses: ./.github/actions/cdk
         with:
@@ -57,7 +56,7 @@ jobs:
           aws_role_to_assume: ${{ vars.AWS_GITHUB_OIDC_DEPLOYMENT_ROLE_ARN }}
           aws_default_region: ${{ vars.AWS_DEFAULT_REGION }}
           app_name: ${{ vars.APP_NAME }}
-      
+
       - name: Read CDK output
         if: ${{ inputs.cdk_command == 'deploy' }}
         id: read-cdk-output
