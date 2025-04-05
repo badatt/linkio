@@ -49,7 +49,6 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: api-build.zip
-          path: ./build
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -61,4 +60,4 @@ jobs:
         run: |
           echo "Updating backend services..."
           echo "Function is available at ${{ needs.deploy-backend-infrastructure.outputs.api_function_arn }}"
-          aws lambda update-function-code --function-name ${{ needs.deploy-backend-infrastructure.outputs.api_function_arn }} --zip-file fileb://./build/api-build.zip
+          aws lambda update-function-code --function-name ${{ needs.deploy-backend-infrastructure.outputs.api_function_arn }} --zip-file fileb://./api-build.zip
