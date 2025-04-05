@@ -16,7 +16,6 @@ on:
         type: string
 
 jobs:
-
   deploy-api:
     name: Deploy API
     runs-on: ubuntu-latest
@@ -49,7 +48,7 @@ jobs:
           echo "Function is available at ${{ inputs.api_function_arn }}"
           zip -rq build.zip ./*
           aws lambda update-function-code --function-name ${{ inputs.api_function_arn }} --zip-file fileb://build.zip
-  
+
   deploy-web:
     name: Deploy Web
     runs-on: ubuntu-latest
@@ -64,13 +63,13 @@ jobs:
     defaults:
       run:
         shell: bash
-    
+
     steps:
       - name: Download Web build artifact
         uses: actions/download-artifact@v4
         with:
           name: web-build
-      
+
       - name: List files
         run: |
           echo "Listing files in the current directory..."
