@@ -9,46 +9,13 @@ jobs:
 
   build-api:
     name: Build API
-    runs-on: ubuntu-latest
-    environment:
-      name: sandbox
-    env:
-      CI: true
-      FORCE_COLOR: true
-    defaults:
-      run:
-        shell: bash
-        working-directory: ./api
-
-    steps:
-      - name: Check out the code
-        uses: actions/checkout@v4
-
-      - name: Setup
-        uses: ./.github/actions/setup
-        with:
-          working_directory: ./api
-      
-      - name: Build API code
-        run: |
-          echo "Building API code ..."
-          sh build.sh
-      
-      - name: Zip build output
-        shell: bash
-        run: |
-          cd build
-          zip -rq ../build.zip .
-      
-      - name: Upload build.zip as artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: api-build.zip
-          path: ./api/build.zip
+    uses: ./.github/workflows/reusable/_api.yml
+    with:
+      environment: sandbox
 
   diff-backend-infrastructure:
     name: Diff backend infrastructure
-    uses: ./.github/workflows/_infra.yml
+    uses: ./.github/workflows/reusable/_infra.yml
     with:
       cdk_command: diff
       environment: sandbox
@@ -56,7 +23,7 @@ jobs:
   deploy-backend-infrastructure:
     name: Deploy backend infrastructure
     needs: diff-backend-infrastructure
-    uses: ./.github/workflows/_infra.yml
+    uses: ./.github/workflows/reusable/_infra.yml
     with:
       cdk_command: deploy
       environment: sandbox
