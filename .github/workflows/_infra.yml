@@ -62,8 +62,10 @@ jobs:
         if: ${{ inputs.cdk_command == 'deploy' }}
         id: read-cdk-output
         run: |
-          echo "### 🚀 Deployment completed" >> $GITHUB_STEP_SUMMARY
+          echo "### 🚀 Infra deployment completed" >> $GITHUB_STEP_SUMMARY
+          echo '```json' >> $GITHUB_STEP_SUMMARY
           echo $(cat cdk-outputs.json) >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
           API_FUNCTION_ARN=$(jq -r '.[].ApiFunctionOut' cdk-outputs.json)
           echo "$API_FUNCTION_ARN"
           echo "api_function_arn=$API_FUNCTION_ARN" >> "$GITHUB_OUTPUT"
