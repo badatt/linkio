@@ -43,11 +43,12 @@ jobs:
           aws-region: ${{ vars.AWS_DEFAULT_REGION }}
 
       - name: Update backend services
+        env:
+          API_FUNCTION_ARN: ${{ inputs.api_function_arn }}
+          APP_NAME: ${{ vars.APP_NAME }}
         run: |
-          echo "Updating backend services..."
-          echo "Function is available at ${{ inputs.api_function_arn }}"
-          zip -rq build.zip ./*
-          aws lambda update-function-code --function-name ${{ inputs.api_function_arn }} --zip-file fileb://build.zip
+          echo "Deploying API code ..."
+          sh build.sh
 
   deploy-web:
     name: Deploy Web
