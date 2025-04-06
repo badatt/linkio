@@ -43,13 +43,13 @@ jobs:
           role-to-assume: ${{ vars.AWS_GITHUB_OIDC_DEPLOYMENT_ROLE_ARN }}
           aws-region: ${{ vars.AWS_DEFAULT_REGION }}
 
-      - name: Update backend services
+      - name: Deploy backend services
         env:
           API_FUNCTION_ARN: ${{ inputs.api_function_arn }}
           APP_NAME: ${{ vars.APP_NAME }}
         run: |
           echo "Deploying API code ..."
-          sh build.sh
+          sh deploy.sh
 
   deploy-web:
     name: Deploy Web
