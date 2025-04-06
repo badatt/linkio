@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -euo pipefail
-
 echo "Updating backend services..."
 echo "Function is available at $API_FUNCTION_ARN"
 
