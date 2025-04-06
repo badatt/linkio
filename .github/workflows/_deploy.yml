@@ -14,6 +14,10 @@ on:
         description: 'The ARN of the API function'
         required: true
         type: string
+    secrets:
+      google_captcha_secret_key:
+        description: 'Google reCAPTCHA secret key'
+        required: true
 
 jobs:
   deploy-api:
@@ -46,7 +50,7 @@ jobs:
         env:
           API_FUNCTION_ARN: ${{ inputs.api_function_arn }}
           APP_NAME: ${{ vars.APP_NAME }}
-          GOOGLE_CAPTCHA_SECRET_KEY: ${{ secrets.GOOGLE_CAPTCHA_SECRET_KEY }}
+          GOOGLE_CAPTCHA_SECRET_KEY: ${{ secrets.google_captcha_secret_key }}
         run: |
           echo "Deploying API code ..."
           sh deploy.sh
