@@ -58,7 +58,7 @@ exports.handler = async (event, context) => {
   };
 };  
       `),
-      handler: 'lambda.handler',
+      handler: 'index.handler',
       runtime: Runtime.NODEJS_22_X,
       timeout: Duration.seconds(30),
       logRetention: 30,
