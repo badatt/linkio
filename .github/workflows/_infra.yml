@@ -65,6 +65,6 @@ jobs:
           echo '```json' >> $GITHUB_STEP_SUMMARY
           jq . cdk-outputs.json >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
-          API_FUNCTION_ARN=$(jq -r '.[].ApiFunctionOut' cdk-outputs.json)
+          API_FUNCTION_ARN=$(jq -r '.[].${{ vars.APP_NAME }}ApiFunctionOut' cdk-outputs.json)
           echo "$API_FUNCTION_ARN"
           echo "api_function_arn=$API_FUNCTION_ARN" >> "$GITHUB_OUTPUT"
