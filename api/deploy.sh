@@ -1,6 +1,10 @@
 echo "Updating backend services..."
 echo "Function is available at $API_FUNCTION_ARN"
 
+echo GOOGLE_CAPTCHA_SECRET_KEY=$GOOGLE_CAPTCHA_SECRET_KEY
+echo APP_NAME=$APP_NAME
+echo API_FUNCTION_ARN=$API_FUNCTION_ARN
+
 zip -rq build.zip ./*
 aws lambda update-function-code --function-name $API_FUNCTION_ARN --zip-file fileb://build.zip
 
