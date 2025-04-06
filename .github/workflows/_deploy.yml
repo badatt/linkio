@@ -46,6 +46,8 @@ jobs:
         env:
           API_FUNCTION_ARN: ${{ inputs.api_function_arn }}
           APP_NAME: ${{ vars.APP_NAME }}
+          AWS_DEFAULT_REGION: ${{ vars.AWS_DEFAULT_REGION }}
+          GOOGLE_CAPTCHA_SECRET_KEY: ${{ secrets.GOOGLE_CAPTCHA_SECRET_KEY }}
         run: |
           echo "Deploying API code ..."
           sh deploy.sh
