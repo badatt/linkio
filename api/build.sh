@@ -10,3 +10,4 @@ cp -r dist/* build/
 cp -r node_modules build/
 cp package.json build/
 cp package-lock.json build/
+cp deploy.sh build/
