@@ -14,6 +14,18 @@ on:
         description: 'The ARN of the API function'
         required: true
         type: string
+      aws_role_to_assume:
+        description: 'The ARN of the AWS OIDC deployment role'
+        required: true
+        type: string
+      aws_default_region:
+        description: 'The default AWS region'
+        required: true
+        type: string
+      app_name:
+        description: 'The name of the application'
+        required: true
+        type: string
     secrets:
       google_captcha_secret_key:
         description: 'Google reCAPTCHA secret key'
@@ -43,13 +55,13 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: ${{ vars.AWS_GITHUB_OIDC_DEPLOYMENT_ROLE_ARN }}
-          aws-region: ${{ vars.AWS_DEFAULT_REGION }}
+          role-to-assume: ${{ inputs.aws_role_to_assume }}
+          aws-region: ${{ inputs.aws_default_region }}
 
       - name: Deploy backend services
         env:
           API_FUNCTION_ARN: ${{ inputs.api_function_arn }}
-          APP_NAME: ${{ vars.APP_NAME }}
+          APP_NAME: ${{ inputs.app_name }}
           GOOGLE_CAPTCHA_SECRET_KEY: ${{ secrets.google_captcha_secret_key }}
         run: |
           echo "Deploying API code ..."
