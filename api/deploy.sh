@@ -8,7 +8,6 @@ echo "Updating environment variables..."
 NEW_ENV_VARS_TO_ADD=$(cat <<EOF
 {
   "APP_NAME": "$APP_NAME",
-  "AWS_DEFAULT_REGION": "$AWS_DEFAULT_REGION",
   "GOOGLE_CAPTCHA_SECRET_KEY": "$GOOGLE_CAPTCHA_SECRET_KEY"
 }
 EOF
