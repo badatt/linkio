@@ -21,7 +21,7 @@ NEW_ENV_VARS=$(jq -n \
         GOOGLE_CAPTCHA_SECRET_KEY: $env2
     }'
 )
-echo "New environment variables: $NEW_ENVVARS"
+echo "New environment variables: $NEW_ENV_VARS"
 
 echo "🔧 Updating Lambda Environment Variables..."
 aws lambda update-function-configuration --function-name $API_FUNCTION_ARN --environment "{ \"Variables\": $NEW_ENV_VARS }"
