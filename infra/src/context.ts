@@ -10,6 +10,7 @@ export interface Props {
 export class Context {
   private static instance: Context;
   public props: Props;
+  public isProd: boolean;
 
   private constructor() {
     this.props = {
@@ -17,6 +18,7 @@ export class Context {
       region: this.getEnvVar('AWS_DEFAULT_REGION'),
       appName: this.getEnvVar('APP_NAME'),
     };
+    this.isProd = this.props.account === '849656214064';
   }
 
   public static getInstance(): Context {
@@ -35,7 +37,7 @@ export class Context {
   }
 
   public out(scope: Construct, name: string, value: string): void {
-    new CfnOutput(scope, `${name}Out`, {
+    new CfnOutput(scope, `${this.props.appName}${name}Out`, {
       value: value,
     });
   }
