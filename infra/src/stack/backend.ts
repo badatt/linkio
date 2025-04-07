@@ -33,7 +33,7 @@ export class BackendStack extends Stack {
 
     ctx.out(this, 'ApiEndpoint', httpApi.apiEndpoint);
 
-    const apiCert = Certificate.fromCertificateArn(this, `${ctx.props.appName}ApiCert`, ctx.props.apiCertArn);
+    /* const apiCert = Certificate.fromCertificateArn(this, `${ctx.props.appName}ApiCert`, ctx.props.apiCertArn);
     const hostedZone = HostedZone.fromHostedZoneAttributes(this, `${ctx.props.appName}HostedZone`, {
       hostedZoneId: ctx.props.hostedZoneId,
       zoneName: ctx.rootDomain,
@@ -56,7 +56,7 @@ export class BackendStack extends Stack {
       target: RecordTarget.fromAlias(
         new ApiGatewayv2DomainProperties(apiCustomDomain.regionalDomainName, apiCustomDomain.regionalHostedZoneId),
       ),
-    });
+    }); */
   }
 
   private createFreeTierLinkStorageBucket(ctx: Context): Bucket {
