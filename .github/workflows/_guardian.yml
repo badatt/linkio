@@ -1,0 +1,35 @@
+name: _guardian
+description: |
+  This workflow is a reusable workflow that is designed to vet the codebase for a specific environment.
+  It is triggered by a workflow call, which means it can be invoked from other workflows.
+  The workflow checks out the code, sets up the environment, and then runs the vetting process.
+on:
+  workflow_call:
+    inputs:
+      environment:
+        description: The environment to vet the codebase for.
+        required: true
+        type: string
+
+jobs:
+  vet:
+    name: Vet codebase
+    runs-on: ubuntu-latest
+    env:
+      CI: true
+      FORCE_COLOR: true
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v4
+
+      - name: Setup
+        uses: ./.github/actions/setup
+
+      - name: Vet code
+        run: |
+          echo "Vetting codebase for environment: ${{ inputs.environment }}"
+          npm run vet

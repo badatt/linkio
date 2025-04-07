@@ -1,5 +1,4 @@
 import { Stack, StackProps, Duration, RemovalPolicy } from 'aws-cdk-lib';
-import { Context } from '../context';
 import { Construct } from 'constructs';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import { Code, Runtime, IFunction } from 'aws-cdk-lib/aws-lambda';
@@ -9,6 +8,8 @@ import { Bucket } from 'aws-cdk-lib/aws-s3';
 import { Certificate, CertificateValidation } from 'aws-cdk-lib/aws-certificatemanager';
 import { ARecord, HostedZone, RecordTarget } from 'aws-cdk-lib/aws-route53';
 import { ApiGatewayv2DomainProperties } from 'aws-cdk-lib/aws-route53-targets';
+
+import { Context } from '../context';
 
 export class BackendStack extends Stack {
   constructor(scope: Construct, id: string, ctx: Context, props?: StackProps) {

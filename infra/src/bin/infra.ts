@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import { App } from 'aws-cdk-lib';
+
 import { Context } from '../context';
 import { BackendStack } from '../stack/backend';
 
