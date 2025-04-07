@@ -29,6 +29,21 @@ jobs:
       - name: Setup
         uses: ./.github/actions/setup
 
+      - name: Setup
+        uses: ./.github/actions/setup
+        with:
+          working_directory: ./api
+
+      - name: Setup
+        uses: ./.github/actions/setup
+        with:
+          working_directory: ./web
+
+      - name: Setup
+        uses: ./.github/actions/setup
+        with:
+          working_directory: ./infra
+
       - name: Vet code
         run: |
           echo "Vetting codebase for environment: ${{ inputs.environment }}"
