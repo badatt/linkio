@@ -2,11 +2,11 @@ import { Stack, StackProps, Duration, RemovalPolicy } from 'aws-cdk-lib';
 import { Context } from '../context';
 import { Construct } from 'constructs';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
-import { Code, Runtime } from 'aws-cdk-lib/aws-lambda';
+import { Code, Runtime, IFunction } from 'aws-cdk-lib/aws-lambda';
 import { ApiMapping, DomainName, HttpApi, HttpMethod } from 'aws-cdk-lib/aws-apigatewayv2';
 import { HttpLambdaIntegration } from 'aws-cdk-lib/aws-apigatewayv2-integrations';
 import { Bucket } from 'aws-cdk-lib/aws-s3';
-import { Certificate } from 'aws-cdk-lib/aws-certificatemanager';
+import { Certificate, CertificateValidation } from 'aws-cdk-lib/aws-certificatemanager';
 import { ARecord, HostedZone, RecordTarget } from 'aws-cdk-lib/aws-route53';
 import { ApiGatewayv2DomainProperties } from 'aws-cdk-lib/aws-route53-targets';
 
@@ -15,48 +15,14 @@ export class BackendStack extends Stack {
     super(scope, id, props);
 
     const freeTierLinksStorageBucket = this.createFreeTierLinkStorageBucket(ctx);
+
     const apiFunction = this.createApiFunction(ctx);
+
     freeTierLinksStorageBucket.grantReadWrite(apiFunction);
     apiFunction.addEnvironment('FREE_TIER_BUCKET_NAME', freeTierLinksStorageBucket.bucketName);
 
-    const httpApi = new HttpApi(this, `${ctx.props.appName}Api`, {
-      apiName: `${ctx.props.appName}Api`,
-    });
-
-    const lambdaIntegration = new HttpLambdaIntegration(`${ctx.props.appName}LambdaIntegration`, apiFunction);
-
-    httpApi.addRoutes({
-      path: '/{proxy+}',
-      methods: [HttpMethod.ANY],
-      integration: lambdaIntegration,
-    });
-
-    ctx.out(this, 'ApiEndpoint', httpApi.apiEndpoint);
-
-    /* const apiCert = Certificate.fromCertificateArn(this, `${ctx.props.appName}ApiCert`, ctx.props.apiCertArn);
-    const hostedZone = HostedZone.fromHostedZoneAttributes(this, `${ctx.props.appName}HostedZone`, {
-      hostedZoneId: ctx.props.hostedZoneId,
-      zoneName: ctx.rootDomain,
-    });
-
-    const apiCustomDomain = new DomainName(this, `${ctx.props.appName}ApiCustomDomain`, {
-      domainName: ctx.props.apiDomain,
-      certificate: apiCert,
-    });
-
-    new ApiMapping(this, `${ctx.props.appName}ApiMapping`, {
-      api: httpApi,
-      domainName: apiCustomDomain,
-      stage: httpApi.defaultStage,
-    });
-
-    new ARecord(this, `${ctx.props.appName}ApiAliasRecord`, {
-      zone: hostedZone,
-      recordName: ctx.props.apiDomain,
-      target: RecordTarget.fromAlias(
-        new ApiGatewayv2DomainProperties(apiCustomDomain.regionalDomainName, apiCustomDomain.regionalHostedZoneId),
-      ),
-    }); */
+    const httpApi = this.createHttpApi(ctx, { handler: apiFunction });
+    this.addCustomApiDomain(ctx, { httpApi });
   }
 
   private createFreeTierLinkStorageBucket(ctx: Context): Bucket {
@@ -93,5 +59,53 @@ exports.handler = async (event, context) => {
     });
     ctx.out(this, 'ApiFunction', fun.functionArn);
     return fun;
+  }
+
+  private createHttpApi(ctx: Context, props: { handler: IFunction }): HttpApi {
+    const httpApi = new HttpApi(this, `${ctx.props.appName}Api`, {
+      apiName: `${ctx.props.appName}Api`,
+    });
+
+    const lambdaIntegration = new HttpLambdaIntegration(`${ctx.props.appName}LambdaIntegration`, props.handler);
+
+    httpApi.addRoutes({
+      path: '/{proxy+}',
+      methods: [HttpMethod.ANY],
+      integration: lambdaIntegration,
+    });
+
+    ctx.out(this, 'ApiEndpoint', httpApi.apiEndpoint);
+    return httpApi;
+  }
+
+  private addCustomApiDomain(ctx: Context, props: { httpApi: HttpApi }) {
+    const hostedZone = HostedZone.fromHostedZoneAttributes(this, `${ctx.props.appName}HostedZone`, {
+      hostedZoneId: ctx.props.hostedZoneId,
+      zoneName: ctx.rootDomain,
+    });
+
+    const certificate = new Certificate(this, `${ctx.props.appName}ApiCert`, {
+      domainName: ctx.props.apiDomain,
+      validation: CertificateValidation.fromDns(hostedZone),
+    });
+
+    const domainName = new DomainName(this, `${ctx.props.appName}ApiDomain`, {
+      domainName: ctx.props.apiDomain,
+      certificate: certificate,
+    });
+
+    new ApiMapping(this, `${ctx.props.appName}ApiMapping`, {
+      api: props.httpApi,
+      domainName: domainName,
+      stage: props.httpApi.defaultStage,
+    });
+
+    new ARecord(this, `${ctx.props.appName}ApiAliasRecord`, {
+      zone: hostedZone,
+      recordName: ctx.props.apiDomain,
+      target: RecordTarget.fromAlias(
+        new ApiGatewayv2DomainProperties(domainName.regionalDomainName, domainName.regionalHostedZoneId),
+      ),
+    });
   }
 }
