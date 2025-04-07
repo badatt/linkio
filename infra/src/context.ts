@@ -5,8 +5,7 @@ export interface Props {
   account: string;
   region: string;
   appName: string;
-  apiDomain: string;
-  apiCertArn: string;
+  rootDomain: string;
   hostedZoneId: string;
 }
 
@@ -14,19 +13,16 @@ export class Context {
   private static instance: Context;
   public readonly props: Props;
   public readonly isProd: boolean;
-  public readonly rootDomain: string;
 
   private constructor() {
     this.props = {
       account: this.getEnvVar('AWS_ACCOUNT_ID'),
       region: this.getEnvVar('AWS_DEFAULT_REGION'),
       appName: this.getEnvVar('APP_NAME'),
-      apiDomain: this.getEnvVar('API_CUSTOM_DOMAIN'),
-      apiCertArn: this.getEnvVar('AWS_API_CERTIFICATE_ARN'),
+      rootDomain: this.getEnvVar('ROOT_DOMAIN'),
       hostedZoneId: this.getEnvVar('AWS_HOSTED_ZONE_ID'),
     };
     this.isProd = this.props.account === '849656214064';
-    this.rootDomain = this.getRootDomain();
   }
 
   public static getInstance(): Context {
@@ -48,13 +44,5 @@ export class Context {
     new CfnOutput(scope, `${this.props.appName}${name}Out`, {
       value: value,
     });
-  }
-
-  private getRootDomain(): string {
-    const domainParts = this.props.apiDomain.split('.');
-    if (domainParts.length < 2) {
-      throw new Error(`Invalid domain name: ${this.props.apiDomain}`);
-    }
-    return domainParts.slice(1).join('.');
   }
 }
