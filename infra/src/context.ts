@@ -12,8 +12,9 @@ export interface Props {
 
 export class Context {
   private static instance: Context;
-  public props: Props;
-  public isProd: boolean;
+  public readonly props: Props;
+  public readonly isProd: boolean;
+  public readonly rootDomain: string;
 
   private constructor() {
     this.props = {
@@ -25,6 +26,7 @@ export class Context {
       hostedZoneId: this.getEnvVar('AWS_HOSTED_ZONE_ID'),
     };
     this.isProd = this.props.account === '849656214064';
+    this.rootDomain = this.getRootDomain();
   }
 
   public static getInstance(): Context {
@@ -46,5 +48,13 @@ export class Context {
     new CfnOutput(scope, `${this.props.appName}${name}Out`, {
       value: value,
     });
+  }
+
+  private getRootDomain(): string {
+    const domainParts = this.props.apiDomain.split('.');
+    if (domainParts.length < 2) {
+      throw new Error(`Invalid domain name: ${this.props.apiDomain}`);
+    }
+    return domainParts.slice(1).join('.');
   }
 }

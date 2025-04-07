@@ -34,7 +34,10 @@ export class BackendStack extends Stack {
     ctx.out(this, 'ApiEndpoint', httpApi.apiEndpoint);
 
     const apiCert = Certificate.fromCertificateArn(this, `${ctx.props.appName}ApiCert`, ctx.props.apiCertArn);
-    const hostedZone = HostedZone.fromHostedZoneId(this, `${ctx.props.appName}HostedZone`, ctx.props.hostedZoneId);
+    const hostedZone = HostedZone.fromHostedZoneAttributes(this, `${ctx.props.appName}HostedZone`, {
+      hostedZoneId: ctx.props.hostedZoneId,
+      zoneName: ctx.rootDomain,
+    });
 
     const apiCustomDomain = new DomainName(this, `${ctx.props.appName}ApiCustomDomain`, {
       domainName: ctx.props.apiDomain,
