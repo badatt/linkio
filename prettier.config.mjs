@@ -25,7 +25,7 @@ export default {
   bracketSpacing: true,
 
   // Place the `>` of a multi-line JSX element at the end of the last line
-  jsxBracketSameLine: false,
+  bracketSameLine: false,
 
   // Format quoted code embedded in the file (like HTML in markdown)
   embeddedLanguageFormatting: 'auto',
