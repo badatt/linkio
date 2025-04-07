@@ -6,8 +6,15 @@ on:
       - develop
 
 jobs:
+  guardian:
+    name: Guardian
+    uses: ./.github/workflows/_guardian.yml
+    with:
+      environment: sandbox
+
   diff-backend-infrastructure:
     name: Diff backend infrastructure
+    needs: guardian
     uses: ./.github/workflows/_infra.yml
     with:
       cdk_command: diff
@@ -23,6 +30,7 @@ jobs:
 
   build:
     name: Build
+    needs: guardian
     uses: ./.github/workflows/_build.yml
     with:
       environment: sandbox

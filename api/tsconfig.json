@@ -1,20 +1,22 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
+    "allowJs": false,
     "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
     "noImplicitAny": true,
     "outDir": "dist",
+    "declaration": false,
     "paths": {
       "*": ["src/*"]
     },
     "sourceMap": false,
     "target": "es5",
-    "typeRoots": ["src/types/*", "./node_modules/@types"],
+    "typeRoots": ["./src/types", "./node_modules/@types"],
     "rootDir": "src"
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "test/**/*"],
   "exclude": ["node_modules", "dist", "build"]
 }

@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { S3Client, HeadObjectCommand, PutObjectCommand, GetObjectCommand } from '@aws-sdk/client-s3';
 import { nanoid } from 'nanoid';
+
 import env from '../util/env.js';
 
 const s3 = new S3Client({
@@ -45,7 +47,6 @@ const uploadFreeTierLinkObject = async (link: string): Promise<string> => {
     await s3.send(command);
     return key;
   } catch (error: any) {
-    console.error('❌ Upload failed:', error);
     throw new Error(`Upload failed: ${error.message}`);
   }
 };
@@ -61,7 +62,6 @@ const getFreeTierLinkObject = async (key: string): Promise<string> => {
     const response = await s3.send(command);
     return response.Metadata?.['x-amz-website-redirect-location'] ?? '';
   } catch (error: any) {
-    console.error('❌ Get failed:', error);
     throw new Error(`Get failed: ${error.message}`);
   }
 };

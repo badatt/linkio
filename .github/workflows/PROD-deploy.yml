@@ -9,6 +9,12 @@ on:
       - 'v*'
 
 jobs:
+  guardian:
+    name: Guardian
+    uses: ./.github/workflows/_guardian.yml
+    with:
+      environment: PROD
+
   diff-backend-infrastructure:
     name: Diff backend infrastructure
     uses: ./.github/workflows/_infra.yml

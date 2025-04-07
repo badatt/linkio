@@ -6,7 +6,8 @@ description: |
 inputs:
   working_directory:
     description: The working directory for the action.
-    required: true
+    required: false
+    default: './'
 
 runs:
   using: 'composite'

@@ -1,5 +1,8 @@
 name: _build
-description:
+description: |
+  This workflow builds the API and Web code for the project.
+  It is designed to be reusable and can be called from other workflows.
+  The workflow is triggered by a workflow call, which means it can be invoked from other workflows.
 
 on:
   workflow_call:

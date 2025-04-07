@@ -1,4 +1,5 @@
 import { FastifyRequest, FastifyReply, RouteShorthandOptions, RequestGenericInterface } from 'fastify';
+
 import { getFreeTierLinkObject } from '../../aws/s3.js';
 
 const readLinkSchema = {
