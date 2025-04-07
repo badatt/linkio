@@ -3,9 +3,12 @@ import { Context } from '../context';
 import { Construct } from 'constructs';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import { Code, Runtime } from 'aws-cdk-lib/aws-lambda';
-import { HttpApi, HttpMethod } from 'aws-cdk-lib/aws-apigatewayv2';
+import { ApiMapping, DomainName, HttpApi, HttpMethod } from 'aws-cdk-lib/aws-apigatewayv2';
 import { HttpLambdaIntegration } from 'aws-cdk-lib/aws-apigatewayv2-integrations';
 import { Bucket } from 'aws-cdk-lib/aws-s3';
+import { Certificate } from 'aws-cdk-lib/aws-certificatemanager';
+import { ARecord, HostedZone, RecordTarget } from 'aws-cdk-lib/aws-route53';
+import { ApiGatewayv2DomainProperties } from 'aws-cdk-lib/aws-route53-targets';
 
 export class BackendStack extends Stack {
   constructor(scope: Construct, id: string, ctx: Context, props?: StackProps) {
@@ -29,6 +32,28 @@ export class BackendStack extends Stack {
     });
 
     ctx.out(this, 'ApiEndpoint', httpApi.apiEndpoint);
+
+    const apiCert = Certificate.fromCertificateArn(this, `${ctx.props.appName}ApiCert`, ctx.props.apiCertArn);
+    const hostedZone = HostedZone.fromHostedZoneId(this, `${ctx.props.appName}HostedZone`, ctx.props.hostedZoneId);
+
+    const apiCustomDomain = new DomainName(this, `${ctx.props.appName}ApiCustomDomain`, {
+      domainName: ctx.props.apiDomain,
+      certificate: apiCert,
+    });
+
+    new ApiMapping(this, `${ctx.props.appName}ApiMapping`, {
+      api: httpApi,
+      domainName: apiCustomDomain,
+      stage: httpApi.defaultStage,
+    });
+
+    new ARecord(this, `${ctx.props.appName}ApiAliasRecord`, {
+      zone: hostedZone,
+      recordName: ctx.props.apiDomain,
+      target: RecordTarget.fromAlias(
+        new ApiGatewayv2DomainProperties(apiCustomDomain.regionalDomainName, apiCustomDomain.regionalHostedZoneId),
+      ),
+    });
   }
 
   private createFreeTierLinkStorageBucket(ctx: Context): Bucket {
