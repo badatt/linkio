@@ -5,7 +5,9 @@ export interface Props {
   account: string;
   region: string;
   appName: string;
-  domain: string;
+  apiDomain: string;
+  apiCertArn: string;
+  hostedZoneId: string;
 }
 
 export class Context {
@@ -18,7 +20,9 @@ export class Context {
       account: this.getEnvVar('AWS_ACCOUNT_ID'),
       region: this.getEnvVar('AWS_DEFAULT_REGION'),
       appName: this.getEnvVar('APP_NAME'),
-      domain: this.getEnvVar('API_CUSTOM_DOMAIN'),
+      apiDomain: this.getEnvVar('API_CUSTOM_DOMAIN'),
+      apiCertArn: this.getEnvVar('AWS_API_CERTIFICATE_ARN'),
+      hostedZoneId: this.getEnvVar('AWS_HOSTED_ZONE_ID'),
     };
     this.isProd = this.props.account === '849656214064';
   }
