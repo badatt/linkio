@@ -56,8 +56,7 @@ jobs:
           aws_role_to_assume: ${{ vars.AWS_GITHUB_OIDC_DEPLOYMENT_ROLE_ARN }}
           aws_default_region: ${{ vars.AWS_DEFAULT_REGION }}
           app_name: ${{ vars.APP_NAME }}
-          api_custom_domain: ${{ vars.API_CUSTOM_DOMAIN }}
-          aws_api_certificate_arn: ${{ vars.AWS_API_CERTIFICATE_ARN }}
+          root_domain: ${{ vars.ROOT_DOMAIN }}
           aws_hosted_zone_id: ${{ vars.AWS_HOSTED_ZONE_ID }}
 
       - name: Read CDK output
