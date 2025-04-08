@@ -90,8 +90,12 @@ jobs:
           ls -al
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          personal_token: ${{ secrets.deployment_github_token }}
-          publish_dir: ./
-          external_repository: ${{ inputs.deployment_github_repo }}
+        run: |
+          git init
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git remote add origin https://x-access-token:${{ secrets.deployment_github_token }}@github.com/${{ inputs.deployment_github_repo }}.git
+          git checkout -b gh-pages
+          git add .
+          git commit -m "Deploy site 🚀"
+          git push --force origin gh-pages
