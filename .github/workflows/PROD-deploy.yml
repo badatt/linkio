@@ -43,5 +43,7 @@ jobs:
     with:
       environment: PROD
       api_function_arn: ${{ needs.deploy-backend-infrastructure.outputs.api_function_arn }}
+      deployment_github_repo: ${{ vars.DEPLOYMENT_GITHUB_REPO }}
     secrets:
       google_captcha_secret_key: ${{ secrets.google_captcha_secret_key }}
+      deployment_github_token: ${{ secrets.DEPLOYMENT_GITHUB_TOKEN }}
