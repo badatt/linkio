@@ -3,15 +3,15 @@ import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
 import Home from './Home';
 import LandingPage from './LandingPage';
 import ErrorPage from './ErrorPage';
+import Layout from '../components/Layout';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: (
-      <div>
-        Layout
+      <Layout>
         <Outlet />
-      </div>
+      </Layout>
     ),
     errorElement: <ErrorPage />,
     children: [
@@ -26,10 +26,9 @@ const router = createBrowserRouter([
       {
         path: ':slug',
         element: (
-          <div>
-            Landing Layout
+          <Layout>
             <Outlet />
-          </div>
+          </Layout>
         ),
         children: [
           {
