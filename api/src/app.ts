@@ -2,6 +2,7 @@ import * as path from 'node:path';
 import AutoLoad, { AutoloadPluginOptions } from '@fastify/autoload';
 import { FastifyPluginAsync } from 'fastify';
 import { fileURLToPath } from 'node:url';
+import cors from '@fastify/cors';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -35,6 +36,10 @@ const app: FastifyPluginAsync<AppOptions> = async (fastify, opts): Promise<void>
     dir: path.join(__dirname, 'routes'),
     options: opts,
     forceESM: true,
+  });
+
+  await fastify.register(cors, {
+    origin: 'http://localhost:3001', // allow requests from your Vite dev server
   });
 };
 

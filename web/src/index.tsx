@@ -1,13 +1,15 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { orchidLight, TidyUiProvider } from '@tidy-ui/all';
+import { GlobalResetStyle, GlobalDefaultStyle, orchidLight, TidyUiProvider } from '@tidy-ui/all';
 
 import Routes from './routes';
 
 const App = () => {
   return (
     <StrictMode>
+      <GlobalResetStyle />
       <TidyUiProvider theme={orchidLight}>
+        <GlobalDefaultStyle />
         <Routes />
       </TidyUiProvider>
     </StrictMode>
