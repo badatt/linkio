@@ -73,6 +73,7 @@ jobs:
           VITE_API_URL: https://${{ inputs.api_domain }}
         run: |
           echo "Building Web ..."
+          echo "VITE_API_URL: $VITE_API_URL"
           export BUILD_TARGET=${{ inputs.environment }}
           npm run build:$BUILD_TARGET
 
