@@ -30,7 +30,7 @@ jobs:
 
   build:
     name: Build
-    needs: guardian
+    needs: [deploy-backend-infrastructure, guardian]
     uses: ./.github/workflows/_build.yml
     with:
       environment: sandbox
