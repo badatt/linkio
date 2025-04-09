@@ -11,6 +11,10 @@ on:
         description: 'The environment to build for'
         required: true
         type: string
+      api_domain:
+        description: 'The domain of the API'
+        required: true
+        type: string
 
 jobs:
   build-api:
@@ -33,9 +37,9 @@ jobs:
         with:
           working_directory: ./api
 
-      - name: Build API code
+      - name: Build API
         run: |
-          echo "Building API code ..."
+          echo "Building API ..."
           sh build.sh
 
       - name: Upload API build artifact
@@ -64,9 +68,11 @@ jobs:
         with:
           working_directory: ./web
 
-      - name: Build Web code
+      - name: Build Web
+        env:
+          VITE_API_URL: https://${{ inputs.api_domain }}
         run: |
-          echo "Building Web code ..."
+          echo "Building Web ..."
           export BUILD_TARGET=${{ inputs.environment }}
           npm run build:$BUILD_TARGET
 

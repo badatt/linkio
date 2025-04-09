@@ -19,6 +19,9 @@ on:
       api_function_arn:
         description: 'The ARN of the API function'
         value: ${{ jobs.infra-cdk.outputs.api_function_arn }}
+      api_domain:
+        description: 'The domain of the API'
+        value: ${{ jobs.infra-cdk.outputs.api_domain }}
 
 jobs:
   infra-cdk:
@@ -37,6 +40,7 @@ jobs:
         working-directory: ./infra
     outputs:
       api_function_arn: ${{ steps.read-cdk-output.outputs.api_function_arn }}
+      api_domain: ${{ steps.read-cdk-output.outputs.api_domain }}
 
     steps:
       - name: Check out the code
@@ -68,5 +72,6 @@ jobs:
           jq . cdk-outputs.json >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
           API_FUNCTION_ARN=$(jq -r '.[].${{ vars.APP_NAME }}ApiFunctionOut' cdk-outputs.json)
-          echo "$API_FUNCTION_ARN"
+          API_DOMAIN=$(jq -r '.[].${{ vars.APP_NAME }}ApiDomainOut' cdk-outputs.json)
           echo "api_function_arn=$API_FUNCTION_ARN" >> "$GITHUB_OUTPUT"
+          echo "api_domain=$API_DOMAIN" >> "$GITHUB_OUTPUT"
