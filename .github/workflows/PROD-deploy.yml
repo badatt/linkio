@@ -35,6 +35,7 @@ jobs:
     uses: ./.github/workflows/_build.yml
     with:
       environment: PROD
+      api_domain: ${{ needs.deploy-backend-infrastructure.outputs.api_domain }}
 
   deploy:
     name: Deploy
