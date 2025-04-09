@@ -91,3 +91,4 @@ jobs:
           personal_token: ${{ secrets.deployment_github_token }}
           publish_dir: ./
           external_repository: ${{ vars.DEPLOYMENT_GITHUB_REPO }}
+          cname: l.${{ vars.ROOT_DOMAIN }}
