@@ -30,11 +30,10 @@ jobs:
 
   build:
     name: Build
-    needs: [deploy-backend-infrastructure, guardian]
+    needs: [guardian]
     uses: ./.github/workflows/_build.yml
     with:
       environment: sandbox
-      api_domain: ${{ needs.deploy-backend-infrastructure.outputs.api_domain }}
 
   deploy:
     name: Deploy

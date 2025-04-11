@@ -4,6 +4,8 @@ import { FastifyPluginAsync } from 'fastify';
 import { fileURLToPath } from 'node:url';
 import cors from '@fastify/cors';
 
+import env from './util/env.js';
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -38,8 +40,16 @@ const app: FastifyPluginAsync<AppOptions> = async (fastify, opts): Promise<void>
     forceESM: true,
   });
 
+  const allowedOrigins = ['http://localhost:3000', `https://${env.API_DOMAIN}`];
+
   await fastify.register(cors, {
-    origin: 'http://localhost:3001', // allow requests from your Vite dev server
+    origin: (origin, cb) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        cb(null, true); // allow request
+      } else {
+        cb(new Error('Not allowed by CORS'), false); // reject request
+      }
+    },
   });
 };
 
