@@ -17,6 +17,7 @@ jobs:
 
   diff-backend-infrastructure:
     name: Diff backend infrastructure
+    needs: guardian
     uses: ./.github/workflows/_infra.yml
     with:
       cdk_command: diff
@@ -32,10 +33,10 @@ jobs:
 
   build:
     name: Build
+    needs: [guardian]
     uses: ./.github/workflows/_build.yml
     with:
       environment: PROD
-      api_domain: ${{ needs.deploy-backend-infrastructure.outputs.api_domain }}
 
   deploy:
     name: Deploy
@@ -45,5 +46,5 @@ jobs:
       environment: PROD
       api_function_arn: ${{ needs.deploy-backend-infrastructure.outputs.api_function_arn }}
     secrets:
-      google_captcha_secret_key: ${{ secrets.google_captcha_secret_key }}
+      google_captcha_secret_key: ${{ secrets.GOOGLE_CAPTCHA_SECRET_KEY }}
       deployment_github_token: ${{ secrets.DEPLOYMENT_GITHUB_TOKEN }}

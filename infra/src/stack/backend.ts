@@ -85,15 +85,13 @@ exports.handler = async (event, context) => {
       zoneName: ctx.props.rootDomain,
     });
 
-    const apiDomain = `${ctx.props.appName.toLowerCase()}-api.${ctx.props.rootDomain}`;
-
     const certificate = new Certificate(this, `${ctx.props.appName}ApiCert`, {
-      domainName: apiDomain,
+      domainName: ctx.props.apiDomain,
       validation: CertificateValidation.fromDns(hostedZone),
     });
 
     const domainName = new DomainName(this, `${ctx.props.appName}ApiDomain`, {
-      domainName: apiDomain,
+      domainName: ctx.props.apiDomain,
       certificate: certificate,
     });
     ctx.out(this, 'ApiDomain', domainName.name);
@@ -106,7 +104,7 @@ exports.handler = async (event, context) => {
 
     new ARecord(this, `${ctx.props.appName}ApiAliasRecord`, {
       zone: hostedZone,
-      recordName: apiDomain,
+      recordName: ctx.props.apiDomain,
       target: RecordTarget.fromAlias(
         new ApiGatewayv2DomainProperties(domainName.regionalDomainName, domainName.regionalHostedZoneId),
       ),

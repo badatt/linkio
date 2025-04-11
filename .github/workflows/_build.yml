@@ -11,10 +11,6 @@ on:
         description: 'The environment to build for'
         required: true
         type: string
-      api_domain:
-        description: 'The domain of the API'
-        required: true
-        type: string
 
 jobs:
   build-api:
@@ -38,6 +34,8 @@ jobs:
           working_directory: ./api
 
       - name: Build API
+        env:
+          API_DOMAIN: ${{ vars.API_DOMAIN }}
         run: |
           echo "Building API ..."
           sh build.sh
@@ -70,7 +68,7 @@ jobs:
 
       - name: Build Web
         env:
-          VITE_API_URL: https://${{ inputs.api_domain }}
+          VITE_API_URL: https://${{ vars.API_DOMAIN }}
         run: |
           echo "Building Web ..."
           echo "VITE_API_URL: $VITE_API_URL"
