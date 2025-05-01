@@ -22,7 +22,7 @@ export class Context {
       appName: this.getEnvVar('APP_NAME'),
       rootDomain: this.getEnvVar('ROOT_DOMAIN'),
       hostedZoneId: this.getEnvVar('AWS_HOSTED_ZONE_ID'),
-      apiDomain: this.getEnvVar('API_DOMAIN'),
+      apiDomain: `go-api.${this.getEnvVar('ROOT_DOMAIN')}`,
     };
     this.isProd = this.props.account === '849656214064';
   }

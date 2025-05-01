@@ -35,7 +35,7 @@ jobs:
 
       - name: Build API
         env:
-          API_DOMAIN: ${{ vars.API_DOMAIN }}
+          ALLOWED_ORIGINS: https://go.${{ vars.ROOT_DOMAIN }}
         run: |
           echo "Building API ..."
           sh build.sh
@@ -68,7 +68,7 @@ jobs:
 
       - name: Build Web
         env:
-          VITE_API_URL: https://${{ vars.API_DOMAIN }}
+          VITE_API_URL: https://go-api.${{ vars.ROOT_DOMAIN }}
         run: |
           echo "Building Web ..."
           echo "VITE_API_URL: $VITE_API_URL"

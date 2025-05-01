@@ -62,7 +62,6 @@ jobs:
           app_name: ${{ vars.APP_NAME }}
           root_domain: ${{ vars.ROOT_DOMAIN }}
           aws_hosted_zone_id: ${{ vars.AWS_HOSTED_ZONE_ID }}
-          api_domain: ${{ vars.API_DOMAIN }}
 
       - name: Read CDK output
         if: ${{ inputs.cdk_command == 'deploy' }}
