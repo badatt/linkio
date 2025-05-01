@@ -19,6 +19,8 @@ jobs:
     env:
       CI: true
       FORCE_COLOR: true
+    environment:
+      name: ${{ inputs.environment }}
     defaults:
       run:
         shell: bash
@@ -52,6 +54,8 @@ jobs:
     env:
       CI: true
       FORCE_COLOR: true
+    environment:
+      name: ${{ inputs.environment }}
     defaults:
       run:
         shell: bash
