@@ -33,7 +33,7 @@ export default function () {
     <Container>
       <FlexBox fld="column" ali="center" gap="2rem" margin="2rem 0">
         <FlexItem>
-          <Text.h2>Minify your URL</Text.h2>
+          <Text.H2>Minify your URL</Text.H2>
         </FlexItem>
         <FlexItem>
           <Input width="760px" ref={urlRef} placeholder="Paste the link here" />
