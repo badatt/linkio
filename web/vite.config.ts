@@ -7,9 +7,9 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: 'index.html',
-        fallback: 'index.html'
+        fallback: 'index.html',
       },
-    }
+    },
   },
   plugins: [react()],
   server: {
