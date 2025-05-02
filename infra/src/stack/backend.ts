@@ -5,14 +5,20 @@ import { Code, Runtime, IFunction } from 'aws-cdk-lib/aws-lambda';
 import { ApiMapping, DomainName, HttpApi, HttpMethod } from 'aws-cdk-lib/aws-apigatewayv2';
 import { HttpLambdaIntegration } from 'aws-cdk-lib/aws-apigatewayv2-integrations';
 import { Bucket } from 'aws-cdk-lib/aws-s3';
-import { Certificate, CertificateValidation } from 'aws-cdk-lib/aws-certificatemanager';
-import { ARecord, HostedZone, RecordTarget } from 'aws-cdk-lib/aws-route53';
-import { ApiGatewayv2DomainProperties } from 'aws-cdk-lib/aws-route53-targets';
+import { Certificate, CertificateValidation, ICertificate } from 'aws-cdk-lib/aws-certificatemanager';
+import { ARecord, HostedZone, IHostedZone, RecordTarget } from 'aws-cdk-lib/aws-route53';
+import { ApiGatewayv2DomainProperties, CloudFrontTarget } from 'aws-cdk-lib/aws-route53-targets';
 
 import { Context } from '../context';
+import { Distribution, ViewerProtocolPolicy } from 'aws-cdk-lib/aws-cloudfront';
+import { S3StaticWebsiteOrigin } from 'aws-cdk-lib/aws-cloudfront-origins';
+
+type Props = StackProps & {
+  cloudfrontCertificate: ICertificate;
+};
 
 export class BackendStack extends Stack {
-  constructor(scope: Construct, id: string, ctx: Context, props?: StackProps) {
+  constructor(scope: Construct, id: string, ctx: Context, props: Props) {
     super(scope, id, props);
 
     const freeTierLinksStorageBucket = this.createFreeTierLinkStorageBucket(ctx);
@@ -22,8 +28,15 @@ export class BackendStack extends Stack {
     freeTierLinksStorageBucket.grantReadWrite(apiFunction);
     apiFunction.addEnvironment('FREE_TIER_BUCKET_NAME', freeTierLinksStorageBucket.bucketName);
 
+    const hostedZone = HostedZone.fromHostedZoneAttributes(this, `${ctx.props.appName}HostedZone`, {
+      hostedZoneId: ctx.props.hostedZoneId,
+      zoneName: ctx.props.rootDomain,
+    });
+
     const httpApi = this.createHttpApi(ctx, { handler: apiFunction });
-    this.addCustomApiDomain(ctx, { httpApi });
+    this.addCustomApiDomain(ctx, { httpApi, hostedZone });
+
+    //this.createAppCloudfrontDistribution(ctx, { hostedZone, certificate: props.cloudfrontCertificate });
   }
 
   private createFreeTierLinkStorageBucket(ctx: Context): Bucket {
@@ -79,15 +92,10 @@ exports.handler = async (event, context) => {
     return httpApi;
   }
 
-  private addCustomApiDomain(ctx: Context, props: { httpApi: HttpApi }) {
-    const hostedZone = HostedZone.fromHostedZoneAttributes(this, `${ctx.props.appName}HostedZone`, {
-      hostedZoneId: ctx.props.hostedZoneId,
-      zoneName: ctx.props.rootDomain,
-    });
-
+  private addCustomApiDomain(ctx: Context, props: { httpApi: HttpApi; hostedZone: IHostedZone }) {
     const certificate = new Certificate(this, `${ctx.props.appName}ApiCert`, {
       domainName: ctx.props.apiDomain,
-      validation: CertificateValidation.fromDns(hostedZone),
+      validation: CertificateValidation.fromDns(props.hostedZone),
     });
 
     const domainName = new DomainName(this, `${ctx.props.appName}ApiDomain`, {
@@ -103,11 +111,43 @@ exports.handler = async (event, context) => {
     });
 
     new ARecord(this, `${ctx.props.appName}ApiAliasRecord`, {
-      zone: hostedZone,
+      zone: props.hostedZone,
       recordName: ctx.props.apiDomain,
       target: RecordTarget.fromAlias(
         new ApiGatewayv2DomainProperties(domainName.regionalDomainName, domainName.regionalHostedZoneId),
       ),
     });
+  }
+
+  private createAppDeploymentBucket(ctx: Context): Bucket {
+    const bucket = new Bucket(this, `${ctx.props.appName}AppDeploymentBucket`, {
+      removalPolicy: ctx.isProd ? RemovalPolicy.RETAIN : RemovalPolicy.DESTROY,
+    });
+    ctx.out(this, 'AppDeploymentBucket', bucket.bucketArn);
+    return bucket;
+  }
+
+  private createAppCloudfrontDistribution(
+    ctx: Context,
+    props: { hostedZone: IHostedZone; certificate: ICertificate },
+  ): Distribution {
+    const distribution = new Distribution(this, `${ctx.props.appName}AppDistribution`, {
+      defaultBehavior: {
+        origin: new S3StaticWebsiteOrigin(this.createAppDeploymentBucket(ctx)),
+        viewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+      },
+      defaultRootObject: 'index.html',
+      domainNames: [ctx.props.appDomain],
+      certificate: props.certificate,
+    });
+    ctx.out(this, 'AppCloudfrontDistribution', distribution.distributionDomainName);
+
+    new ARecord(this, `${ctx.props.appName}AppAliasRecord`, {
+      zone: props.hostedZone,
+      recordName: ctx.props.appDomain,
+      target: RecordTarget.fromAlias(new CloudFrontTarget(distribution)),
+    });
+    ctx.out(this, 'AppCustomDomain', distribution.domainName);
+    return distribution;
   }
 }

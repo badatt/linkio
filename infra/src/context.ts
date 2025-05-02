@@ -8,6 +8,7 @@ export interface Props {
   rootDomain: string;
   hostedZoneId: string;
   apiDomain: string;
+  appDomain: string;
 }
 
 export class Context {
@@ -23,6 +24,7 @@ export class Context {
       rootDomain: this.getEnvVar('ROOT_DOMAIN'),
       hostedZoneId: this.getEnvVar('AWS_HOSTED_ZONE_ID'),
       apiDomain: `go-api.${this.getEnvVar('ROOT_DOMAIN')}`,
+      appDomain: `go.${this.getEnvVar('ROOT_DOMAIN')}`,
     };
     this.isProd = this.props.account === '849656214064';
   }
