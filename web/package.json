@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "dotenv -e .local.env -- vite dev --port 3000",
     "build": "vite build && cp dist/index.html dist/404.html",
-    "build:sandbox": "dotenv -e .sandbox.env -- vite build",
-    "build:PROD": "dotenv -e .PROD.env -- vite build",
+    "build:sandbox": "dotenv -e .sandbox.env -- npm run build",
+    "build:PROD": "dotenv -e .PROD.env -- npm run build",
     "start": "vite preview",
     "serve": "http-server dist --port 3001",
     "type-check": "tsc"
