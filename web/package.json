@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "dotenv -e .local.env -- vite dev --port 3001",
+    "dev": "dotenv -e .local.env -- vite dev --port 3000",
     "build": "vite build",
     "build:sandbox": "dotenv -e .sandbox.env -- vite build",
     "build:PROD": "dotenv -e .PROD.env -- vite build",

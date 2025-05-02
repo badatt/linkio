@@ -9,9 +9,11 @@ aws lambda update-function-code --function-name $API_FUNCTION_ARN --zip-file fil
 NEW_ENV_VARS_TO_ADD=$(jq -n \
   --arg appName "$APP_NAME" \
   --arg captchaKey "$GOOGLE_CAPTCHA_SECRET_KEY" \
+  --arg allowedOrigins "$ALLOWED_ORIGINS" \
   '{
     APP_NAME: $appName,
-    GOOGLE_CAPTCHA_SECRET_KEY: $captchaKey
+    GOOGLE_CAPTCHA_SECRET_KEY: $captchaKey,
+    ALLOWED_ORIGINS: $allowedOrigins,
   }')
 
 echo "📦 Merging new environment variables into existing Lambda config..."

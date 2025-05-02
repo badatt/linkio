@@ -36,8 +36,6 @@ jobs:
           working_directory: ./api
 
       - name: Build API
-        env:
-          ALLOWED_ORIGINS: https://go.${{ vars.ROOT_DOMAIN }}
         run: |
           echo "Building API ..."
           sh build.sh
