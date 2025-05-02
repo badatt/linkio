@@ -85,11 +85,3 @@ jobs:
         run: |
           echo "Listing files in the current directory..."
           ls -al
-
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          personal_token: ${{ secrets.deployment_github_token }}
-          publish_dir: ./
-          external_repository: ${{ vars.DEPLOYMENT_GITHUB_REPO }}
-          cname: go.${{ vars.ROOT_DOMAIN }}
