@@ -4,7 +4,7 @@ import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import { Code, Runtime, IFunction } from 'aws-cdk-lib/aws-lambda';
 import { ApiMapping, DomainName, HttpApi, HttpMethod } from 'aws-cdk-lib/aws-apigatewayv2';
 import { HttpLambdaIntegration } from 'aws-cdk-lib/aws-apigatewayv2-integrations';
-import { Bucket, BucketAccessControl, IBucket } from 'aws-cdk-lib/aws-s3';
+import { BlockPublicAccess, Bucket, BucketAccessControl, IBucket } from 'aws-cdk-lib/aws-s3';
 import { Certificate, CertificateValidation, ICertificate } from 'aws-cdk-lib/aws-certificatemanager';
 import { ARecord, HostedZone, IHostedZone, RecordTarget } from 'aws-cdk-lib/aws-route53';
 import { ApiGatewayv2DomainProperties, CloudFrontTarget } from 'aws-cdk-lib/aws-route53-targets';
@@ -51,6 +51,12 @@ export class BackendStack extends Stack {
       websiteErrorDocument: '404.html',
       publicReadAccess: true,
       accessControl: BucketAccessControl.PUBLIC_READ,
+      blockPublicAccess: new BlockPublicAccess({
+        blockPublicAcls: false,
+        ignorePublicAcls: false,
+        blockPublicPolicy: false,
+        restrictPublicBuckets: false,
+      }),
       lifecycleRules: [
         {
           expiration: Duration.days(28),
@@ -135,6 +141,12 @@ exports.handler = async (event, context) => {
       publicReadAccess: true,
       accessControl: BucketAccessControl.PUBLIC_READ,
       autoDeleteObjects: !ctx.isProd,
+      blockPublicAccess: new BlockPublicAccess({
+        blockPublicAcls: false,
+        ignorePublicAcls: false,
+        blockPublicPolicy: false,
+        restrictPublicBuckets: false,
+      }),
     });
     ctx.out(this, 'AppDeploymentBucket', bucket.bucketArn);
     return bucket;
