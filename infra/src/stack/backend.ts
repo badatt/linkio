@@ -36,7 +36,7 @@ export class BackendStack extends Stack {
     const httpApi = this.createHttpApi(ctx, { handler: apiFunction });
     this.addCustomApiDomain(ctx, { httpApi, hostedZone });
 
-    //this.createAppCloudfrontDistribution(ctx, { hostedZone, certificate: props.cloudfrontCertificate });
+    this.createAppCloudfrontDistribution(ctx, { hostedZone, certificate: props.cloudfrontCertificate });
   }
 
   private createFreeTierLinkStorageBucket(ctx: Context): Bucket {
