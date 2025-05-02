@@ -5,10 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "dotenv -e .local.env -- vite dev --port 3000",
-    "build": "vite build",
+    "build": "vite build && cp dist/index.html dist/404.html",
     "build:sandbox": "dotenv -e .sandbox.env -- vite build",
     "build:PROD": "dotenv -e .PROD.env -- vite build",
-    "postbuild": "cp dist/index.html dist/404.html",
     "start": "vite preview",
     "serve": "http-server dist --port 3001",
     "type-check": "tsc"
