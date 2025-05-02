@@ -23,6 +23,7 @@ const cloudfrontCertificateStack = new CloudfrontCertificateStack(
 
 const backendStack = new BackendStack(app, `${ctx.props.appName}BackendStack`, ctx, {
   cloudfrontCertificate: cloudfrontCertificateStack.certificate,
+  crossRegionReferences: true,
   env: {
     account: process.env.AWS_ACCOUNT_ID,
     region: process.env.AWS_DEFAULT_REGION,
