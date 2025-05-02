@@ -17,6 +17,7 @@ const cloudfrontCertificateStack = new CloudfrontCertificateStack(
       account: process.env.AWS_ACCOUNT_ID,
       region: 'us-east-1',
     },
+    crossRegionReferences: true,
   },
 );
 
