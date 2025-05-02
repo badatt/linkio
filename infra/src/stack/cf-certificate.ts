@@ -11,7 +11,6 @@ export class CloudfrontCertificateStack extends Stack {
     super(scope, id, props);
     this.certificate = new Certificate(this, `${ctx.props.appName}CloudfrontCertificate`, {
       domainName: ctx.props.appDomain,
-      subjectAlternativeNames: [ctx.props.apiDomain],
       validation: CertificateValidation.fromDns(
         HostedZone.fromHostedZoneAttributes(this, `${ctx.props.appName}HostedZone`, {
           hostedZoneId: ctx.props.hostedZoneId,
