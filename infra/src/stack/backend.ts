@@ -4,7 +4,7 @@ import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import { Code, Runtime, IFunction } from 'aws-cdk-lib/aws-lambda';
 import { ApiMapping, DomainName, HttpApi, HttpMethod } from 'aws-cdk-lib/aws-apigatewayv2';
 import { HttpLambdaIntegration } from 'aws-cdk-lib/aws-apigatewayv2-integrations';
-import { Bucket } from 'aws-cdk-lib/aws-s3';
+import { Bucket, BucketAccessControl, IBucket } from 'aws-cdk-lib/aws-s3';
 import { Certificate, CertificateValidation, ICertificate } from 'aws-cdk-lib/aws-certificatemanager';
 import { ARecord, HostedZone, IHostedZone, RecordTarget } from 'aws-cdk-lib/aws-route53';
 import { ApiGatewayv2DomainProperties, CloudFrontTarget } from 'aws-cdk-lib/aws-route53-targets';
@@ -36,13 +36,21 @@ export class BackendStack extends Stack {
     const httpApi = this.createHttpApi(ctx, { handler: apiFunction });
     this.addCustomApiDomain(ctx, { httpApi, hostedZone });
 
-    this.createAppCloudfrontDistribution(ctx, { hostedZone, certificate: props.cloudfrontCertificate });
+    this.createAppCloudfrontDistribution(ctx, {
+      hostedZone,
+      certificate: props.cloudfrontCertificate,
+      freeTierLinksStorageBucket: freeTierLinksStorageBucket,
+    });
   }
 
   private createFreeTierLinkStorageBucket(ctx: Context): Bucket {
     const bucket = new Bucket(this, `${ctx.props.appName}FreeTierLinksStorageBucket`, {
       removalPolicy: ctx.isProd ? RemovalPolicy.RETAIN : RemovalPolicy.DESTROY,
       autoDeleteObjects: !ctx.isProd,
+      websiteIndexDocument: 'index.html',
+      websiteErrorDocument: '404.html',
+      publicReadAccess: true,
+      accessControl: BucketAccessControl.PUBLIC_READ,
       lifecycleRules: [
         {
           expiration: Duration.days(28),
@@ -122,6 +130,11 @@ exports.handler = async (event, context) => {
   private createAppDeploymentBucket(ctx: Context): Bucket {
     const bucket = new Bucket(this, `${ctx.props.appName}AppDeploymentBucket`, {
       removalPolicy: ctx.isProd ? RemovalPolicy.RETAIN : RemovalPolicy.DESTROY,
+      websiteIndexDocument: 'index.html',
+      websiteErrorDocument: '404.html',
+      publicReadAccess: true,
+      accessControl: BucketAccessControl.PUBLIC_READ,
+      autoDeleteObjects: !ctx.isProd,
     });
     ctx.out(this, 'AppDeploymentBucket', bucket.bucketArn);
     return bucket;
@@ -129,7 +142,7 @@ exports.handler = async (event, context) => {
 
   private createAppCloudfrontDistribution(
     ctx: Context,
-    props: { hostedZone: IHostedZone; certificate: ICertificate },
+    props: { hostedZone: IHostedZone; certificate: ICertificate; freeTierLinksStorageBucket: IBucket },
   ): Distribution {
     const distribution = new Distribution(this, `${ctx.props.appName}AppDistribution`, {
       defaultBehavior: {
@@ -142,12 +155,15 @@ exports.handler = async (event, context) => {
     });
     ctx.out(this, 'AppCloudfrontDistribution', distribution.distributionDomainName);
 
+    distribution.addBehavior('/*', new S3StaticWebsiteOrigin(props.freeTierLinksStorageBucket));
+
     new ARecord(this, `${ctx.props.appName}AppAliasRecord`, {
       zone: props.hostedZone,
       recordName: ctx.props.appDomain,
       target: RecordTarget.fromAlias(new CloudFrontTarget(distribution)),
     });
     ctx.out(this, 'AppCustomDomain', distribution.domainName);
+
     return distribution;
   }
 }
