@@ -181,9 +181,12 @@ exports.handler = async (event, context) => {
     });
     ctx.out(this, 'AppCloudfrontDistributionId', distribution.distributionId);
 
-    distribution.addBehavior('/', new S3StaticWebsiteOrigin(appDeploymentBucket, {
-      originPath: '/index.html',
-    }));
+    distribution.addBehavior(
+      '/',
+      new S3StaticWebsiteOrigin(appDeploymentBucket, {
+        originPath: '/index.html',
+      }),
+    );
     distribution.addBehavior('/assets/*', new S3StaticWebsiteOrigin(appDeploymentBucket));
 
     new ARecord(this, `${ctx.props.appName}AppAliasRecord`, {
