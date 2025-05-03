@@ -12,6 +12,7 @@ import { ApiGatewayv2DomainProperties, CloudFrontTarget } from 'aws-cdk-lib/aws-
 import { Context } from '../context';
 import { Distribution, ViewerProtocolPolicy } from 'aws-cdk-lib/aws-cloudfront';
 import { S3StaticWebsiteOrigin } from 'aws-cdk-lib/aws-cloudfront-origins';
+import { Effect, PolicyStatement, StarPrincipal } from 'aws-cdk-lib/aws-iam';
 
 type Props = StackProps & {
   cloudfrontCertificate: ICertificate;
@@ -61,6 +62,14 @@ export class BackendStack extends Stack {
         },
       ],
     });
+    bucket.addToResourcePolicy(
+      new PolicyStatement({
+        actions: ['s3:GetObject'],
+        effect: Effect.ALLOW,
+        principals: [new StarPrincipal()],
+        resources: [bucket.arnForObjects('*')],
+      })
+    )
     ctx.out(this, 'FreeTierLinksStorageBucket', bucket.bucketArn);
     return bucket;
   }
@@ -144,6 +153,14 @@ exports.handler = async (event, context) => {
         restrictPublicBuckets: false,
       }),
     });
+    bucket.addToResourcePolicy(
+      new PolicyStatement({
+        actions: ['s3:GetObject'],
+        effect: Effect.ALLOW,
+        principals: [new StarPrincipal()],
+        resources: [bucket.arnForObjects('*')],
+      })
+    )
     ctx.out(this, 'AppDeploymentBucket', bucket.bucketName);
     return bucket;
   }
