@@ -40,6 +40,7 @@ const uploadFreeTierLinkObject = async (link: string): Promise<string> => {
     Key: key,
     WebsiteRedirectLocation: link,
     ContentType: 'text/html',
+    Tagging: 'link=true',
   });
 
   try {

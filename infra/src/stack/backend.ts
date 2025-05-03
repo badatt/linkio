@@ -56,12 +56,9 @@ export class BackendStack extends Stack {
         blockPublicPolicy: false,
         restrictPublicBuckets: false,
       }),
-      lifecycleRules: [
-        {
-          expiration: Duration.days(28),
-        },
-      ],
     });
+    ctx.out(this, 'FreeTierLinksStorageBucket', bucket.bucketArn);
+
     bucket.addToResourcePolicy(
       new PolicyStatement({
         actions: ['s3:GetObject'],
@@ -70,7 +67,14 @@ export class BackendStack extends Stack {
         resources: [bucket.arnForObjects('*')],
       }),
     );
-    ctx.out(this, 'FreeTierLinksStorageBucket', bucket.bucketArn);
+
+    bucket.addLifecycleRule({
+      expiration: Duration.days(28),
+      enabled: true,
+      tagFilters: {
+        link: 'true',
+      },
+    });
     return bucket;
   }
 
@@ -169,7 +173,7 @@ exports.handler = async (event, context) => {
     ctx: Context,
     props: { hostedZone: IHostedZone; certificate: ICertificate; freeTierLinksStorageBucket: IBucket },
   ): Distribution {
-    const appDeploymentBucket = this.createAppDeploymentBucket(ctx);
+    //const appDeploymentBucket = this.createAppDeploymentBucket(ctx);
     const distribution = new Distribution(this, `${ctx.props.appName}AppDistribution`, {
       defaultBehavior: {
         origin: new S3StaticWebsiteOrigin(props.freeTierLinksStorageBucket),
@@ -181,16 +185,16 @@ exports.handler = async (event, context) => {
     });
     ctx.out(this, 'AppCloudfrontDistributionId', distribution.distributionId);
 
-    distribution.addBehavior('/app', new S3StaticWebsiteOrigin(appDeploymentBucket));
+    //distribution.addBehavior('/app', new S3StaticWebsiteOrigin(appDeploymentBucket));
 
-    distribution.addBehavior('/app/*', new S3StaticWebsiteOrigin(appDeploymentBucket));
+    //distribution.addBehavior('/app/*', new S3StaticWebsiteOrigin(appDeploymentBucket));
 
-    distribution.addBehavior(
+    /* distribution.addBehavior(
       '/assets/*',
       new S3StaticWebsiteOrigin(appDeploymentBucket, {
         originPath: '/app',
       }),
-    );
+    ); */
 
     new ARecord(this, `${ctx.props.appName}AppAliasRecord`, {
       zone: props.hostedZone,
