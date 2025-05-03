@@ -44,13 +44,11 @@ export class BackendStack extends Stack {
   }
 
   private createFreeTierLinkStorageBucket(ctx: Context): Bucket {
-    const bucket = new Bucket(this, `${ctx.props.appName}FreeTierLinksBkt`, {
+    const bucket = new Bucket(this, `${ctx.props.appName}FreeTierLinksBucket`, {
       removalPolicy: ctx.isProd ? RemovalPolicy.RETAIN : RemovalPolicy.DESTROY,
       autoDeleteObjects: !ctx.isProd,
       websiteIndexDocument: 'index.html',
       websiteErrorDocument: '404.html',
-      publicReadAccess: true,
-      accessControl: BucketAccessControl.PUBLIC_READ,
       blockPublicAccess: new BlockPublicAccess({
         blockPublicAcls: false,
         ignorePublicAcls: false,
@@ -134,12 +132,10 @@ exports.handler = async (event, context) => {
   }
 
   private createAppDeploymentBucket(ctx: Context): Bucket {
-    const bucket = new Bucket(this, `${ctx.props.appName}AppDeploymentBkt`, {
+    const bucket = new Bucket(this, `${ctx.props.appName}AppDeploymentBucket`, {
       removalPolicy: ctx.isProd ? RemovalPolicy.RETAIN : RemovalPolicy.DESTROY,
       websiteIndexDocument: 'index.html',
       websiteErrorDocument: '404.html',
-      publicReadAccess: true,
-      accessControl: BucketAccessControl.PUBLIC_READ,
       autoDeleteObjects: !ctx.isProd,
       blockPublicAccess: new BlockPublicAccess({
         blockPublicAcls: false,
