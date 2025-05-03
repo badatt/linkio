@@ -71,11 +71,10 @@ jobs:
       - name: Build Web
         env:
           VITE_API_URL: https://go-api.${{ vars.ROOT_DOMAIN }}
+          BUILD_TARGET: ${{ inputs.environment }}
         run: |
           echo "Building Web ..."
-          echo "VITE_API_URL: $VITE_API_URL"
-          export BUILD_TARGET=${{ inputs.environment }}
-          npm run build:$BUILD_TARGET
+          sh build.sh
 
       - name: Upload Web build artifact
         uses: actions/upload-artifact@v4
