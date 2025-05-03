@@ -11,7 +11,7 @@ import { ApiGatewayv2DomainProperties, CloudFrontTarget } from 'aws-cdk-lib/aws-
 
 import { Context } from '../context';
 import { Distribution, ViewerProtocolPolicy } from 'aws-cdk-lib/aws-cloudfront';
-import { S3BucketOrigin } from 'aws-cdk-lib/aws-cloudfront-origins';
+import { S3StaticWebsiteOrigin } from 'aws-cdk-lib/aws-cloudfront-origins';
 import { Effect, PolicyStatement, StarPrincipal } from 'aws-cdk-lib/aws-iam';
 
 type Props = StackProps & {
@@ -167,7 +167,7 @@ exports.handler = async (event, context) => {
     //const appDeploymentBucket = this.createAppDeploymentBucket(ctx);
     const distribution = new Distribution(this, `${ctx.props.appName}AppDistribution`, {
       defaultBehavior: {
-        origin: S3BucketOrigin.withOriginAccessControl(props.storageBucket),
+        origin: new S3StaticWebsiteOrigin(props.storageBucket),
         viewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
       },
       defaultRootObject: 'index.html',
