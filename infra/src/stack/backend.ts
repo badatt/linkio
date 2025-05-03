@@ -182,11 +182,19 @@ exports.handler = async (event, context) => {
     ctx.out(this, 'AppCloudfrontDistributionId', distribution.distributionId);
 
     distribution.addBehavior(
+      '/app',
+      new S3StaticWebsiteOrigin(appDeploymentBucket, {
+        originPath: '/app',
+      }),
+    );
+
+    distribution.addBehavior(
       '/app/*',
       new S3StaticWebsiteOrigin(appDeploymentBucket, {
         originPath: '/app',
       }),
     );
+
     distribution.addBehavior(
       '/assets/*',
       new S3StaticWebsiteOrigin(appDeploymentBucket, {
