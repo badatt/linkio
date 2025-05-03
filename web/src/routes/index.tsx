@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
 import Home from './Home';
-import LandingPage from './LandingPage';
+//import LandingPage from './LandingPage';
 import ErrorPage from './ErrorPage';
 import Layout from '../components/Layout';
 
@@ -23,7 +23,7 @@ const router = createBrowserRouter([
           </Suspense>
         ),
       },
-      {
+      /* {
         path: ':slug',
         element: (
           <Layout>
@@ -40,7 +40,7 @@ const router = createBrowserRouter([
             ),
           },
         ],
-      },
+      }, */
     ],
   },
 ]);
