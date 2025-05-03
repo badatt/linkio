@@ -66,6 +66,16 @@ export class BackendStack extends Stack {
         link: 'true',
       },
     });
+
+    bucket.addToResourcePolicy(
+      new PolicyStatement({
+        actions: ['s3:GetObject'],
+        effect: Effect.ALLOW,
+        principals: [new StarPrincipal()],
+        resources: [bucket.arnForObjects('*')],
+      }),
+    );
+
     return bucket;
   }
 
