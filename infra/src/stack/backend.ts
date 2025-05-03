@@ -144,7 +144,7 @@ exports.handler = async (event, context) => {
         restrictPublicBuckets: false,
       }),
     });
-    ctx.out(this, 'AppDeploymentBucket', bucket.bucketArn);
+    ctx.out(this, 'AppDeploymentBucket', bucket.bucketName);
     return bucket;
   }
 

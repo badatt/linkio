@@ -14,8 +14,8 @@ on:
         description: 'The ARN of the API function'
         required: true
         type: string
-      app_deployment_bucket_arn:
-        description: 'The ARN of the deployment bucket'
+      app_deployment_bucket_name:
+        description: 'The name of the deployment bucket'
         required: true
         type: string
       app_cloudfront_id:
@@ -102,7 +102,7 @@ jobs:
 
       - name: Deploy frontend services
         env:
-          APP_DEPLOYMENT_BUCKET_ARN: ${{ inputs.app_deployment_bucket_arn }}
+          APP_DEPLOYMENT_BUCKET_NAME: ${{ inputs.app_deployment_bucket_name }}
           APP_CLOUDFRONT_ID: ${{ inputs.app_cloudfront_id }}
         run: |
           echo "Deploying Web app ..."

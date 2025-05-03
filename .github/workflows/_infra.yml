@@ -22,9 +22,9 @@ on:
       api_domain:
         description: 'The domain of the API'
         value: ${{ jobs.infra-cdk.outputs.api_domain }}
-      app_deployment_bucket_arn:
+      app_deployment_bucket_name:
         description: 'The ARN of the deployment bucket'
-        value: ${{ jobs.infra-cdk.outputs.app_deployment_bucket_arn }}
+        value: ${{ jobs.infra-cdk.outputs.app_deployment_bucket_name }}
       app_cloudfront_id:
         description: 'The CloudFront ID for the app'
         value: ${{ jobs.infra-cdk.outputs.app_cloudfront_id }}
@@ -47,7 +47,7 @@ jobs:
     outputs:
       api_function_arn: ${{ steps.read-cdk-output.outputs.api_function_arn }}
       api_domain: ${{ steps.read-cdk-output.outputs.api_domain }}
-      app_deployment_bucket_arn: ${{ steps.read-cdk-output.outputs.app_deployment_bucket_arn }}
+      app_deployment_bucket_name: ${{ steps.read-cdk-output.outputs.app_deployment_bucket_name }}
       app_cloudfront_id: ${{ steps.read-cdk-output.outputs.app_cloudfront_id }}
 
     steps:
@@ -83,7 +83,7 @@ jobs:
           echo "api_function_arn=$API_FUNCTION_ARN" >> "$GITHUB_OUTPUT"
           API_DOMAIN=$(jq -r '.${{ vars.APP_NAME }}BackendStack.${{ vars.APP_NAME }}ApiDomainOut' cdk-outputs.json)
           echo "api_domain=$API_DOMAIN" >> "$GITHUB_OUTPUT"
-          APP_DEPLOYMENT_BUCKET_ARN=$(jq -r '.${{ vars.APP_NAME }}BackendStack.${{ vars.APP_NAME }}AppDeploymentBucketOut' cdk-outputs.json)
-          echo "app_deployment_bucket_arn=$APP_DEPLOYMENT_BUCKET_ARN" >> "$GITHUB_OUTPUT"
+          APP_DEPLOYMENT_BUCKET_NAME=$(jq -r '.${{ vars.APP_NAME }}BackendStack.${{ vars.APP_NAME }}AppDeploymentBucketOut' cdk-outputs.json)
+          echo "app_deployment_bucket_name=$APP_DEPLOYMENT_BUCKET_NAME" >> "$GITHUB_OUTPUT"
           APP_CLOUDFRONT_ID=$(jq -r '.${{ vars.APP_NAME }}FrontendStack.${{ vars.APP_NAME }}AppCloudfrontDistributionIdOut' cdk-outputs.json)
           echo "app_cloudfront_id=$APP_CLOUDFRONT_ID" >> "$GITHUB_OUTPUT"
