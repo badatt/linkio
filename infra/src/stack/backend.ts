@@ -57,7 +57,7 @@ export class BackendStack extends Stack {
         restrictPublicBuckets: false,
       }),
     });
-    ctx.out(this, 'FreeTierLinksStorageBucket', bucket.bucketArn);
+    ctx.out(this, 'FreeTierLinksStorageBucket', bucket.bucketName);
 
     bucket.addToResourcePolicy(
       new PolicyStatement({
