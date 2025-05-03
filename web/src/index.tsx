@@ -1,8 +1,12 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
 import { GlobalResetStyle, GlobalDefaultStyle, orchidLight, TidyUiProvider } from '@tidy-ui/all';
 
 import Routes from './routes';
+
+const queryClient = new QueryClient();
 
 const App = () => {
   return (
@@ -10,7 +14,9 @@ const App = () => {
       <GlobalResetStyle />
       <TidyUiProvider theme={orchidLight}>
         <GlobalDefaultStyle />
-        <Routes />
+        <QueryClientProvider client={queryClient}>
+          <Routes />
+        </QueryClientProvider>
       </TidyUiProvider>
     </StrictMode>
   );
