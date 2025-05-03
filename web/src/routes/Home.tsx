@@ -16,7 +16,7 @@ export default function () {
         .then((response) => {
           console.log('Response:', response.data);
           if (response.data) {
-            setMessage(`${window.location.origin}/${response.data.slug}`);
+            setMessage(`${window.location.hostname}/${response.data.slug}`);
           } else {
             setMessage('Error: No data received');
           }
