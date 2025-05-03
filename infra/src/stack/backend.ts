@@ -68,8 +68,8 @@ export class BackendStack extends Stack {
         effect: Effect.ALLOW,
         principals: [new StarPrincipal()],
         resources: [bucket.arnForObjects('*')],
-      })
-    )
+      }),
+    );
     ctx.out(this, 'FreeTierLinksStorageBucket', bucket.bucketArn);
     return bucket;
   }
@@ -159,8 +159,8 @@ exports.handler = async (event, context) => {
         effect: Effect.ALLOW,
         principals: [new StarPrincipal()],
         resources: [bucket.arnForObjects('*')],
-      })
-    )
+      }),
+    );
     ctx.out(this, 'AppDeploymentBucket', bucket.bucketName);
     return bucket;
   }
