@@ -1,6 +1,6 @@
 import { FastifyRequest, FastifyReply, RouteShorthandOptions, RequestGenericInterface } from 'fastify';
 
-import { uploadFreeTierLinkObject } from '../../aws/s3.js';
+import { uploadLinkObject } from '../../aws/s3.js';
 
 const createLinkSchema = {
   body: {
@@ -21,7 +21,7 @@ interface CreateLinkRequest extends RequestGenericInterface {
 }
 
 const createLinkHandler = async (request: FastifyRequest<CreateLinkRequest>, reply: FastifyReply) => {
-  const slug = await uploadFreeTierLinkObject(request.body.link);
+  const slug = await uploadLinkObject(request.body.link);
   return reply.code(201).send({ slug });
 };
 

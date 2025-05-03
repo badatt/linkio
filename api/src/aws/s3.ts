@@ -25,8 +25,8 @@ const checkIfObjectExists = async (bucket: string, key: string): Promise<boolean
   }
 };
 
-const uploadFreeTierLinkObject = async (link: string): Promise<string> => {
-  const bucketName = env.FREE_TIER_BUCKET_NAME;
+const uploadLinkObject = async (link: string): Promise<string> => {
+  const bucketName = env.LINKS_STORAGE_BUCKET_NAME;
   let exists;
   let key;
 
@@ -51,8 +51,8 @@ const uploadFreeTierLinkObject = async (link: string): Promise<string> => {
   }
 };
 
-const getFreeTierLinkObject = async (key: string): Promise<string> => {
-  const bucketName = env.FREE_TIER_BUCKET_NAME;
+const getLinkObject = async (key: string): Promise<string> => {
+  const bucketName = env.LINKS_STORAGE_BUCKET_NAME;
   const command = new GetObjectCommand({
     Bucket: bucketName,
     Key: key,
@@ -66,4 +66,4 @@ const getFreeTierLinkObject = async (key: string): Promise<string> => {
   }
 };
 
-export { uploadFreeTierLinkObject, getFreeTierLinkObject };
+export { uploadLinkObject, getLinkObject };

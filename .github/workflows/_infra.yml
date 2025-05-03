@@ -83,7 +83,7 @@ jobs:
           echo "api_function_arn=$API_FUNCTION_ARN" >> "$GITHUB_OUTPUT"
           API_DOMAIN=$(jq -r '.${{ vars.APP_NAME }}BackendStack.${{ vars.APP_NAME }}ApiDomainOut' cdk-outputs.json)
           echo "api_domain=$API_DOMAIN" >> "$GITHUB_OUTPUT"
-          APP_DEPLOYMENT_BUCKET_NAME=$(jq -r '.${{ vars.APP_NAME }}BackendStack.${{ vars.APP_NAME }}FreeTierLinksStorageBucketOut' cdk-outputs.json)
+          APP_DEPLOYMENT_BUCKET_NAME=$(jq -r '.${{ vars.APP_NAME }}BackendStack.${{ vars.APP_NAME }}LinksStorageBucket' cdk-outputs.json)
           echo "app_deployment_bucket_name=$APP_DEPLOYMENT_BUCKET_NAME" >> "$GITHUB_OUTPUT"
           APP_CLOUDFRONT_ID=$(jq -r '.${{ vars.APP_NAME }}BackendStack.${{ vars.APP_NAME }}AppCloudfrontDistributionIdOut' cdk-outputs.json)
           echo "app_cloudfront_id=$APP_CLOUDFRONT_ID" >> "$GITHUB_OUTPUT"

@@ -1,6 +1,6 @@
 import { FastifyRequest, FastifyReply, RouteShorthandOptions, RequestGenericInterface } from 'fastify';
 
-import { getFreeTierLinkObject } from '../../aws/s3.js';
+import { getLinkObject } from '../../aws/s3.js';
 
 const readLinkSchema = {
   params: {
@@ -21,7 +21,7 @@ interface ReadLinkRequest extends RequestGenericInterface {
 }
 
 const readLinkHandler = async (request: FastifyRequest<ReadLinkRequest>, reply: FastifyReply) => {
-  const fullUrl = await getFreeTierLinkObject(request.params.slug);
+  const fullUrl = await getLinkObject(request.params.slug);
   return reply.code(201).send({ slug: request.params.slug, location: fullUrl });
 };
 

@@ -11,7 +11,7 @@ import { ApiGatewayv2DomainProperties, CloudFrontTarget } from 'aws-cdk-lib/aws-
 
 import { Context } from '../context';
 import { Distribution, ViewerProtocolPolicy } from 'aws-cdk-lib/aws-cloudfront';
-import { S3StaticWebsiteOrigin } from 'aws-cdk-lib/aws-cloudfront-origins';
+import { S3BucketOrigin } from 'aws-cdk-lib/aws-cloudfront-origins';
 import { Effect, PolicyStatement, StarPrincipal } from 'aws-cdk-lib/aws-iam';
 
 type Props = StackProps & {
@@ -22,12 +22,12 @@ export class BackendStack extends Stack {
   constructor(scope: Construct, id: string, ctx: Context, props: Props) {
     super(scope, id, props);
 
-    const freeTierLinksStorageBucket = this.createFreeTierLinkStorageBucket(ctx);
+    const storageBucket = this.createStorageBucket(ctx);
 
     const apiFunction = this.createApiFunction(ctx);
 
-    freeTierLinksStorageBucket.grantReadWrite(apiFunction);
-    apiFunction.addEnvironment('FREE_TIER_BUCKET_NAME', freeTierLinksStorageBucket.bucketName);
+    storageBucket.grantReadWrite(apiFunction);
+    apiFunction.addEnvironment('LINKS_STORAGE_BUCKET_NAME', storageBucket.bucketName);
 
     const hostedZone = HostedZone.fromHostedZoneAttributes(this, `${ctx.props.appName}HostedZone`, {
       hostedZoneId: ctx.props.hostedZoneId,
@@ -40,33 +40,16 @@ export class BackendStack extends Stack {
     this.createAppCloudfrontDistribution(ctx, {
       hostedZone,
       certificate: props.cloudfrontCertificate,
-      freeTierLinksStorageBucket: freeTierLinksStorageBucket,
+      storageBucket: storageBucket,
     });
   }
 
-  private createFreeTierLinkStorageBucket(ctx: Context): Bucket {
-    const bucket = new Bucket(this, `${ctx.props.appName}FreeTierLinksBucket`, {
+  private createStorageBucket(ctx: Context): Bucket {
+    const bucket = new Bucket(this, `${ctx.props.appName}LinksBucket`, {
       removalPolicy: ctx.isProd ? RemovalPolicy.RETAIN : RemovalPolicy.DESTROY,
       autoDeleteObjects: !ctx.isProd,
-      websiteIndexDocument: 'index.html',
-      websiteErrorDocument: '404.html',
-      blockPublicAccess: new BlockPublicAccess({
-        blockPublicAcls: false,
-        ignorePublicAcls: false,
-        blockPublicPolicy: false,
-        restrictPublicBuckets: false,
-      }),
     });
-    ctx.out(this, 'FreeTierLinksStorageBucket', bucket.bucketName);
-
-    bucket.addToResourcePolicy(
-      new PolicyStatement({
-        actions: ['s3:GetObject'],
-        effect: Effect.ALLOW,
-        principals: [new StarPrincipal()],
-        resources: [bucket.arnForObjects('*')],
-      }),
-    );
+    ctx.out(this, 'LinksStorageBucket', bucket.bucketName);
 
     bucket.addLifecycleRule({
       expiration: Duration.days(28),
@@ -171,12 +154,12 @@ exports.handler = async (event, context) => {
 
   private createAppCloudfrontDistribution(
     ctx: Context,
-    props: { hostedZone: IHostedZone; certificate: ICertificate; freeTierLinksStorageBucket: IBucket },
+    props: { hostedZone: IHostedZone; certificate: ICertificate; storageBucket: IBucket },
   ): Distribution {
     //const appDeploymentBucket = this.createAppDeploymentBucket(ctx);
     const distribution = new Distribution(this, `${ctx.props.appName}AppDistribution`, {
       defaultBehavior: {
-        origin: new S3StaticWebsiteOrigin(props.freeTierLinksStorageBucket),
+        origin: S3BucketOrigin.withOriginAccessControl(props.storageBucket),
         viewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
       },
       defaultRootObject: 'index.html',
