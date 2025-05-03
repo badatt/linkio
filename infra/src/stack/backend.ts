@@ -44,7 +44,7 @@ export class BackendStack extends Stack {
   }
 
   private createFreeTierLinkStorageBucket(ctx: Context): Bucket {
-    const bucket = new Bucket(this, `${ctx.props.appName}FreeTierLinksStorageBucket`, {
+    const bucket = new Bucket(this, `${ctx.props.appName}FreeTierLinksBkt`, {
       removalPolicy: ctx.isProd ? RemovalPolicy.RETAIN : RemovalPolicy.DESTROY,
       autoDeleteObjects: !ctx.isProd,
       websiteIndexDocument: 'index.html',
@@ -134,7 +134,7 @@ exports.handler = async (event, context) => {
   }
 
   private createAppDeploymentBucket(ctx: Context): Bucket {
-    const bucket = new Bucket(this, `${ctx.props.appName}AppDeploymentBucket`, {
+    const bucket = new Bucket(this, `${ctx.props.appName}AppDeploymentBkt`, {
       removalPolicy: ctx.isProd ? RemovalPolicy.RETAIN : RemovalPolicy.DESTROY,
       websiteIndexDocument: 'index.html',
       websiteErrorDocument: '404.html',
