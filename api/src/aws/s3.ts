@@ -38,9 +38,8 @@ const uploadFreeTierLinkObject = async (link: string): Promise<string> => {
   const command = new PutObjectCommand({
     Bucket: bucketName,
     Key: key,
-    Metadata: {
-      'x-amz-website-redirect-location': link,
-    },
+    WebsiteRedirectLocation: link,
+    ContentType: 'text/html',
   });
 
   try {
