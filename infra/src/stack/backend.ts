@@ -48,6 +48,14 @@ export class BackendStack extends Stack {
     const bucket = new Bucket(this, `${ctx.props.appName}LinksBucket`, {
       removalPolicy: ctx.isProd ? RemovalPolicy.RETAIN : RemovalPolicy.DESTROY,
       autoDeleteObjects: !ctx.isProd,
+      websiteIndexDocument: 'index.html',
+      websiteErrorDocument: '404.html',
+      blockPublicAccess: new BlockPublicAccess({
+        blockPublicAcls: false,
+        ignorePublicAcls: false,
+        blockPublicPolicy: false,
+        restrictPublicBuckets: false,
+      }),
     });
     ctx.out(this, 'LinksStorageBucket', bucket.bucketName);
 
@@ -167,17 +175,6 @@ exports.handler = async (event, context) => {
       certificate: props.certificate,
     });
     ctx.out(this, 'AppCloudfrontDistributionId', distribution.distributionId);
-
-    //distribution.addBehavior('/app', new S3StaticWebsiteOrigin(appDeploymentBucket));
-
-    //distribution.addBehavior('/app/*', new S3StaticWebsiteOrigin(appDeploymentBucket));
-
-    /* distribution.addBehavior(
-      '/assets/*',
-      new S3StaticWebsiteOrigin(appDeploymentBucket, {
-        originPath: '/app',
-      }),
-    ); */
 
     new ARecord(this, `${ctx.props.appName}AppAliasRecord`, {
       zone: props.hostedZone,
