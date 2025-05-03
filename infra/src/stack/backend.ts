@@ -172,7 +172,7 @@ exports.handler = async (event, context) => {
     const appDeploymentBucket = this.createAppDeploymentBucket(ctx);
     const distribution = new Distribution(this, `${ctx.props.appName}AppDistribution`, {
       defaultBehavior: {
-        origin: new S3StaticWebsiteOrigin(appDeploymentBucket),
+        origin: new S3StaticWebsiteOrigin(props.freeTierLinksStorageBucket),
         viewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
       },
       defaultRootObject: 'index.html',
@@ -182,7 +182,6 @@ exports.handler = async (event, context) => {
     ctx.out(this, 'AppCloudfrontDistributionId', distribution.distributionId);
 
     distribution.addBehavior('/', new S3StaticWebsiteOrigin(appDeploymentBucket));
-    distribution.addBehavior('/*', new S3StaticWebsiteOrigin(props.freeTierLinksStorageBucket));
 
     new ARecord(this, `${ctx.props.appName}AppAliasRecord`, {
       zone: props.hostedZone,
