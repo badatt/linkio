@@ -26,9 +26,6 @@ on:
       google_captcha_secret_key:
         description: 'Google reCAPTCHA secret key'
         required: true
-      deployment_github_token:
-        description: 'GitHub token for deployment'
-        required: true
 
 jobs:
   deploy-api:
