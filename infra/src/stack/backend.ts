@@ -183,12 +183,7 @@ exports.handler = async (event, context) => {
 
     distribution.addBehavior('/app', new S3StaticWebsiteOrigin(appDeploymentBucket));
 
-    distribution.addBehavior(
-      '/app/*',
-      new S3StaticWebsiteOrigin(appDeploymentBucket, {
-        originPath: '/app',
-      }),
-    );
+    distribution.addBehavior('/app/*', new S3StaticWebsiteOrigin(appDeploymentBucket));
 
     distribution.addBehavior(
       '/assets/*',
