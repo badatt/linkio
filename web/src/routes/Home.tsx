@@ -9,12 +9,10 @@ export default function () {
   const handleSubmit = () => {
     if (urlRef.current) {
       const link = urlRef.current.value;
-      console.log(`URL: ${link}`); // Handle the URL submission here
 
       axios
         .post(`${import.meta.env.VITE_API_URL}/links`, { link })
         .then((response) => {
-          console.log('Response:', response.data);
           if (response.data) {
             setMessage(`${window.location.hostname}/${response.data.slug}`);
           } else {
