@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Container, DividerEnhanced, FlexBox, FlexItem, styled, Text } from '@tidy-ui/all';
+import { Anchor, Container, DividerEnhanced, FlexBox, FlexItem, styled, Text, Note } from '@tidy-ui/all';
 import Footer from './Footer';
 
 const Layout = styled.div`
@@ -17,6 +17,16 @@ export default function ({ children }: { children: React.ReactNode }) {
   return (
     <Layout>
       <Container maxWidth="md">
+        <Note padding="0.25rem 0">
+          <Text.Caption ctr tnc>
+            ⚠️ This site is currently under active development. If you encounter any issues or bugs, please{' '}
+            <Anchor href="https://github.com/badatt/linkio/issues" canLaunch girth="xxs" tone="minor">
+              report them on GitHub
+            </Anchor>
+            . Your feedback helps us improve!
+          </Text.Caption>
+        </Note>
+
         <FlexBox fld="column" nowrap>
           <FlexItem fuw>{children}</FlexItem>
           <FlexItem fuw>

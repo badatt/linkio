@@ -1,7 +1,7 @@
 import * as React from 'react';
 import axios, { AxiosError } from 'axios';
 import { useMutation } from '@tanstack/react-query';
-import { Alert, Button, ButtonCluster, Code, FlexBox, FlexItem, Input, Paper } from '@tidy-ui/all';
+import { Alert, Button, ButtonCluster, Code, FlexBox, FlexItem, Input, Progress } from '@tidy-ui/all';
 
 type CreateLinkRequest = {
   link: string;
@@ -48,39 +48,38 @@ export default function () {
   };
 
   return (
-    <Paper>
-      <FlexBox fld="column" ali="center" gap="1rem">
-        <FlexItem fuw>
-          <Input
-            isStretched
-            ref={urlRef}
-            placeholder="Paste your long URL here..."
-            status={isError ? 'danger' : 'info'}
-          />
+    <FlexBox fld="column" ali="center" gap="1rem" margin="2rem 0">
+      <Progress variant="indeterminate" girth="xxs" tone="minor" display={isPending ? 'inline-block' : 'none'} />
+      <FlexItem fuw>
+        <Input
+          isStretched
+          ref={urlRef}
+          placeholder="Paste your long URL here..."
+          status={isError ? 'danger' : 'info'}
+        />
+      </FlexItem>
+      <FlexItem width="50%">
+        <ButtonCluster isStretched disabled={isPending}>
+          <Button variant="simple" onClick={handleCancel} disabled={isPending}>
+            Clear
+          </Button>
+          <Button variant="primary" tone="major" onClick={handleSubmit} disabled={isPending}>
+            Shorten URL
+          </Button>
+        </ButtonCluster>
+      </FlexItem>
+      {isSuccess && (
+        <FlexItem>
+          <Code>{`${window.location.hostname}/${data.slug}`}</Code>
         </FlexItem>
-        <FlexItem width="50%">
-          <ButtonCluster isStretched disabled={isPending}>
-            <Button variant="simple" onClick={handleCancel} disabled={isPending}>
-              Clear
-            </Button>
-            <Button variant="primary" tone="major" onClick={handleSubmit} disabled={isPending}>
-              Shorten URL
-            </Button>
-          </ButtonCluster>
+      )}
+      {isError && (
+        <FlexItem>
+          <Alert status="danger" isSharp>
+            {error.response?.data.message}
+          </Alert>
         </FlexItem>
-        {isSuccess && (
-          <FlexItem>
-            <Code>{`${window.location.hostname}/${data.slug}`}</Code>
-          </FlexItem>
-        )}
-        {isError && (
-          <FlexItem>
-            <Alert status="danger" isSharp>
-              {error.response?.data.message}
-            </Alert>
-          </FlexItem>
-        )}
-      </FlexBox>
-    </Paper>
+      )}
+    </FlexBox>
   );
 }

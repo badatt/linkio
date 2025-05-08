@@ -26,7 +26,7 @@ export default function () {
           </FlexItem>
         </FlexBox>
       </FlexItem>
-      <FlexItem als="center">
+      <FlexItem als="center" margin="2rem 0">
         <Text.Caption>© {new Date().getFullYear()} go.datty.in. All rights reserved.</Text.Caption>
       </FlexItem>
     </FlexBox>
