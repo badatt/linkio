@@ -21,8 +21,9 @@ export default function () {
             <Text.Caption bld tone="minor">
               Theme
             </Text.Caption>
-            <Anchor girth='xs'
-              href=''
+            <Anchor
+              girth="xs"
+              href=""
               onClick={() => {
                 changeTheme(theme.isDark ? orchidLight : orchidDark);
               }}
