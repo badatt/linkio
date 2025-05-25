@@ -18,8 +18,8 @@ export default function ({ children }: { children: React.ReactNode }) {
     <Layout>
       <Container maxWidth="md">
         <Note padding="0.25rem 0">
-          <Text.Caption ctr tnc>
-            ⚠️ This site is currently under active development. If you encounter any issues or bugs, please{' '}
+          <Text.Caption ctr>
+            This site is currently under active development. If you encounter any issues or bugs, please{' '}
             <Anchor href="https://github.com/badatt/linkio/issues" canLaunch girth="xxs" tone="minor">
               report them on GitHub
             </Anchor>
