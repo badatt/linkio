@@ -17,7 +17,7 @@
   "license": "ISC",
   "dependencies": {
     "@tanstack/react-query": "^5.75.1",
-    "@tidy-ui/all": "^0.48.0",
+    "@tidy-ui/all": "0.48.11",
     "axios": "^1.8.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
