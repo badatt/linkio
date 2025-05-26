@@ -1,8 +1,7 @@
 import { Suspense } from 'react';
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
-import Home from './Home';
-import ErrorPage from './ErrorPage';
-import Layout from '../components/Layout';
+import { HomePage, ErrorPage, SettingsPage } from '../pages';
+import { Layout, PrivateRoute } from '../components';
 
 const router = createBrowserRouter([
   {
@@ -18,9 +17,22 @@ const router = createBrowserRouter([
         index: true,
         element: (
           <Suspense fallback={<div>Loading...</div>}>
-            <Home />
+            <HomePage />
           </Suspense>
         ),
+      },
+      {
+        element: <PrivateRoute />,
+        children: [
+          {
+            path: '/settings',
+            element: (
+              <Suspense fallback={<div>Loading...</div>}>
+                <SettingsPage />
+              </Suspense>
+            ),
+          },
+        ],
       },
     ],
   },

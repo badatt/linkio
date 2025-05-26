@@ -1,9 +1,9 @@
 import React from 'react';
 import { FlexBox, FlexItem, Text, Stack } from '@tidy-ui/all';
-import UrlShortenerForm from '../components/UrlShortenerForm';
-import Features from '../components/Features';
+import UrlShortenerForm from './UrlShortenerForm';
+import Features from './Features';
 
-export default function () {
+const HomePage = () => {
   return (
     <FlexBox fld="column" ali="center" gap="1rem" margin="2rem 0">
       <FlexItem fuw>
@@ -20,4 +20,6 @@ export default function () {
       </FlexItem>
     </FlexBox>
   );
-}
+};
+
+export { HomePage };

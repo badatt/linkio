@@ -1,8 +1,7 @@
-import { FlexBox, FlexItem, Stack, Text, useTheme, orchidDark, orchidLight, Anchor } from '@tidy-ui/all';
+import { FlexBox, FlexItem, Stack, Text } from '@tidy-ui/all';
 import * as React from 'react';
 
 export default function () {
-  const { changeTheme, theme } = useTheme();
   return (
     <FlexBox fld="column" nowrap>
       <FlexItem>
@@ -16,20 +15,6 @@ export default function () {
             <Text.Caption>Contact</Text.Caption>
             <Text.Caption>Privacy Policy</Text.Caption>
             <Text.Caption>Terms of Service</Text.Caption>
-          </FlexItem>
-          <FlexItem ele={<Stack order="column" />}>
-            <Text.Caption bld tone="minor">
-              Theme
-            </Text.Caption>
-            <Anchor
-              girth="xs"
-              href=""
-              onClick={() => {
-                changeTheme(theme.isDark ? orchidLight : orchidDark);
-              }}
-            >
-              {theme.isDark ? 'Light' : 'Dark'}
-            </Anchor>
           </FlexItem>
           <FlexItem ele={<Stack order="column" />}>
             <Text.Caption bld tone="minor">
