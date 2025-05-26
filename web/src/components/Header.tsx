@@ -16,10 +16,12 @@ import { GoogleAuthProvider, signInWithPopup, onAuthStateChanged, User, signOut 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMoon, faSun } from '@fortawesome/free-regular-svg-icons';
 import { auth } from '../firebase';
+import { useNavigate } from 'react-router-dom';
 
 export default function () {
   const [user, setUser] = React.useState<User | null>(null);
   const { changeTheme, theme } = useTheme();
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, setUser);
@@ -45,7 +47,11 @@ export default function () {
         </FlexItem>
         <FlexItem>
           <Stack align="center" gap="1rem">
-            {user && <Anchor href="/settings">Settings</Anchor>}
+            {user && (
+              <Anchor href="" onClick={() => navigate('/settings')}>
+                Settings
+              </Anchor>
+            )}
             {user && (
               <Button tone="danger" variant="simple" onClick={() => signOut(auth)}>
                 Signout
