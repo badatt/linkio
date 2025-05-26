@@ -2,6 +2,7 @@ import * as React from 'react';
 import axios, { AxiosError } from 'axios';
 import { useMutation } from '@tanstack/react-query';
 import { Alert, Button, ButtonCluster, Code, FlexBox, FlexItem, Input, Progress } from '@tidy-ui/all';
+import { env } from '../../util';
 
 type CreateLinkRequest = {
   link: string;
@@ -19,7 +20,7 @@ type CreateLinkErrorResponse = {
 };
 
 const createLink = async (request: CreateLinkRequest) => {
-  const response = await axios.post(`${import.meta.env.VITE_API_URL}/links`, { link: request.link });
+  const response = await axios.post(`${env('VITE_API_URL')}/links`, { link: request.link });
   return response.data;
 };
 
