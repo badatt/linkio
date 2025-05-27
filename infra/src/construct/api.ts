@@ -53,7 +53,7 @@ export class Api extends BaseConstruct {
       timeout: Duration.seconds(30),
       logRetention: 30,
     });
-    this.out(`${this.id}Function`, fun.functionArn);
+    this.out('Function', fun.functionArn);
     return fun;
   }
 
