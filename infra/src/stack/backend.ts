@@ -1,18 +1,12 @@
-import { Stack, StackProps, Duration, RemovalPolicy } from 'aws-cdk-lib';
+import { Stack, StackProps } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
-import { Code, Runtime, IFunction } from 'aws-cdk-lib/aws-lambda';
-import { ApiMapping, DomainName, HttpApi, HttpMethod } from 'aws-cdk-lib/aws-apigatewayv2';
-import { HttpLambdaIntegration } from 'aws-cdk-lib/aws-apigatewayv2-integrations';
-import { BlockPublicAccess, Bucket, IBucket } from 'aws-cdk-lib/aws-s3';
-import { Certificate, CertificateValidation, ICertificate } from 'aws-cdk-lib/aws-certificatemanager';
-import { ARecord, HostedZone, IHostedZone, RecordTarget } from 'aws-cdk-lib/aws-route53';
-import { ApiGatewayv2DomainProperties, CloudFrontTarget } from 'aws-cdk-lib/aws-route53-targets';
+import { ICertificate } from 'aws-cdk-lib/aws-certificatemanager';
+import { HostedZone } from 'aws-cdk-lib/aws-route53';
 
 import { Context } from '../context';
-import { Distribution, ViewerProtocolPolicy } from 'aws-cdk-lib/aws-cloudfront';
-import { S3StaticWebsiteOrigin } from 'aws-cdk-lib/aws-cloudfront-origins';
-import { Effect, PolicyStatement, StarPrincipal } from 'aws-cdk-lib/aws-iam';
+import { Storage } from '../construct/storage';
+import { Api } from '../construct/api';
+import { CloudFront } from '../construct/cloudfront';
 
 type Props = StackProps & {
   cloudfrontCertificate: ICertificate;
@@ -22,177 +16,34 @@ export class BackendStack extends Stack {
   constructor(scope: Construct, id: string, ctx: Context, props: Props) {
     super(scope, id, props);
 
-    const storageBucket = this.createStorageBucket(ctx);
+    const linksStorage = new Storage(this, ctx, {
+      id: 'LinksStorage',
+      objectExpirationDays: 28,
+    });
 
-    const apiFunction = this.createApiFunction(ctx);
+    const api = new Api(this, ctx, {
+      id: 'Api',
+    });
 
-    storageBucket.grantReadWrite(apiFunction);
-    apiFunction.addEnvironment('LINKS_STORAGE_BUCKET_NAME', storageBucket.bucketName);
+    linksStorage.grandReadAndWriteAccess(api.apiFunction);
+    api.addEnv('LINKS_STORAGE_BUCKET_NAME', linksStorage.bucket.bucketName);
 
     const hostedZone = HostedZone.fromHostedZoneAttributes(this, `${ctx.props.appName}HostedZone`, {
       hostedZoneId: ctx.props.hostedZoneId,
       zoneName: ctx.props.rootDomain,
     });
 
-    const httpApi = this.createHttpApi(ctx, { handler: apiFunction });
-    this.addCustomApiDomain(ctx, { httpApi, hostedZone });
-
-    this.createAppCloudfrontDistribution(ctx, {
+    api.addCustomApiDomain({
+      domain: ctx.props.apiDomain,
       hostedZone,
+    });
+
+    new CloudFront(this, ctx, {
+      id: 'AppCloudFront',
+      origin: linksStorage.bucket,
       certificate: props.cloudfrontCertificate,
-      storageBucket: storageBucket,
+      domain: ctx.props.appDomain,
+      hostedZone: hostedZone,
     });
-  }
-
-  private createStorageBucket(ctx: Context): Bucket {
-    const bucket = new Bucket(this, `${ctx.props.appName}LinksBucket`, {
-      removalPolicy: ctx.isProd ? RemovalPolicy.RETAIN : RemovalPolicy.DESTROY,
-      autoDeleteObjects: !ctx.isProd,
-      websiteIndexDocument: 'index.html',
-      websiteErrorDocument: '404.html',
-      blockPublicAccess: new BlockPublicAccess({
-        blockPublicAcls: false,
-        ignorePublicAcls: false,
-        blockPublicPolicy: false,
-        restrictPublicBuckets: false,
-      }),
-    });
-    ctx.out(this, 'LinksStorageBucket', bucket.bucketName);
-
-    bucket.addLifecycleRule({
-      expiration: Duration.days(28),
-      enabled: true,
-      tagFilters: {
-        link: 'true',
-      },
-    });
-
-    bucket.addToResourcePolicy(
-      new PolicyStatement({
-        actions: ['s3:GetObject'],
-        effect: Effect.ALLOW,
-        principals: [new StarPrincipal()],
-        resources: [bucket.arnForObjects('*')],
-      }),
-    );
-
-    return bucket;
-  }
-
-  private createApiFunction(ctx: Context): NodejsFunction {
-    const fun = new NodejsFunction(this, `${ctx.props.appName}ApiFunction`, {
-      code: Code.fromInline(`
-exports.handler = async (event, context) => {
-  console.log('Event:', JSON.stringify(event, null, 2));
-  console.log('Context:', JSON.stringify(context, null, 2));
-
-  return {
-    statusCode: 200,
-    body: JSON.stringify({ message: 'Hello from Lambda (ESM)!' })
-  };
-};  
-      `),
-      handler: 'index.handler',
-      runtime: Runtime.NODEJS_22_X,
-      timeout: Duration.seconds(30),
-      logRetention: 30,
-    });
-    ctx.out(this, 'ApiFunction', fun.functionArn);
-    return fun;
-  }
-
-  private createHttpApi(ctx: Context, props: { handler: IFunction }): HttpApi {
-    const httpApi = new HttpApi(this, `${ctx.props.appName}Api`, {
-      apiName: `${ctx.props.appName}Api`,
-    });
-
-    const lambdaIntegration = new HttpLambdaIntegration(`${ctx.props.appName}LambdaIntegration`, props.handler);
-
-    httpApi.addRoutes({
-      path: '/{proxy+}',
-      methods: [HttpMethod.ANY],
-      integration: lambdaIntegration,
-    });
-
-    ctx.out(this, 'HttpApiEndpoint', httpApi.apiEndpoint);
-    return httpApi;
-  }
-
-  private addCustomApiDomain(ctx: Context, props: { httpApi: HttpApi; hostedZone: IHostedZone }) {
-    const certificate = new Certificate(this, `${ctx.props.appName}ApiCert`, {
-      domainName: ctx.props.apiDomain,
-      validation: CertificateValidation.fromDns(props.hostedZone),
-    });
-
-    const domainName = new DomainName(this, `${ctx.props.appName}ApiDomain`, {
-      domainName: ctx.props.apiDomain,
-      certificate: certificate,
-    });
-    ctx.out(this, 'ApiDomain', domainName.name);
-
-    new ApiMapping(this, `${ctx.props.appName}ApiMapping`, {
-      api: props.httpApi,
-      domainName: domainName,
-      stage: props.httpApi.defaultStage,
-    });
-
-    new ARecord(this, `${ctx.props.appName}ApiAliasRecord`, {
-      zone: props.hostedZone,
-      recordName: ctx.props.apiDomain,
-      target: RecordTarget.fromAlias(
-        new ApiGatewayv2DomainProperties(domainName.regionalDomainName, domainName.regionalHostedZoneId),
-      ),
-    });
-  }
-
-  private createAppDeploymentBucket(ctx: Context): Bucket {
-    const bucket = new Bucket(this, `${ctx.props.appName}AppDeploymentBucket`, {
-      removalPolicy: ctx.isProd ? RemovalPolicy.RETAIN : RemovalPolicy.DESTROY,
-      websiteIndexDocument: 'index.html',
-      websiteErrorDocument: '404.html',
-      autoDeleteObjects: !ctx.isProd,
-      blockPublicAccess: new BlockPublicAccess({
-        blockPublicAcls: false,
-        ignorePublicAcls: false,
-        blockPublicPolicy: false,
-        restrictPublicBuckets: false,
-      }),
-    });
-    bucket.addToResourcePolicy(
-      new PolicyStatement({
-        actions: ['s3:GetObject'],
-        effect: Effect.ALLOW,
-        principals: [new StarPrincipal()],
-        resources: [bucket.arnForObjects('*')],
-      }),
-    );
-    ctx.out(this, 'AppDeploymentBucket', bucket.bucketName);
-    return bucket;
-  }
-
-  private createAppCloudfrontDistribution(
-    ctx: Context,
-    props: { hostedZone: IHostedZone; certificate: ICertificate; storageBucket: IBucket },
-  ): Distribution {
-    //const appDeploymentBucket = this.createAppDeploymentBucket(ctx);
-    const distribution = new Distribution(this, `${ctx.props.appName}AppDistribution`, {
-      defaultBehavior: {
-        origin: new S3StaticWebsiteOrigin(props.storageBucket),
-        viewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
-      },
-      defaultRootObject: 'index.html',
-      domainNames: [ctx.props.appDomain],
-      certificate: props.certificate,
-    });
-    ctx.out(this, 'AppCloudfrontDistributionId', distribution.distributionId);
-
-    new ARecord(this, `${ctx.props.appName}AppAliasRecord`, {
-      zone: props.hostedZone,
-      recordName: ctx.props.appDomain,
-      target: RecordTarget.fromAlias(new CloudFrontTarget(distribution)),
-    });
-    ctx.out(this, 'AppCustomDomain', distribution.domainName);
-
-    return distribution;
   }
 }
