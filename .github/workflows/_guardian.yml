@@ -37,7 +37,7 @@ jobs:
       - name: Setup web
         uses: ./.github/actions/setup
         with:
-          working_directory: ./web
+          working_directory: ./app
 
       - name: Setup infra
         uses: ./.github/actions/setup

@@ -57,13 +57,13 @@ export default [
     },
   },
 
-  // Web config (if using React)
+  // App config (if using React)
   {
-    files: ['web/**/*.{ts,tsx}'],
+    files: ['app/**/*.{ts,tsx}'],
     languageOptions: {
       parser: parserTs,
       parserOptions: {
-        project: './web/tsconfig.json',
+        project: './app/tsconfig.json',
         sourceType: 'module',
         ecmaVersion: 2022,
         ecmaFeatures: { jsx: true },
@@ -95,7 +95,7 @@ export default [
       react: { version: 'detect' },
       'import/resolver': {
         typescript: {
-          project: './packages/web/tsconfig.json',
+          project: './packages/app/tsconfig.json',
         },
       },
     },
