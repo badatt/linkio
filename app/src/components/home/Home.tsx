@@ -3,7 +3,7 @@ import { FlexBox, FlexItem, Text, Stack } from '@tidy-ui/all';
 import UrlShortenerForm from './UrlShortenerForm';
 import Features from './Features';
 
-const HomePage = () => {
+export default function () {
   return (
     <FlexBox fld="column" ali="center" gap="1rem" margin="2rem 0">
       <FlexItem fuw>
@@ -21,5 +21,3 @@ const HomePage = () => {
     </FlexBox>
   );
 };
-
-export { HomePage };

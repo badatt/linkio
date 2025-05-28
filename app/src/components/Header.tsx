@@ -15,13 +15,12 @@ import {
 import { GoogleAuthProvider, signInWithPopup, onAuthStateChanged, User, signOut } from 'firebase/auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMoon, faSun } from '@fortawesome/free-regular-svg-icons';
-import { auth } from '../firebase';
-import { useNavigate } from 'react-router-dom';
+import { auth } from '@/util';
+import Link from 'next/link';
 
 export default function () {
   const [user, setUser] = React.useState<User | null>(null);
   const { changeTheme, theme } = useTheme();
-  const navigate = useNavigate();
 
   React.useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, setUser);
@@ -43,13 +42,15 @@ export default function () {
     <>
       <FlexBox jsc="space-between" margin="0.5rem 0 0 0">
         <FlexItem>
-          <Text.H6>Linkio</Text.H6>
+          <Text.H6>
+            <Link href="/">Linkio</Link>
+          </Text.H6>
         </FlexItem>
         <FlexItem>
           <Stack align="center" gap="1rem">
             {user && (
-              <Anchor href="" onClick={() => navigate('/settings')}>
-                Settings
+              <Anchor href="">
+                <Link href="/settings">Settings</Link>
               </Anchor>
             )}
             {user && (

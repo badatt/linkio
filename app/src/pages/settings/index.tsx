@@ -1,10 +1,11 @@
-import { Note } from "@tidy-ui/all";
-import { Layout } from "@/components";
+import { Layout, PrivateRoute } from '@/components';
 
-export default function() {
+export default function () {
   return (
-    <Layout>
-      <Note>Settings</Note>
-    </Layout>
+    <PrivateRoute>
+      <Layout>
+        Settings
+      </Layout>
+    </PrivateRoute>
   );
 }

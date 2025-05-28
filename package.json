@@ -11,7 +11,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --check .",
-    "format:fix": "prettier --write .",
+    "format:fix": "prettier --write . --log-level=warn",
     "vet": "npm run lint && npm run format",
     "vet:fix": "npm run lint:fix && npm run format:fix"
   },

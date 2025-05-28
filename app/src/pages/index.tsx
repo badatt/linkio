@@ -1,10 +1,10 @@
-import { Note } from "@tidy-ui/all";
-import { Layout } from "@/components";
-
-export default function() {
+import { Layout } from '@/components';
+import { Home } from '@/components';
+ 
+export default function () {
   return (
     <Layout>
-      <Note>Hello World !</Note>
+      <Home />
     </Layout>
   );
 }

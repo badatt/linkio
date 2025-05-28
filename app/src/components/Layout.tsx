@@ -1,24 +1,41 @@
-import type { Metadata } from "next";
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { GlobalResetStyle, GlobalDefaultStyle, TidyUiProvider, GlobalFont } from '@tidy-ui/all';
+import * as React from 'react';
+import { Container, DividerEnhanced, FlexBox, FlexItem, styled, Text } from '@tidy-ui/all';
+import App from './App';
+import Header from './Header';
+import Footer from './Footer';
 
-const queryClient = new QueryClient();
+const Layout = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  bottom: 0;
+  overflow: auto;
+`;
 
-export default function({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function ({ children }: { children: React.ReactNode }) {
   return (
-    <>
-    <GlobalResetStyle />
-    <TidyUiProvider>
-      <GlobalFont />
-      <GlobalDefaultStyle />
-      <QueryClientProvider client={queryClient}>
-        {children}
-      </QueryClientProvider>
-    </TidyUiProvider>
-    </>
+    <App>
+      <Layout>
+        <Container maxWidth="md">
+          <FlexBox fld="column" nowrap>
+            <FlexItem fuw>
+              <Header />
+            </FlexItem>
+            <FlexItem fuw>{children}</FlexItem>
+            <FlexItem fuw>
+              <DividerEnhanced>
+                <Text.Caption tone="neutral">No login needed. Free to use.</Text.Caption>
+              </DividerEnhanced>
+            </FlexItem>
+            <FlexItem fuw>
+              <Footer />
+            </FlexItem>
+          </FlexBox>
+        </Container>
+      </Layout>
+    </App>
   );
 }

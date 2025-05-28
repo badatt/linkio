@@ -137,7 +137,7 @@ export default [
 
   // Ignore common folders
   {
-    ignores: ['**/dist/**', '**/build/**', '**/node_modules/**', '**/cdk.out/**'],
+    ignores: ['**/dist/**', '**/build/**', '**/node_modules/**', '**/cdk.out/**', '**/.next/**'],
   },
 
   prettier,

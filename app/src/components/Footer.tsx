@@ -1,5 +1,5 @@
-import { FlexBox, FlexItem, Stack, Text } from '@tidy-ui/all';
 import * as React from 'react';
+import { FlexBox, FlexItem, Stack, Text } from '@tidy-ui/all';
 
 export default function () {
   return (
