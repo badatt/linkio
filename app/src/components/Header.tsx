@@ -15,8 +15,9 @@ import {
 import { GoogleAuthProvider, signInWithPopup, onAuthStateChanged, User, signOut } from 'firebase/auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMoon, faSun } from '@fortawesome/free-regular-svg-icons';
-import { auth } from '@/util';
 import Link from 'next/link';
+
+import { auth } from '@/util';
 
 export default function () {
   const [user, setUser] = React.useState<User | null>(null);

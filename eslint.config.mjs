@@ -1,3 +1,4 @@
+import { defineConfig } from 'eslint-define-config';
 import eslintPluginTs from '@typescript-eslint/eslint-plugin';
 import parserTs from '@typescript-eslint/parser';
 import js from '@eslint/js';
@@ -8,132 +9,124 @@ import pluginReact from 'eslint-plugin-react';
 import pluginReactHooks from 'eslint-plugin-react-hooks';
 import pluginJsxA11y from 'eslint-plugin-jsx-a11y';
 
-/** @type {import("eslint").Linter.FlatConfig} */
-export default [
+const rules = {
+  ...eslintPluginTs.configs.recommended.rules,
+  semi: ['error', 'always'],
+  quotes: ['error', 'single', { avoidEscape: true }],
+  'import/order': [
+    'error',
+    {
+      groups: [['builtin', 'external'], 'internal', ['parent', 'sibling', 'index']],
+      'newlines-between': 'always',
+    },
+  ],
+  'import/no-unresolved': 'error',
+  'react/jsx-uses-react': 'off',
+  'react/react-in-jsx-scope': 'off',
+  'react-hooks/rules-of-hooks': 'error',
+  'react-hooks/exhaustive-deps': 'warn',
+  'jsx-a11y/alt-text': 'warn',
+  'jsx-a11y/anchor-is-valid': 'warn',
+};
+
+const plugins = {
+  '@typescript-eslint': eslintPluginTs,
+  import: pluginImport,
+  security: pluginSecurity,
+  react: pluginReact,
+  'react-hooks': pluginReactHooks,
+  'jsx-a11y': pluginJsxA11y,
+};
+
+const api = {
+  files: ['api/**/*.{ts,tsx}'],
+  languageOptions: {
+    parser: parserTs,
+    parserOptions: {
+      project: './api/tsconfig.json',
+      sourceType: 'module',
+      ecmaVersion: 2022,
+    },
+    globals: {
+      process: 'readonly',
+      require: 'readonly',
+      module: 'readonly',
+      __dirname: 'readonly',
+    },
+  },
+  plugins,
+  rules,
+  settings: {
+    'import/resolver': {
+      typescript: {
+        project: './api/tsconfig.json',
+      },
+    },
+  },
+};
+
+const app = {
+  files: ['app/**/*.{ts,tsx}'],
+  languageOptions: {
+    parser: parserTs,
+    parserOptions: {
+      project: './app/tsconfig.json',
+      sourceType: 'module',
+      ecmaVersion: 2022,
+      ecmaFeatures: { jsx: true },
+    },
+    globals: {
+      document: 'readonly',
+      window: 'readonly',
+      console: 'readonly',
+      process: 'readonly',
+    },
+  },
+  plugins,
+  rules,
+  settings: {
+    'import/resolver': {
+      typescript: {
+        project: './app/tsconfig.json',
+      },
+    },
+  },
+};
+
+const infra = {
+  files: ['infra/**/*.{ts,tsx}'],
+  languageOptions: {
+    parser: parserTs,
+    parserOptions: {
+      project: './infra/tsconfig.json',
+      sourceType: 'module',
+      ecmaVersion: 2022,
+    },
+    globals: {
+      process: 'readonly',
+      require: 'readonly',
+      module: 'readonly',
+      console: 'readonly',
+      __dirname: 'readonly',
+    },
+  },
+  plugins,
+  rules,
+  settings: {
+    'import/resolver': {
+      typescript: {
+        project: './infra/tsconfig.json',
+      },
+    },
+  },
+};
+
+const config = [
   js.configs.recommended,
 
-  // API config
-  {
-    files: ['api/**/*.{ts,tsx}'],
-    languageOptions: {
-      parser: parserTs,
-      parserOptions: {
-        project: './api/tsconfig.json',
-        sourceType: 'module',
-        ecmaVersion: 2022,
-        ecmaFeatures: { jsx: true },
-      },
-      globals: {
-        process: 'readonly',
-        require: 'readonly',
-        module: 'readonly',
-        __dirname: 'readonly',
-      },
-    },
-    plugins: {
-      '@typescript-eslint': eslintPluginTs,
-      import: pluginImport,
-      security: pluginSecurity,
-    },
-    rules: {
-      ...eslintPluginTs.configs.recommended.rules,
-      semi: ['error', 'always'],
-      quotes: ['error', 'single', { avoidEscape: true }],
-      'import/order': [
-        'error',
-        {
-          groups: [['builtin', 'external'], 'internal', ['parent', 'sibling', 'index']],
-          'newlines-between': 'always',
-        },
-      ],
-      'import/no-unresolved': 'error',
-    },
-    settings: {
-      'import/resolver': {
-        typescript: {
-          project: './packages/api/tsconfig.json',
-        },
-      },
-    },
-  },
-
-  // App config (if using React)
-  {
-    files: ['app/**/*.{ts,tsx}'],
-    languageOptions: {
-      parser: parserTs,
-      parserOptions: {
-        project: './app/tsconfig.json',
-        sourceType: 'module',
-        ecmaVersion: 2022,
-        ecmaFeatures: { jsx: true },
-      },
-      globals: {
-        document: 'readonly',
-        window: 'readonly',
-        console: 'readonly',
-        process: 'readonly',
-      },
-    },
-    plugins: {
-      '@typescript-eslint': eslintPluginTs,
-      react: pluginReact,
-      'react-hooks': pluginReactHooks,
-      'jsx-a11y': pluginJsxA11y,
-      import: pluginImport,
-    },
-    rules: {
-      ...eslintPluginTs.configs.recommended.rules,
-      'react/jsx-uses-react': 'off',
-      'react/react-in-jsx-scope': 'off',
-      'react-hooks/rules-of-hooks': 'error',
-      'react-hooks/exhaustive-deps': 'warn',
-      'jsx-a11y/alt-text': 'warn',
-      'jsx-a11y/anchor-is-valid': 'warn',
-    },
-    settings: {
-      react: { version: 'detect' },
-      'import/resolver': {
-        typescript: {
-          project: './packages/app/tsconfig.json',
-        },
-      },
-    },
-  },
-
-  // Infra config
-  {
-    files: ['infra/**/*.{ts,tsx}'],
-    languageOptions: {
-      parser: parserTs,
-      parserOptions: {
-        project: './infra/tsconfig.json',
-        sourceType: 'module',
-        ecmaVersion: 2022,
-      },
-      globals: {
-        process: 'readonly',
-        require: 'readonly',
-        module: 'readonly',
-        console: 'readonly',
-        __dirname: 'readonly',
-      },
-    },
-    plugins: {
-      '@typescript-eslint': eslintPluginTs,
-      import: pluginImport,
-    },
-    rules: {
-      ...eslintPluginTs.configs.recommended.rules,
-    },
-    settings: {
-      'import/resolver': {
-        typescript: {
-          project: './packages/infra/tsconfig.json',
-        },
-      },
-    },
-  },
+  api,
+  app,
+  infra,
 
   // Ignore common folders
   {
@@ -142,3 +135,5 @@ export default [
 
   prettier,
 ];
+
+export default defineConfig(config);

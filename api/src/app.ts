@@ -4,7 +4,7 @@ import { FastifyPluginAsync } from 'fastify';
 import { fileURLToPath } from 'node:url';
 import cors from '@fastify/cors';
 
-import env from './util/env.js';
+import env from './util/env';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

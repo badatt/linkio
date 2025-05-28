@@ -1,9 +1,10 @@
 import { Construct } from 'constructs';
-import { Context } from '../context';
 import { BlockPublicAccess, Bucket } from 'aws-cdk-lib/aws-s3';
 import { Duration, RemovalPolicy } from 'aws-cdk-lib';
-import { BaseConstruct } from './base';
 import { Effect, IGrantable, PolicyStatement, StarPrincipal } from 'aws-cdk-lib/aws-iam';
+
+import { BaseConstruct } from './base';
+import { Context } from '../context';
 import { BaseProps } from '../types';
 
 interface StorageProps extends BaseProps {

@@ -1,13 +1,14 @@
 import { Construct } from 'constructs';
-import { Context } from '../context';
-import { BaseProps } from '../types';
-import { BaseConstruct } from './base';
 import { Distribution, ViewerProtocolPolicy } from 'aws-cdk-lib/aws-cloudfront';
 import { S3StaticWebsiteOrigin } from 'aws-cdk-lib/aws-cloudfront-origins';
 import { IBucket } from 'aws-cdk-lib/aws-s3';
 import { ICertificate } from 'aws-cdk-lib/aws-certificatemanager';
 import { ARecord, IHostedZone, RecordTarget } from 'aws-cdk-lib/aws-route53';
 import { CloudFrontTarget } from 'aws-cdk-lib/aws-route53-targets';
+
+import { BaseConstruct } from './base';
+import { BaseProps } from '../types';
+import { Context } from '../context';
 
 interface CloudFrontProps extends BaseProps {
   origin: IBucket;

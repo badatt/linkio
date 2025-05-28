@@ -1,8 +1,9 @@
 import { Stack, StackProps } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-import { Context } from '../context';
 import { Certificate, CertificateValidation } from 'aws-cdk-lib/aws-certificatemanager';
 import { HostedZone } from 'aws-cdk-lib/aws-route53';
+
+import { Context } from '../context';
 
 export class CloudfrontCertificateStack extends Stack {
   public readonly certificate: Certificate;

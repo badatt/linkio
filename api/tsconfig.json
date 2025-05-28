@@ -1,11 +1,10 @@
 {
-  "extends": "../tsconfig.json",
   "compilerOptions": {
     "allowJs": false,
     "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
-    "module": "NodeNext",
-    "moduleResolution": "nodenext",
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "noImplicitAny": true,
     "outDir": "dist",
     "declaration": false,

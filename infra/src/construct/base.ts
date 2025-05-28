@@ -1,7 +1,8 @@
 import { Construct } from 'constructs';
+import { CfnOutput } from 'aws-cdk-lib';
+
 import { Context } from '../context';
 import { BaseProps } from '../types';
-import { CfnOutput } from 'aws-cdk-lib';
 
 export class BaseConstruct extends Construct {
   protected readonly ctx: Context;

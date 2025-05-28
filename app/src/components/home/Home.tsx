@@ -1,5 +1,6 @@
 import React from 'react';
 import { FlexBox, FlexItem, Text, Stack } from '@tidy-ui/all';
+
 import UrlShortenerForm from './UrlShortenerForm';
 import Features from './Features';
 
@@ -20,4 +21,4 @@ export default function () {
       </FlexItem>
     </FlexBox>
   );
-};
+}

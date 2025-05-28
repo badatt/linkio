@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Container, DividerEnhanced, FlexBox, FlexItem, styled, Text } from '@tidy-ui/all';
+
 import App from './App';
 import Header from './Header';
 import Footer from './Footer';

@@ -1,7 +1,4 @@
 import { Construct } from 'constructs';
-import { Context } from '../context';
-import { BaseConstruct } from './base';
-import { BaseProps } from '../types';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import { Code, IFunction, Runtime } from 'aws-cdk-lib/aws-lambda';
 import { Duration } from 'aws-cdk-lib';
@@ -10,6 +7,10 @@ import { HttpLambdaIntegration } from 'aws-cdk-lib/aws-apigatewayv2-integrations
 import { ARecord, IHostedZone, RecordTarget } from 'aws-cdk-lib/aws-route53';
 import { Certificate, CertificateValidation } from 'aws-cdk-lib/aws-certificatemanager';
 import { ApiGatewayv2DomainProperties } from 'aws-cdk-lib/aws-route53-targets';
+
+import { BaseProps } from '../types';
+import { BaseConstruct } from './base';
+import { Context } from '../context';
 
 export class Api extends BaseConstruct {
   public readonly apiFunction: IFunction;

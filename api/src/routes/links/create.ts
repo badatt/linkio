@@ -1,6 +1,6 @@
 import { FastifyRequest, FastifyReply, RouteShorthandOptions, RequestGenericInterface } from 'fastify';
 
-import { uploadLinkObject } from '../../aws/s3.js';
+import { uploadLinkObject } from '../../aws/s3';
 
 const createLinkSchema = {
   body: {

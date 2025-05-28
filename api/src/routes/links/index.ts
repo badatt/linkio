@@ -1,8 +1,8 @@
 import { FastifyInstance, FastifyPluginAsync } from 'fastify';
 
-import { AppOptions } from '../../app.js';
-import { CreateLinkRequest, createLinkHandler, createLinkHandlerOptions } from './create.js';
-import { ReadLinkRequest, readLinkHandler, readLinkHandlerOptions } from './read.js';
+import { AppOptions } from '../../app';
+import { CreateLinkRequest, createLinkHandler, createLinkHandlerOptions } from './create';
+import { ReadLinkRequest, readLinkHandler, readLinkHandlerOptions } from './read';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const links: FastifyPluginAsync = async (fastify: FastifyInstance, opts: AppOptions): Promise<void> => {
