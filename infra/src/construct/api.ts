@@ -1,7 +1,5 @@
 import { Construct } from 'constructs';
-import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
-import { Code, IFunction, Runtime } from 'aws-cdk-lib/aws-lambda';
-import { Duration } from 'aws-cdk-lib';
+import { IFunction } from 'aws-cdk-lib/aws-lambda';
 import { ApiMapping, HttpApi, HttpMethod, DomainName } from 'aws-cdk-lib/aws-apigatewayv2';
 import { HttpLambdaIntegration } from 'aws-cdk-lib/aws-apigatewayv2-integrations';
 import { ARecord, IHostedZone, RecordTarget } from 'aws-cdk-lib/aws-route53';
@@ -12,20 +10,21 @@ import { BaseProps } from '../types';
 import { BaseConstruct } from './base';
 import { Context } from '../context';
 
+interface ApiProps extends BaseProps {
+  handler: IFunction;
+}
+
 export class Api extends BaseConstruct {
-  public readonly apiFunction: IFunction;
   public readonly httpApi: HttpApi;
 
-  constructor(scope: Construct, ctx: Context, props: BaseProps) {
+  constructor(scope: Construct, ctx: Context, props: ApiProps) {
     super(scope, ctx, props);
-
-    this.apiFunction = this.createApiFunction();
 
     this.httpApi = new HttpApi(this, this.id, {
       apiName: this.id,
     });
 
-    const lambdaIntegration = new HttpLambdaIntegration(`${this.id}LambdaIntegration`, this.apiFunction);
+    const lambdaIntegration = new HttpLambdaIntegration(`${this.id}LambdaIntegration`, props.handler);
 
     this.httpApi.addRoutes({
       path: '/{proxy+}',
@@ -34,36 +33,6 @@ export class Api extends BaseConstruct {
     });
 
     this.out('Endpoint', this.httpApi.apiEndpoint);
-  }
-
-  private createApiFunction(): NodejsFunction {
-    const fun = new NodejsFunction(this, `${this.id}Function`, {
-      code: Code.fromInline(`
-  exports.handler = async (event, context) => {
-    console.log('Event:', JSON.stringify(event, null, 2));
-    console.log('Context:', JSON.stringify(context, null, 2));
-  
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ message: 'Hello from Lambda (ESM)!' })
-    };
-  };
-        `),
-      handler: 'index.handler',
-      runtime: Runtime.NODEJS_22_X,
-      timeout: Duration.seconds(30),
-      logRetention: 30,
-    });
-    this.out('Function', fun.functionArn);
-    return fun;
-  }
-
-  public addEnv(key: string, value: string) {
-    if (this.apiFunction instanceof NodejsFunction) {
-      this.apiFunction.addEnvironment(key, value);
-    } else {
-      throw new Error('API function is not a NodejsFunction');
-    }
   }
 
   public addCustomApiDomain(props: { domain: string; hostedZone: IHostedZone }) {

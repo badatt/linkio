@@ -7,6 +7,8 @@ import { Context } from '../context';
 import { Storage } from '../construct/storage';
 import { Api } from '../construct/api';
 import { CloudFront } from '../construct/cloudfront';
+import { Lambda } from '../construct/lambda';
+import { DynamoDb } from '../construct/db';
 
 type Props = StackProps & {
   cloudfrontCertificate: ICertificate;
@@ -16,18 +18,37 @@ export class BackendStack extends Stack {
   constructor(scope: Construct, id: string, ctx: Context, props: Props) {
     super(scope, id, props);
 
+    // API function handler
+    const apiFunction = new Lambda(this, ctx, {
+      id: 'ApiFunction',
+    });
+
+    // Links storage bucket
     const linksStorage = new Storage(this, ctx, {
       id: 'LinksStorage',
       objectExpirationDays: 28,
     });
 
-    const api = new Api(this, ctx, {
-      id: 'Api',
+    linksStorage.grandReadAndWriteAccess(apiFunction.handler);
+    apiFunction.addEnv('LINKS_STORAGE_BUCKET_NAME', linksStorage.bucket.bucketName);
+
+    // Dynamo DB tables
+    const db = new DynamoDb(this, ctx, {
+      id: 'Db',
     });
 
-    linksStorage.grandReadAndWriteAccess(api.apiFunction);
-    api.addEnv('LINKS_STORAGE_BUCKET_NAME', linksStorage.bucket.bucketName);
+    db.grandReadAndWriteAccess(apiFunction.handler);
+    db.tables.forEach((table, name) => {
+      apiFunction.addEnv(name, table.tableName);
+    });
 
+    // Http API
+    const api = new Api(this, ctx, {
+      id: 'Api',
+      handler: apiFunction.handler,
+    });
+
+    // Hosted Zone
     const hostedZone = HostedZone.fromHostedZoneAttributes(this, `${ctx.props.appName}HostedZone`, {
       hostedZoneId: ctx.props.hostedZoneId,
       zoneName: ctx.props.rootDomain,
@@ -38,6 +59,7 @@ export class BackendStack extends Stack {
       hostedZone,
     });
 
+    // Cloudfront distribution CDN
     new CloudFront(this, ctx, {
       id: 'AppCloudFront',
       origin: linksStorage.bucket,
