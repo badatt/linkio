@@ -11,9 +11,9 @@ NEW_ENV_VARS_TO_ADD=$(jq -n \
   --arg captchaKey "$GOOGLE_CAPTCHA_SECRET_KEY" \
   --arg allowedOrigins "$ALLOWED_ORIGINS" \
   '{
-    APP_NAME: $appName,
-    GOOGLE_CAPTCHA_SECRET_KEY: $captchaKey,
-    ALLOWED_ORIGINS: $allowedOrigins,
+    AppName: $appName,
+    GoogleCaptchaSecretKey: $captchaKey,
+    AllowedOrigins: $allowedOrigins,
   }')
 
 echo "📦 Merging new environment variables into existing Lambda config..."

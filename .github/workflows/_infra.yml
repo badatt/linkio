@@ -79,7 +79,7 @@ jobs:
           echo '```json' >> $GITHUB_STEP_SUMMARY
           jq . cdk-outputs.json >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
-          API_FUNCTION_ARN=$(jq -r '.${{ vars.APP_NAME }}BackendStack.${{ vars.APP_NAME }}ApiFunctionOut' cdk-outputs.json)
+          API_FUNCTION_ARN=$(jq -r '.${{ vars.APP_NAME }}BackendStack.${{ vars.APP_NAME }}ApiFunctionHandlerOut' cdk-outputs.json)
           echo "api_function_arn=$API_FUNCTION_ARN" >> "$GITHUB_OUTPUT"
           API_DOMAIN=$(jq -r '.${{ vars.APP_NAME }}BackendStack.${{ vars.APP_NAME }}ApiDomainOut' cdk-outputs.json)
           echo "api_domain=$API_DOMAIN" >> "$GITHUB_OUTPUT"

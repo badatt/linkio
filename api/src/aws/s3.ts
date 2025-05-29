@@ -2,7 +2,7 @@
 import { S3Client, HeadObjectCommand, PutObjectCommand, GetObjectCommand } from '@aws-sdk/client-s3';
 import { nanoid } from 'nanoid';
 
-import env from '@/util/env';
+import env from '../util/env';
 
 const s3 = new S3Client({
   region: env.AWS_DEFAULT_REGION,

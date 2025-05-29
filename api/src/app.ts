@@ -2,9 +2,9 @@ import { AutoloadPluginOptions } from '@fastify/autoload';
 import { FastifyPluginAsync } from 'fastify';
 import cors from '@fastify/cors';
 
-import env from '@/util/env';
-import routes from '@/routes';
-import plugins from '@/plugins';
+import env from './util/env';
+import routes from './routes';
+import plugins from './plugins';
 
 export type AppOptions = {
   // Place your custom options for app below here.
