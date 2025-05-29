@@ -2,7 +2,7 @@ import { FastifyPluginAsync } from 'fastify';
 import os from 'node:os';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const example: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
+const route: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   fastify.get('/', async function (request, reply) {
     const systemInfo = {
@@ -23,4 +23,8 @@ const example: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
   });
 };
 
-export default example;
+const health: FastifyPluginAsync = async (fastify): Promise<void> => {
+  await fastify.register(route, { prefix: '/health' });
+};
+
+export default health;
