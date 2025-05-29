@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Container, DividerEnhanced, FlexBox, FlexItem, styled, Text } from '@tidy-ui/all';
 
-import App from './App';
 import Header from './Header';
 import Footer from './Footer';
 
@@ -18,25 +17,23 @@ const Layout = styled.div`
 
 export default function ({ children }: { children: React.ReactNode }) {
   return (
-    <App>
-      <Layout>
-        <Container maxWidth="md">
-          <FlexBox fld="column" nowrap>
-            <FlexItem fuw>
-              <Header />
-            </FlexItem>
-            <FlexItem fuw>{children}</FlexItem>
-            <FlexItem fuw>
-              <DividerEnhanced>
-                <Text.Caption tone="neutral">No login needed. Free to use.</Text.Caption>
-              </DividerEnhanced>
-            </FlexItem>
-            <FlexItem fuw>
-              <Footer />
-            </FlexItem>
-          </FlexBox>
-        </Container>
-      </Layout>
-    </App>
+    <Layout>
+      <Container maxWidth="md">
+        <FlexBox fld="column" nowrap>
+          <FlexItem fuw>
+            <Header />
+          </FlexItem>
+          <FlexItem fuw>{children}</FlexItem>
+          <FlexItem fuw>
+            <DividerEnhanced>
+              <Text.Caption tone="neutral">No login needed. Free to use.</Text.Caption>
+            </DividerEnhanced>
+          </FlexItem>
+          <FlexItem fuw>
+            <Footer />
+          </FlexItem>
+        </FlexBox>
+      </Container>
+    </Layout>
   );
 }

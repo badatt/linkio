@@ -1,9 +1,5 @@
-import { Layout, PrivateRoute } from '@/components';
+import { PrivateRoute } from '@/components';
 
 export default function () {
-  return (
-    <PrivateRoute>
-      <Layout>Settings</Layout>
-    </PrivateRoute>
-  );
+  return <PrivateRoute>Settings</PrivateRoute>;
 }

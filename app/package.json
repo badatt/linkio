@@ -18,13 +18,14 @@
     "@tidy-ui/all": "0.48.19",
     "axios": "^1.8.4",
     "firebase": "^11.8.1",
+    "next": "15.3.2",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-firebase-hooks": "^5.1.1",
-    "styled-components": "^5.3.3",
-    "next": "15.3.2"
+    "styled-components": "^5.3.3"
   },
   "devDependencies": {
+    "@tanstack/react-query-devtools": "^5.77.2",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

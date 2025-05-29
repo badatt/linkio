@@ -38,7 +38,7 @@ export default function () {
         <GridItem key={index} xl={6} lg={6} md={6} sm={12} xs={12}>
           <Paper height="200px">
             <Stack order="column" align="center" gap="0.5rem">
-              <Text.H4 ctr margin="0.5rem">
+              <Text.H4 ctr margin="0.5rem" tone="minor">
                 <FontAwesomeIcon icon={feature.emoji} />
               </Text.H4>
               <Text.Subtitle2 ctr>{feature.title}</Text.Subtitle2>
