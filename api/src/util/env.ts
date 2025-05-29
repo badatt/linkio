@@ -7,8 +7,10 @@ const getEnvVar = (name: string): string => {
 };
 
 export default {
-  APP_NAME: getEnvVar('APP_NAME'),
+  APP_NAME: getEnvVar('AppName'),
   AWS_DEFAULT_REGION: getEnvVar('AWS_DEFAULT_REGION'),
-  LINKS_STORAGE_BUCKET_NAME: getEnvVar('LINKS_STORAGE_BUCKET_NAME'),
-  ALLOWED_ORIGINS: getEnvVar('ALLOWED_ORIGINS'),
+  LINKS_STORAGE_BUCKET_NAME: getEnvVar('LinksStorageBucketName'),
+  ALLOWED_ORIGINS: getEnvVar('AllowedOrigins'),
+  LINKS_TABLE: getEnvVar('LinksTable'),
+  USERS_TABLE: getEnvVar('UsersTable'),
 };

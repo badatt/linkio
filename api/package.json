@@ -14,7 +14,7 @@
     "start": "npm run build && fastify start -p 4001 -l info dist/app.js",
     "build": "rollup -c",
     "watch:ts": "tsc -w",
-    "dev": "npm run build && concurrently -k -p \"[{name}]\" -n \"TypeScript,App\" -c \"yellow.bold,cyan.bold\" \"npm:watch:ts\" \"npm:dev:start\"",
+    "dev": "concurrently -k -p \"[{name}]\" -n \"TypeScript,App\" -c \"yellow.bold,cyan.bold\" \"npm:watch:ts\" \"npm:dev:start\"",
     "dev:start": "dotenv -e .sandbox.env -- fastify start -p 4001 --ignore-watch=.ts$ -w -l info -P dist/app.js"
   },
   "keywords": [],

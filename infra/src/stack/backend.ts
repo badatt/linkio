@@ -30,7 +30,7 @@ export class BackendStack extends Stack {
     });
 
     linksStorage.grandReadAndWriteAccess(apiFunction.handler);
-    apiFunction.addEnv('LINKS_STORAGE_BUCKET_NAME', linksStorage.bucket.bucketName);
+    apiFunction.addEnv('LinksStorageBucketName', linksStorage.bucket.bucketName);
 
     // Dynamo DB tables
     const db = new DynamoDb(this, ctx, {
