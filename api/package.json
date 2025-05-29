@@ -12,7 +12,7 @@
   "scripts": {
     "test": "npm run build && tsc -p test/tsconfig.json && FASTIFY_AUTOLOAD_TYPESCRIPT=1 node --test --experimental-test-coverage --loader ts-node/esm test/**/*.ts",
     "start": "npm run build && fastify start -p 4001 -l info dist/app.js",
-    "build": "tsc --build --clean && tsc",
+    "build": "tsc --build --clean && tsc && tsc-esm-fix dist",
     "watch:ts": "tsc -w",
     "dev": "npm run build && concurrently -k -p \"[{name}]\" -n \"TypeScript,App\" -c \"yellow.bold,cyan.bold\" \"npm:watch:ts\" \"npm:dev:start\"",
     "dev:start": "dotenv -e .sandbox.env -- fastify start -p 4001 --ignore-watch=.ts$ -w -l info -P dist/app.js"
@@ -38,6 +38,7 @@
     "dotenv-cli": "^8.0.0",
     "fastify-tsconfig": "^3.0.0",
     "ts-node": "^10.4.0",
+    "tsc-esm-fix": "^3.1.2",
     "typescript": "~5.8.2"
   }
 }
