@@ -15,7 +15,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@tanstack/react-query": "^5.75.1",
-    "@tidy-ui/all": "0.48.18",
+    "@tidy-ui/all": "0.48.19",
     "axios": "^1.8.4",
     "firebase": "^11.8.1",
     "react": "^18.0.0",

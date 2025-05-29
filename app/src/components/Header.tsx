@@ -28,6 +28,14 @@ export default function () {
     return () => unsubscribe();
   }, []);
 
+  React.useEffect(() => {
+    changeTheme(localStorage.getItem('theme-is-dark') == 'true' ? orchidDark : orchidLight);
+  }, [changeTheme]);
+
+  React.useEffect(() => {
+    localStorage.setItem('theme-is-dark', `${theme.isDark}`);
+  }, [theme]);
+
   const handleSignIn = async () => {
     try {
       const provider = new GoogleAuthProvider();

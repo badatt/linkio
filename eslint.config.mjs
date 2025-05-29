@@ -80,6 +80,7 @@ const app = {
       window: 'readonly',
       console: 'readonly',
       process: 'readonly',
+      localStorage: 'readonly',
     },
   },
   plugins,
