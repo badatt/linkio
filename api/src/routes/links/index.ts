@@ -1,7 +1,7 @@
 import { FastifyInstance, FastifyPluginAsync } from 'fastify';
 
-import { CreateLinkRequest, createLinkHandler, createLinkHandlerOptions } from './create';
-import { ReadLinkRequest, readLinkHandler, readLinkHandlerOptions } from './read';
+import { CreateLinkRequest, createLinkHandler, createLinkHandlerOptions } from './create.js';
+import { ReadLinkRequest, readLinkHandler, readLinkHandlerOptions } from './read.js';
 
 const route: FastifyPluginAsync = async (fastify: FastifyInstance): Promise<void> => {
   fastify.post<CreateLinkRequest>('/', createLinkHandlerOptions, createLinkHandler);

@@ -1,6 +1,6 @@
 import { FastifyRequest, FastifyReply, RouteShorthandOptions, RequestGenericInterface } from 'fastify';
 
-import { getLinkObject } from '../../aws/s3';
+import { getLinkObject } from '../../aws/s3.js';
 
 const readLinkSchema = {
   params: {

@@ -2,9 +2,9 @@ import { AutoloadPluginOptions } from '@fastify/autoload';
 import { FastifyPluginAsync } from 'fastify';
 import cors from '@fastify/cors';
 
-import env from './util/env';
-import routes from './routes';
-import plugins from './plugins';
+import env from './util/env.js';
+import routes from './routes/index.js';
+import plugins from './plugins/index.js';
 
 export type AppOptions = {
   // Place your custom options for app below here.
@@ -13,7 +13,7 @@ export type AppOptions = {
 // Pass --options via CLI arguments in command to enable these options.
 const options: AppOptions = {};
 
-const app: FastifyPluginAsync<AppOptions> = async (fastify): Promise<void> => {
+const app: FastifyPluginAsync<AppOptions> = async (fastify, opts): Promise<void> => {
   for (const plugin of plugins) {
     await fastify.register(plugin);
   }
