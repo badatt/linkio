@@ -1,50 +1,25 @@
 import * as React from 'react';
-import axios, { AxiosError } from 'axios';
-import { useMutation } from '@tanstack/react-query';
 import { Alert, Button, ButtonCluster, Code, FlexBox, FlexItem, Input, Progress } from '@tidy-ui/all';
 
-type CreateLinkRequest = {
-  link: string;
-};
-
-type CreateLinkSuccessResponse = {
-  slug: string;
-};
-
-type CreateLinkErrorResponse = {
-  statusCode?: number;
-  code?: string;
-  error?: string;
-  message?: string;
-};
-
-const createLink = async (request: CreateLinkRequest) => {
-  const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/links`, { link: request.link });
-  return response.data;
-};
+import { useCreateLink } from '@/hooks';
 
 export default function () {
   const urlRef = React.useRef<HTMLInputElement>(null);
 
-  const { isPending, isSuccess, isError, data, mutate, error } = useMutation<
-    CreateLinkSuccessResponse,
-    AxiosError<CreateLinkErrorResponse>,
-    CreateLinkRequest
-  >({
-    mutationFn: createLink,
-  });
+  const { mutate, isPending, isSuccess, isError, error, data, reset } = useCreateLink();
 
   const handleSubmit = () => {
     if (urlRef.current) {
-      const link = urlRef.current.value;
-      mutate({ link });
+      const url = urlRef.current.value;
+      mutate({ url });
     }
   };
 
-  const handleCancel = () => {
+  const handleClear = () => {
     if (urlRef.current) {
       urlRef.current.value = '';
     }
+    reset();
   };
 
   return (
@@ -60,7 +35,7 @@ export default function () {
       </FlexItem>
       <FlexItem width="50%">
         <ButtonCluster isStretched disabled={isPending}>
-          <Button variant="simple" onClick={handleCancel} disabled={isPending}>
+          <Button variant="simple" onClick={handleClear} disabled={isPending}>
             Clear
           </Button>
           <Button variant="primary" tone="major" onClick={handleSubmit} disabled={isPending}>
@@ -70,7 +45,7 @@ export default function () {
       </FlexItem>
       {isSuccess && (
         <FlexItem>
-          <Code>{`${window.location.hostname}/${data.slug}`}</Code>
+          <Code>{data.location}</Code>
         </FlexItem>
       )}
       {isError && (

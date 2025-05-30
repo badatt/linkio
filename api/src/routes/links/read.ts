@@ -1,6 +1,7 @@
 import { FastifyRequest, FastifyReply, RouteShorthandOptions, RequestGenericInterface } from 'fastify';
 
-import { getLinkObject } from '../../aws/s3.js';
+import env from '../../util/env.js';
+import s3 from '../../aws/s3.js';
 
 const readLinkSchema = {
   params: {
@@ -21,8 +22,9 @@ interface ReadLinkRequest extends RequestGenericInterface {
 }
 
 const readLinkHandler = async (request: FastifyRequest<ReadLinkRequest>, reply: FastifyReply) => {
-  const fullUrl = await getLinkObject(request.params.slug);
-  return reply.code(201).send({ slug: request.params.slug, url: fullUrl });
+  const bucketName = env.LINKS_STORAGE_BUCKET_NAME;
+  const linkObject = await s3.getObject(bucketName, request.params.slug);
+  return reply.code(200).send({ slug: request.params.slug, url: linkObject.WebsiteRedirectLocation });
 };
 
 export { readLinkHandlerOptions, readLinkHandler, ReadLinkRequest };
