@@ -13,7 +13,7 @@ export class DynamoDb extends BaseConstruct {
   constructor(scope: Construct, ctx: Context, props: BaseProps) {
     super(scope, ctx, props);
 
-    const usersTable = this.createTable({
+    this.createTable({
       tableName: 'UsersTable',
       partitionKey: {
         name: 'uid',
@@ -21,11 +21,11 @@ export class DynamoDb extends BaseConstruct {
       },
     });
 
-    usersTable.addGlobalSecondaryIndex({
+    /* usersTable.addGlobalSecondaryIndex({
       indexName: 'EmailIndex',
       partitionKey: { name: 'email', type: AttributeType.STRING },
       projectionType: ProjectionType.KEYS_ONLY,
-    });
+    }); */
 
     const linksTable = this.createTable({
       tableName: 'LinksTable',
