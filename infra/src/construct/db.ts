@@ -27,7 +27,7 @@ export class DynamoDb extends BaseConstruct {
       projectionType: ProjectionType.KEYS_ONLY,
     });
 
-    this.createTable({
+    const linksTable = this.createTable({
       tableName: 'LinksTable',
       partitionKey: {
         name: 'uid',
@@ -35,13 +35,13 @@ export class DynamoDb extends BaseConstruct {
       },
     });
 
-    /* linksTable.addGlobalSecondaryIndex({
+    linksTable.addGlobalSecondaryIndex({
       indexName: 'CreatedByUidIndex',
       partitionKey: { name: 'createdByUid', type: AttributeType.STRING },
       sortKey: { name: 'createdAt', type: AttributeType.NUMBER },
       projectionType: ProjectionType.INCLUDE,
       nonKeyAttributes: ['active'],
-    }); */
+    });
 
     /* linksTable.addGlobalSecondaryIndex({
       indexName: 'CreatedByEmailIndex',
