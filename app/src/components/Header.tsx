@@ -18,10 +18,12 @@ import { faMoon, faSun } from '@fortawesome/free-regular-svg-icons';
 import Link from 'next/link';
 
 import { auth } from '@/util';
+import { useCreateUser } from '@/hooks';
 
 export default function () {
   const [user, setUser] = React.useState<User | null>(null);
   const { changeTheme, theme } = useTheme();
+  const { mutate } = useCreateUser();
 
   React.useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, setUser);
@@ -40,8 +42,9 @@ export default function () {
     try {
       const provider = new GoogleAuthProvider();
       const result = await signInWithPopup(auth, provider);
-      console.log('User Info:', result.user.toJSON());
-      console.log('User', result.user);
+      console.log('User Json ', result.user.toJSON());
+      console.log('User result', JSON.stringify(result));
+      mutate(result);
     } catch (error) {
       console.error('Error signing in:', error);
     }

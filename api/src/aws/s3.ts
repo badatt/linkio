@@ -1,10 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { S3Client, HeadObjectCommand, PutObjectCommand, GetObjectCommand } from '@aws-sdk/client-s3';
-import { nanoid } from 'nanoid';
+import {
+  S3Client,
+  HeadObjectCommand,
+  PutObjectCommand,
+  GetObjectCommand,
+  GetObjectCommandOutput,
+} from '@aws-sdk/client-s3';
 
 import env from '../util/env.js';
 
-const s3 = new S3Client({
+const client = new S3Client({
   region: env.AWS_DEFAULT_REGION,
 });
 
@@ -15,7 +20,7 @@ const checkIfObjectExists = async (bucket: string, key: string): Promise<boolean
       Key: key,
     });
 
-    await s3.send(command);
+    await client.send(command);
     return true;
   } catch (err: any) {
     if (err.name === 'NotFound') {
@@ -25,45 +30,33 @@ const checkIfObjectExists = async (bucket: string, key: string): Promise<boolean
   }
 };
 
-const uploadLinkObject = async (link: string): Promise<string> => {
-  const bucketName = env.LINKS_STORAGE_BUCKET_NAME;
-  let exists;
-  let key;
-
-  do {
-    key = nanoid(6);
-    exists = await checkIfObjectExists(bucketName, key);
-  } while (exists);
-
+const putLinkObject = async (bucket: string, key: string, link: URL): Promise<void> => {
   const command = new PutObjectCommand({
-    Bucket: bucketName,
+    Bucket: bucket,
     Key: key,
-    WebsiteRedirectLocation: link,
+    WebsiteRedirectLocation: link.href,
     ContentType: 'text/html',
     Tagging: 'link=true',
   });
 
   try {
-    await s3.send(command);
-    return key;
+    await client.send(command);
   } catch (error: any) {
-    throw new Error(`Upload failed: ${error.message}`);
+    throw new Error(`Upload link object failed: ${error.message}`);
   }
 };
 
-const getLinkObject = async (key: string): Promise<string> => {
-  const bucketName = env.LINKS_STORAGE_BUCKET_NAME;
+const getObject = async (bucket: string, key: string): Promise<GetObjectCommandOutput> => {
   const command = new GetObjectCommand({
-    Bucket: bucketName,
+    Bucket: bucket,
     Key: key,
   });
 
   try {
-    const response = await s3.send(command);
-    return response.Metadata?.['x-amz-website-redirect-location'] ?? '';
+    return await client.send(command);
   } catch (error: any) {
     throw new Error(`Get failed: ${error.message}`);
   }
 };
 
-export { uploadLinkObject, getLinkObject };
+export default { putLinkObject, getObject, checkIfObjectExists };
