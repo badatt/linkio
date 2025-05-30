@@ -5,9 +5,9 @@ import { uploadLinkObject } from '../../aws/s3.js';
 const createLinkSchema = {
   body: {
     type: 'object',
-    required: ['link'],
+    required: ['url'],
     properties: {
-      link: { type: 'string', format: 'uri' },
+      url: { type: 'string', format: 'uri' },
     },
   },
 };
@@ -17,11 +17,11 @@ const createLinkHandlerOptions: RouteShorthandOptions = {
 };
 
 interface CreateLinkRequest extends RequestGenericInterface {
-  Body: { link: string };
+  Body: { url: string };
 }
 
 const createLinkHandler = async (request: FastifyRequest<CreateLinkRequest>, reply: FastifyReply) => {
-  const slug = await uploadLinkObject(request.body.link);
+  const slug = await uploadLinkObject(request.body.url);
   return reply.code(201).send({ slug });
 };
 

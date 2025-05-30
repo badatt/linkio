@@ -22,7 +22,7 @@ interface ReadLinkRequest extends RequestGenericInterface {
 
 const readLinkHandler = async (request: FastifyRequest<ReadLinkRequest>, reply: FastifyReply) => {
   const fullUrl = await getLinkObject(request.params.slug);
-  return reply.code(201).send({ slug: request.params.slug, location: fullUrl });
+  return reply.code(201).send({ slug: request.params.slug, url: fullUrl });
 };
 
 export { readLinkHandlerOptions, readLinkHandler, ReadLinkRequest };

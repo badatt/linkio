@@ -13,6 +13,7 @@ export type AppOptions = {
 // Pass --options via CLI arguments in command to enable these options.
 const options: AppOptions = {};
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const app: FastifyPluginAsync<AppOptions> = async (fastify, opts): Promise<void> => {
   for (const plugin of plugins) {
     await fastify.register(plugin);
