@@ -1,5 +1,5 @@
 import { Construct } from 'constructs';
-import { Attribute, AttributeType, BillingMode, ProjectionType, Table } from 'aws-cdk-lib/aws-dynamodb';
+import { Attribute, AttributeType, BillingMode, Table } from 'aws-cdk-lib/aws-dynamodb';
 import { RemovalPolicy } from 'aws-cdk-lib';
 import { IGrantable } from 'aws-cdk-lib/aws-iam';
 
@@ -27,7 +27,7 @@ export class DynamoDb extends BaseConstruct {
       projectionType: ProjectionType.KEYS_ONLY,
     }); */
 
-    const linksTable = this.createTable({
+    this.createTable({
       tableName: 'LinksTable',
       partitionKey: {
         name: 'uid',
@@ -35,13 +35,13 @@ export class DynamoDb extends BaseConstruct {
       },
     });
 
-    linksTable.addGlobalSecondaryIndex({
+    /* linksTable.addGlobalSecondaryIndex({
       indexName: 'CreatedByUidIndex',
       partitionKey: { name: 'createdByUid', type: AttributeType.STRING },
       sortKey: { name: 'createdAt', type: AttributeType.NUMBER },
       projectionType: ProjectionType.INCLUDE,
       nonKeyAttributes: ['active'],
-    });
+    }); */
 
     /* linksTable.addGlobalSecondaryIndex({
       indexName: 'CreatedByEmailIndex',
