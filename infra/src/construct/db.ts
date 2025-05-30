@@ -43,13 +43,13 @@ export class DynamoDb extends BaseConstruct {
       nonKeyAttributes: ['active'],
     });
 
-    linksTable.addGlobalSecondaryIndex({
+    /* linksTable.addGlobalSecondaryIndex({
       indexName: 'CreatedByEmailIndex',
       partitionKey: { name: 'createdByEmail', type: AttributeType.STRING },
       sortKey: { name: 'createdAt', type: AttributeType.NUMBER },
       projectionType: ProjectionType.INCLUDE,
       nonKeyAttributes: ['active'],
-    });
+    }); */
   }
 
   private createTable(props: { tableName: string; partitionKey: Attribute; sortKey?: Attribute }): Table {
