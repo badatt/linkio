@@ -13,4 +13,7 @@ export default {
   ALLOWED_ORIGINS: getEnvVar('AllowedOrigins'),
   LINKS_TABLE: getEnvVar('LinksTable'),
   USERS_TABLE: getEnvVar('UsersTable'),
+  FIREBASE_PROJECT_ID: getEnvVar('FirebaseProjectId'),
+  FIREBASE_CLIENT_EMAIL: getEnvVar('FirebaseClientEmail'),
+  FIREBASE_PRIVATE_KEY: getEnvVar('FirebasePrivateKey'),
 };

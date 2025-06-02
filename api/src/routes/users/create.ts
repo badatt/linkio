@@ -3,62 +3,70 @@ import { FastifyRequest, FastifyReply, RouteShorthandOptions, RequestGenericInte
 import env from '../../util/env.js';
 import ddb from '../../aws/ddb.js';
 
-const createUserSchema = {
+const UpsertUserSchema = {
   body: {
-    title: 'Create user request schema',
+    title: 'Upsert user request schema',
     type: 'object',
+    additionalProperties: false,
     properties: {
-      uid: {
-        type: 'string',
-      },
-      email: {
-        type: 'string',
-        format: 'email',
-      },
-      emailVerified: {
-        type: 'boolean',
-      },
-      displayName: {
-        type: 'string',
-      },
       isAnonymous: {
         type: 'boolean',
       },
-      photoURL: {
-        type: 'string',
-        format: 'uri',
-      },
       createdAt: {
-        type: 'string',
+        type: 'number',
       },
       lastLoginAt: {
-        type: 'string',
+        type: 'number',
       },
     },
-    required: ['uid', 'email', 'emailVerified', 'displayName', 'isAnonymous', 'photoURL', 'createdAt', 'lastLoginAt'],
+    required: ['isAnonymous', 'createdAt', 'lastLoginAt'],
   },
 };
 
-const createUserHandlerOptions: RouteShorthandOptions = {
-  schema: createUserSchema,
+const upsertUserHandlerOptions: RouteShorthandOptions = {
+  schema: UpsertUserSchema,
 };
 
-interface CreateUserRequest extends RequestGenericInterface {
+interface UpsertUserRequest extends RequestGenericInterface {
   Body: {
-    uid: string;
-    email: string;
-    emailVerified: boolean;
-    displayName: string;
     isAnonymous: boolean;
-    photoURL: string;
-    createdAt: string;
-    lastLoginAt: string;
-  };
+    createdAt: number;
+    lastLoginAt: number;
+  }
 }
 
-const createUserHandler = async (request: FastifyRequest<CreateUserRequest>, reply: FastifyReply) => {
-  await ddb.put(env.USERS_TABLE, request.body);
-  return reply.code(201).header('Location', `${request.url}/${request.body.uid}`).send();
+const upsertUserHandler = async (request: FastifyRequest<UpsertUserRequest>, reply: FastifyReply) => {
+  const user = request.user;
+
+  if (!user || !user.sub || !user.email) {
+    return reply.code(400).send({ error: 'Missing identity in the access token' });
+  }
+
+  const body = {
+    isAnonymous: request.body.isAnonymous,
+    createdAt: request.body.createdAt,
+    lastLoginAt: request.body.lastLoginAt,
+  }
+  
+  const userItem = {
+    uid: user.sub,
+    email: user.email,
+    name: user.name,
+    picture: user.picture,
+    emailVerified: user.email_verified,
+    firebase: {
+      signInProvider: user.firebase.sign_in_provider,
+    },
+    ...body
+  }
+  const existingUser = await ddb.get(env.USERS_TABLE, userItem.uid);
+  if (existingUser) {
+    await ddb.update(env.USERS_TABLE, userItem.uid, {  ...request.body });
+  } else {
+     await ddb.put(env.USERS_TABLE, userItem);
+  }
+ 
+  return reply.code(201).header('Location', `${request.url}/${userItem.uid}`).send();
 };
 
-export { createUserHandlerOptions, createUserHandler, CreateUserRequest };
+export { upsertUserHandlerOptions , upsertUserHandler, UpsertUserRequest };

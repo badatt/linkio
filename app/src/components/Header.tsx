@@ -12,23 +12,14 @@ import {
   orchidDark,
   orchidLight,
 } from '@tidy-ui/all';
-import { GoogleAuthProvider, signInWithPopup, onAuthStateChanged, User, signOut } from 'firebase/auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMoon, faSun } from '@fortawesome/free-regular-svg-icons';
 import Link from 'next/link';
 
-import { auth } from '@/util';
-import { useCreateUser } from '@/hooks';
+import SignIn from './SignIn';
 
 export default function () {
-  const [user, setUser] = React.useState<User | null>(null);
   const { changeTheme, theme } = useTheme();
-  const { mutate } = useCreateUser();
-
-  React.useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, setUser);
-    return () => unsubscribe();
-  }, []);
 
   React.useEffect(() => {
     changeTheme(localStorage.getItem('theme-is-dark') == 'true' ? orchidDark : orchidLight);
@@ -37,18 +28,6 @@ export default function () {
   React.useEffect(() => {
     localStorage.setItem('theme-is-dark', `${theme.isDark}`);
   }, [theme]);
-
-  const handleSignIn = async () => {
-    try {
-      const provider = new GoogleAuthProvider();
-      const result = await signInWithPopup(auth, provider);
-      console.log('User Json ', result.user.toJSON());
-      console.log('User result', JSON.stringify(result));
-      mutate(result);
-    } catch (error) {
-      console.error('Error signing in:', error);
-    }
-  };
 
   return (
     <>
@@ -60,21 +39,7 @@ export default function () {
         </FlexItem>
         <FlexItem>
           <Stack align="center" gap="1rem">
-            {user && (
-              <Anchor href="">
-                <Link href="/settings">Settings</Link>
-              </Anchor>
-            )}
-            {user && (
-              <Button tone="danger" variant="simple" onClick={() => signOut(auth)}>
-                Signout
-              </Button>
-            )}
-            {!user && (
-              <Button tone="major" variant="outlined" onClick={handleSignIn}>
-                Sign in with Google
-              </Button>
-            )}
+            <SignIn />
             <Button
               onClick={() => {
                 changeTheme(theme.isDark ? orchidLight : orchidDark);
