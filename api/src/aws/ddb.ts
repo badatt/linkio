@@ -1,12 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { DynamoDBClient, PutItemCommand, GetItemCommand, QueryCommand } from '@aws-sdk/client-dynamodb';
 import { marshall, unmarshall } from '@aws-sdk/util-dynamodb';
+import { DynamoDBDocumentClient, UpdateCommand } from '@aws-sdk/lib-dynamodb';
 
 import env from '../util/env.js';
 
 const client = new DynamoDBClient({
   region: env.AWS_DEFAULT_REGION,
 });
+
+const docClient = DynamoDBDocumentClient.from(client);
 
 const put = async (tableName: string, item: object) => {
   const command = new PutItemCommand({
@@ -21,7 +24,7 @@ const put = async (tableName: string, item: object) => {
   }
 };
 
-const get = async (tableName: string, uid: string): Promise<object> => {
+const get = async (tableName: string, uid: string): Promise<object | undefined> => {
   const command = new GetItemCommand({
     TableName: tableName,
     Key: marshall({ uid }),
@@ -29,12 +32,7 @@ const get = async (tableName: string, uid: string): Promise<object> => {
 
   try {
     const response = await client.send(command);
-    if (response.Item) {
-      const item = unmarshall(response.Item);
-      return item;
-    } else {
-      return {};
-    }
+    return response.Item ? unmarshall(response.Item) : undefined;
   } catch (error: any) {
     throw new Error(`Get item failed: ${error.message}`);
   }
@@ -63,8 +61,41 @@ const query = async (tableName: string, condition: string, values: Record<string
   }
 };
 
+const update = async (tableName: string, uid: string, updates: Record<string, any>): Promise<Record<string, any> | undefined> => {
+  const updateExpressionParts: string[] = [];
+  const expressionAttributeNames: Record<string, string> = {};
+  const expressionAttributeValues: Record<string, any> = {};
+
+  Object.entries(updates).forEach(([key, value]) => {
+    const attrName = `#${key}`;
+    const attrValue = `:${key}`;
+    updateExpressionParts.push(`${attrName} = ${attrValue}`);
+    expressionAttributeNames[attrName] = key;
+    expressionAttributeValues[attrValue] = value;
+  });
+
+  const updateExpression = 'SET ' + updateExpressionParts.join(', ');
+
+  const command = new UpdateCommand({
+    TableName: tableName,
+    Key: { uid },
+    UpdateExpression: updateExpression,
+    ExpressionAttributeNames: expressionAttributeNames,
+    ExpressionAttributeValues: expressionAttributeValues,
+    ReturnValues: 'ALL_NEW',
+  });
+
+  try {
+    const response = await docClient.send(command);
+    return response.Attributes;
+  } catch (error: any) {
+    throw new Error(`Get item failed: ${error.message}`);
+  }
+};
+
 export default {
   get,
   query,
   put,
+  update,
 };

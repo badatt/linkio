@@ -1,4 +1,6 @@
+import errorHandler from './error-handler.js';
+import auth from './firebase-auth.js';
 import sensible from './sensible.js';
-import support from './support.js';
+import ajv from './ajv-compiler.js';
 
-export default [sensible, support];
+export default [ajv, auth, sensible, errorHandler];
