@@ -1,6 +1,6 @@
-export class ApiError  extends Error {
+class ApiError extends Error {
   statusCode: number;
-  code?: string;
+  code: string;
 
   constructor(statusCode: number, message: string, code?: string) {
     super(message);
@@ -11,3 +11,5 @@ export class ApiError  extends Error {
     Error.captureStackTrace?.(this, this.constructor);
   }
 }
+
+export { ApiError };

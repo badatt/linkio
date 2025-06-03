@@ -15,8 +15,6 @@ const options: AppOptions = {};
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const app: FastifyPluginAsync<AppOptions> = async (fastify, opts): Promise<void> => {
-  
-
   for (const plugin of plugins) {
     await fastify.register(plugin);
   }
@@ -25,7 +23,7 @@ const app: FastifyPluginAsync<AppOptions> = async (fastify, opts): Promise<void>
     await fastify.register(route);
   }
 
-  const allowedOrigins = ['http://localhost:3001', env.ALLOWED_ORIGINS];
+  const allowedOrigins = ['http://localhost:3000', env.ALLOWED_ORIGINS];
 
   await fastify.register(cors, {
     origin: (origin, cb) => {
@@ -36,7 +34,6 @@ const app: FastifyPluginAsync<AppOptions> = async (fastify, opts): Promise<void>
       }
     },
   });
-
 };
 
 export default app;

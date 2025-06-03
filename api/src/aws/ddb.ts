@@ -1,67 +1,83 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { DynamoDBClient, PutItemCommand, GetItemCommand, QueryCommand } from '@aws-sdk/client-dynamodb';
-import { marshall, unmarshall } from '@aws-sdk/util-dynamodb';
-import { DynamoDBDocumentClient, UpdateCommand } from '@aws-sdk/lib-dynamodb';
+import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
+import { DynamoDBDocumentClient, UpdateCommand, PutCommand, GetCommand, QueryCommand } from '@aws-sdk/lib-dynamodb';
 
 import env from '../util/env.js';
+import { ApiError } from '../model/error.js';
 
-const client = new DynamoDBClient({
-  region: env.AWS_DEFAULT_REGION,
-});
+const client = DynamoDBDocumentClient.from(
+  new DynamoDBClient({
+    region: env.AWS_DEFAULT_REGION,
+  }),
+);
 
-const docClient = DynamoDBDocumentClient.from(client);
-
-const put = async (tableName: string, item: object) => {
-  const command = new PutItemCommand({
+const exists = async (tableName: string, uid: string): Promise<boolean> => {
+  const command = new GetCommand({
     TableName: tableName,
-    Item: marshall(item),
+    Key: { uid },
+  });
+
+  try {
+    const response = await client.send(command);
+    return !!response.Item;
+  } catch (error: any) {
+    throw new ApiError(404, `Get item failed: ${error.message}`);
+  }
+};
+
+const create = async <T>(tableName: string, item: T): Promise<T> => {
+  const command = new PutCommand({
+    TableName: tableName,
+    Item: item as Record<string, any>,
+    ConditionExpression: 'attribute_not_exists(uid)',
   });
 
   try {
     await client.send(command);
+    return item;
   } catch (error: any) {
-    throw new Error(`Put item failed: ${error.message}`);
+    throw new ApiError(406, `Put item failed: ${error.message}`);
   }
 };
 
-const get = async (tableName: string, uid: string): Promise<object | undefined> => {
-  const command = new GetItemCommand({
+const get = async <T>(tableName: string, uid: string): Promise<T | undefined> => {
+  const command = new GetCommand({
     TableName: tableName,
-    Key: marshall({ uid }),
+    Key: { uid },
   });
 
   try {
     const response = await client.send(command);
-    return response.Item ? unmarshall(response.Item) : undefined;
+    return response.Item as T | undefined;
   } catch (error: any) {
-    throw new Error(`Get item failed: ${error.message}`);
+    throw new ApiError(404, `Get item failed: ${error.message}`);
   }
 };
 
-const query = async (tableName: string, condition: string, values: Record<string, string>): Promise<Array<object>> => {
+const query = async <T>(tableName: string, condition: string, values: Record<string, any>): Promise<Array<T>> => {
   const command = new QueryCommand({
     TableName: tableName,
     KeyConditionExpression: condition,
-    ExpressionAttributeValues: marshall(values),
+    ExpressionAttributeValues: values,
   });
 
   try {
     const response = await client.send(command);
-    const items = new Array<object>();
+    const items = new Array<T>();
     if (response.Items && response.Items.length > 0) {
       for (const item of response.Items) {
-        items.push(unmarshall(item));
+        items.push(item as T);
       }
       return items;
     } else {
       return [];
     }
   } catch (error: any) {
-    throw new Error(`Query items failed: ${error.message}`);
+    throw new ApiError(404, `Query items failed: ${error.message}`);
   }
 };
 
-const update = async (tableName: string, uid: string, updates: Record<string, any>): Promise<Record<string, any> | undefined> => {
+const update = async <T>(tableName: string, uid: string, updates: Record<string, any>): Promise<T> => {
   const updateExpressionParts: string[] = [];
   const expressionAttributeNames: Record<string, string> = {};
   const expressionAttributeValues: Record<string, any> = {};
@@ -83,19 +99,22 @@ const update = async (tableName: string, uid: string, updates: Record<string, an
     ExpressionAttributeNames: expressionAttributeNames,
     ExpressionAttributeValues: expressionAttributeValues,
     ReturnValues: 'ALL_NEW',
+    ConditionExpression: 'attribute_exists(uid)',
   });
 
   try {
-    const response = await docClient.send(command);
-    return response.Attributes;
+    const response = await client.send(command);
+    if (!response.Attributes) throw new ApiError(406, 'Update item failed: unknown error');
+    return response.Attributes as T;
   } catch (error: any) {
-    throw new Error(`Get item failed: ${error.message}`);
+    throw new ApiError(406, `Update item failed: ${error.message}`);
   }
 };
 
 export default {
+  create,
+  exists,
   get,
   query,
-  put,
   update,
 };

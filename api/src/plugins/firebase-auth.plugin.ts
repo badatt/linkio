@@ -2,7 +2,7 @@ import fp from 'fastify-plugin';
 import admin from 'firebase-admin';
 
 import env from '../util/env.js';
-import { ApiError } from '../util/error.js';
+import { ApiError } from '../model/error.js';
 
 export default fp(async (fastify) => {
   if (!admin.apps.length) {
