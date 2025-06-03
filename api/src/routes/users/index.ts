@@ -1,11 +1,16 @@
 import { FastifyInstance, FastifyPluginAsync } from 'fastify';
 
-import { UpsertUserRequest, upsertUserHandler, upsertUserHandlerOptions } from './create.js';
-import { readUserHandler } from './read.js';
+import { ReadUserSchema, ReadUserRequest, UpsertUserRequest, UpsertUserSchema } from '../../schemas/users.schema.js';
+import { upsertUserHandler } from './create.handler.js';
+import { readUserHandler } from './read.handler.js';
 
 const handlers: FastifyPluginAsync = async (fastify: FastifyInstance): Promise<void> => {
-  fastify.post<UpsertUserRequest>('/', { ...upsertUserHandlerOptions, preHandler: fastify.authPreHandler }, upsertUserHandler);
-  fastify.get('/', { preHandler: fastify.authPreHandler }, readUserHandler);
+  fastify.post<UpsertUserRequest>(
+    '/',
+    { schema: UpsertUserSchema, preHandler: fastify.authPreHandler },
+    upsertUserHandler,
+  );
+  fastify.get<ReadUserRequest>('/', { schema: ReadUserSchema, preHandler: fastify.authPreHandler }, readUserHandler);
 };
 
 const route: FastifyPluginAsync = async (fastify): Promise<void> => {

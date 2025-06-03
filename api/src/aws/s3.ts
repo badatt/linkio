@@ -8,6 +8,7 @@ import {
 } from '@aws-sdk/client-s3';
 
 import env from '../util/env.js';
+import { ApiError } from '../model/error.js';
 
 const client = new S3Client({
   region: env.AWS_DEFAULT_REGION,
@@ -42,7 +43,7 @@ const putLinkObject = async (bucket: string, key: string, link: URL): Promise<vo
   try {
     await client.send(command);
   } catch (error: any) {
-    throw new Error(`Upload link object failed: ${error.message}`);
+    throw new ApiError(406, `Upload link object failed: ${error.message}`);
   }
 };
 
@@ -55,7 +56,7 @@ const getObject = async (bucket: string, key: string): Promise<GetObjectCommandO
   try {
     return await client.send(command);
   } catch (error: any) {
-    throw new Error(`Get failed: ${error.message}`);
+    throw new ApiError(404, `Get failed: ${error.message}`);
   }
 };
 

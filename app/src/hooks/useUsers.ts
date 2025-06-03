@@ -17,7 +17,7 @@ const useCreateUser = () => {
       createdAt: new Date(user.metadata.creationTime!).getTime(),
       lastLoginAt: new Date(user.metadata.lastSignInTime!).getTime(),
     };
-    
+
     const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/users`, request, {
       headers: {
         Authorization: `Bearer ${await user.getIdToken()}`,

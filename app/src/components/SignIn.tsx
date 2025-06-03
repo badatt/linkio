@@ -1,9 +1,5 @@
 import * as React from 'react';
-import {
-  Button,
-  FlexBox,
-  Loader,
-} from '@tidy-ui/all';
+import { Button, FlexBox, Loader } from '@tidy-ui/all';
 import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut, User } from 'firebase/auth';
 
 import { auth } from '@/util';
@@ -17,7 +13,6 @@ export default function () {
     const unsubscribe = onAuthStateChanged(auth, setUser);
     return () => unsubscribe();
   }, []);
-
 
   const handleSignIn = async () => {
     try {
@@ -35,16 +30,15 @@ export default function () {
   };
 
   React.useEffect(() => {
-   if (isError) {
+    if (isError) {
       signOut(auth);
     }
   }, [isSuccess, isError, data, error]);
 
   return (
-    <FlexBox ali='center'>
-      {isPending && (
-        <Loader girth='sm'/>
-      )}
+    <FlexBox ali="center">
+      {isPending && <Loader girth="sm" />}
+      {user && <div>Hi {user.displayName} </div>}
       {user && !isError && !isPending && (
         <Button tone="danger" variant="simple" onClick={handleSignOut}>
           Signout
