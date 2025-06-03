@@ -1,0 +1,24 @@
+name: PR check
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - develop
+      - release/*
+      - main
+
+jobs:
+  guardian:
+    name: Guardian
+    uses: ./.github/workflows/_guardian.yml
+    with:
+      environment: sandbox
+
+  diff-backend-infrastructure:
+    name: Diff backend infrastructure
+    needs: guardian
+    uses: ./.github/workflows/_infra.yml
+    with:
+      cdk_command: diff
+      environment: sandbox
