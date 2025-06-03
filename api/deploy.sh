@@ -7,13 +7,19 @@ zip -rq build.zip ./*
 aws lambda update-function-code --function-name $API_FUNCTION_ARN --zip-file fileb://build.zip
 
 NEW_ENV_VARS_TO_ADD=$(jq -n \
-  --arg appName "$APP_NAME" \
-  --arg captchaKey "$GOOGLE_CAPTCHA_SECRET_KEY" \
-  --arg allowedOrigins "$ALLOWED_ORIGINS" \
+  --arg AppName "$APP_NAME" \
+  --arg CaptchaKey "$GOOGLE_CAPTCHA_SECRET_KEY" \
+  --arg AllowedOrigins "$ALLOWED_ORIGINS" \
+  --arg FirebaseProjectId "$FIREBASE_PROJECT_ID" \
+  --arg FirebaseClientEmail "$FIREBASE_CLIENT_EMAIL" \
+  --arg FirebasePrivateKey "$FIREBASE_PRIVATE_KEY" \
   '{
-    AppName: $appName,
-    GoogleCaptchaSecretKey: $captchaKey,
-    AllowedOrigins: $allowedOrigins,
+    AppName: $AppName,
+    GoogleCaptchaSecretKey: $CaptchaKey,
+    AllowedOrigins: $AllowedOrigins,
+    FirebaseProjectId: $FirebaseProjectId,
+    FirebaseClientEmail: $FirebaseClientEmail,
+    FirebasePrivateKey: $FirebasePrivateKey,
   }')
 
 echo "📦 Merging new environment variables into existing Lambda config..."

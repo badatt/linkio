@@ -46,3 +46,4 @@ jobs:
       app_cloudfront_id: ${{ needs.deploy-backend-infrastructure.outputs.app_cloudfront_id }}
     secrets:
       google_captcha_secret_key: ${{ secrets.GOOGLE_CAPTCHA_SECRET_KEY }}
+      firebase_private_key: ${{ secrets.FIREBASE_PRIVATE_KEY }}

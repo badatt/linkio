@@ -26,6 +26,9 @@ on:
       google_captcha_secret_key:
         description: 'Google reCAPTCHA secret key'
         required: true
+      firebase_private_key:
+        description: 'Firebase private key'
+        required: true
 
 jobs:
   deploy-api:
@@ -60,6 +63,9 @@ jobs:
           APP_NAME: ${{ vars.APP_NAME }}
           GOOGLE_CAPTCHA_SECRET_KEY: ${{ secrets.google_captcha_secret_key }}
           ALLOWED_ORIGINS: https://go.${{ vars.ROOT_DOMAIN }}
+          FIREBASE_PROJECT_ID: ${{ vars.FIREBASE_PROJECT_ID }}
+          FIREBASE_CLIENT_EMAIL: ${{ vars.FIREBASE_CLIENT_EMAIL }}
+          FIREBASE_PRIVATE_KEY: ${{ secrets.firebase_private_key }}
         run: |
           echo "Deploying API ..."
           sh deploy.sh
