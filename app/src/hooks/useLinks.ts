@@ -1,25 +1,26 @@
-import axios, { AxiosError } from 'axios';
-import { useMutation } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { FastifyErrorResponse } from '@/types';
+import { api } from '@/util';
+import { FastifyErrorResponse, Link } from '@/types';
 
 type CreateLinkRequest = {
   url: string;
 };
 
-type CreateLinkSuccessResponse = {
-  slug: string;
-  location: string;
-};
-
 const useCreateLink = () => {
+  const queryClient = useQueryClient();
+
   const mutationFn = async (request: CreateLinkRequest) => {
-    const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/links`, request);
+    const response = await api.post('/links', request);
     return response.data;
   };
 
-  return useMutation<CreateLinkSuccessResponse, AxiosError<FastifyErrorResponse>, CreateLinkRequest>({
+  return useMutation<Link, AxiosError<FastifyErrorResponse>, CreateLinkRequest>({
     mutationFn,
+    onSuccess: (data) => {
+      queryClient.setQueryData(['link'], (oldData: Link) => ({ ...oldData, ...data }));
+    },
   });
 };
 

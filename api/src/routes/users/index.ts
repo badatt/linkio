@@ -10,7 +10,7 @@ const handlers: FastifyPluginAsync = async (fastify: FastifyInstance): Promise<v
     { schema: UpsertUserSchema, preHandler: fastify.authPreHandler },
     upsertUserHandler,
   );
-  fastify.get<ReadUserRequest>('/', { schema: ReadUserSchema, preHandler: fastify.authPreHandler }, readUserHandler);
+  fastify.get<ReadUserRequest>('/me', { schema: ReadUserSchema, preHandler: fastify.authPreHandler }, readUserHandler);
 };
 
 const route: FastifyPluginAsync = async (fastify): Promise<void> => {

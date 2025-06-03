@@ -38,7 +38,6 @@ export default function () {
   return (
     <FlexBox ali="center">
       {isPending && <Loader girth="sm" />}
-      {user && <div>Hi {user.displayName} </div>}
       {user && !isError && !isPending && (
         <Button tone="danger" variant="simple" onClick={handleSignOut}>
           Signout

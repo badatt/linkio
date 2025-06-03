@@ -1,41 +1,27 @@
 import * as React from 'react';
-import {
-  Anchor,
-  Button,
-  Divider,
-  FlexBox,
-  FlexItem,
-  Note,
-  Stack,
-  Text,
-  useTheme,
-  orchidDark,
-  orchidLight,
-} from '@tidy-ui/all';
+import { Anchor, Button, Divider, FlexBox, FlexItem, Note, Stack, Text, orchidDark, orchidLight } from '@tidy-ui/all';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMoon, faSun } from '@fortawesome/free-regular-svg-icons';
 import Link from 'next/link';
 
+import { useTheme, useCurrentUser } from '@/hooks';
+
 import SignIn from './SignIn';
 
 export default function () {
-  const { changeTheme, theme } = useTheme();
-
-  React.useEffect(() => {
-    changeTheme(localStorage.getItem('theme-is-dark') == 'true' ? orchidDark : orchidLight);
-  }, [changeTheme]);
-
-  React.useEffect(() => {
-    localStorage.setItem('theme-is-dark', `${theme.isDark}`);
-  }, [theme]);
+  const { data } = useCurrentUser();
+  const { theme, changeTheme } = useTheme();
 
   return (
     <>
-      <FlexBox jsc="space-between" margin="0.5rem 0 0 0">
+      <FlexBox ali="center" jsc="space-between" margin="0.5rem 0 0 0">
         <FlexItem>
           <Text.H6>
             <Link href="/">Linkio</Link>
           </Text.H6>
+        </FlexItem>
+        <FlexItem>
+          <Text.Body1>{data ? `Welcome, ${data.name}` : 'Welcome, Guest!'}</Text.Body1>
         </FlexItem>
         <FlexItem>
           <Stack align="center" gap="1rem">
