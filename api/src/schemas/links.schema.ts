@@ -16,7 +16,6 @@ const CreateLinkBodySchema = Type.Object(
 const CreateLinkResponseSchema = Type.Object(
   {
     slug: Type.String(),
-    location: Type.String({ format: 'uri' }),
   },
   {
     title: 'Create link response schema',

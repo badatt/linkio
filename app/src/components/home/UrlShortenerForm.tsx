@@ -45,7 +45,9 @@ export default function () {
       </FlexItem>
       {isSuccess && (
         <FlexItem>
-          <Code>{data.location}</Code>
+          <Code>
+            {window.location.host}/{data.slug}
+          </Code>
         </FlexItem>
       )}
       {isError && (
