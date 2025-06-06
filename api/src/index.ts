@@ -3,7 +3,11 @@ import Fastify, { FastifyInstance } from 'fastify';
 
 import { app, options } from './app.js';
 
-const fastify: FastifyInstance = Fastify();
+const fastify: FastifyInstance = Fastify({
+  logger: {
+    level: 'info',
+  },
+});
 fastify.register(app, options);
 
 const proxy = awsLambdaFastify(fastify);
