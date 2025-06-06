@@ -24,8 +24,8 @@ const createLinkHandler = async (
   } while (exists);
 
   await s3.putLinkObject(bucketName, slug, new URL(request.body.url));
-  const location = `${request.protocol}://${request.headers.host}/${slug}`;
-  const minifiedUrl = `${request.headers.host}/${slug}`;
+  const location = `${request.protocol}://${request.headers.origin}/${slug}`;
+  const minifiedUrl = `${request.headers.origin}/${slug}`;
   return reply.code(201).header('Location', location).send({ slug, location: minifiedUrl });
 };
 
