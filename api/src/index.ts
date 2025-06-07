@@ -7,8 +7,12 @@ const fastify: FastifyInstance = Fastify({
   logger: {
     level: 'info',
     timestamp: false,
-    redact: ['req.headers.authorization', 'pid'],
+    redact: ['req.headers.authorization'],
+    genReqId(req): string {
+      return req.traceId;
+    },
   },
+  disableRequestLogging: true,
 });
 
 fastify.register(app, options);
