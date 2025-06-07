@@ -14,6 +14,7 @@ export default fp(async (fastify) => {
       originalUrl: request.originalUrl,
       method: request.method,
       params: request.params,
+      body: request.body,
       raw: {
         httpVersion: request.raw.httpVersion,
         hostname: request.hostname,

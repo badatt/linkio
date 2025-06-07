@@ -6,6 +6,13 @@ export default fp(async (fastify) => {
     const statusCode = error.statusCode ?? 500;
     const code = error.code ?? 'INTERNAL_SERVER_ERROR';
 
+    request.log.error({
+      statusCode,
+      code,
+      message: error.message,
+      trace: error.stack,
+    });
+
     reply.status(statusCode).send({
       code,
       message: error.message,

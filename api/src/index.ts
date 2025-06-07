@@ -15,16 +15,6 @@ const fastify: FastifyInstance = Fastify({
       },
     },
     timestamp: false,
-    serializers: {
-      err(err) {
-        return {
-          statusCode: err.statusCode,
-          message: err.message,
-          type: err.code,
-          stack: err.stack ?? '',
-        };
-      },
-    },
     redact: ['req.headers.authorization'],
   },
   disableRequestLogging: true,
