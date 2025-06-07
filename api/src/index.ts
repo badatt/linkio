@@ -1,17 +1,11 @@
 import awsLambdaFastify from '@fastify/aws-lambda';
 import Fastify, { FastifyInstance } from 'fastify';
-import { randomUUID } from 'crypto';
 
 import { app, options } from './app.js';
 
 const fastify: FastifyInstance = Fastify({
   logger: {
     level: 'info',
-    genReqId(req) {
-      const traceId = randomUUID();
-      console.log(`New request(${req.id}) Id generated ${traceId}`);
-      return traceId;
-    },
     formatters: {
       level(label) {
         return { level: label };
