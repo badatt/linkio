@@ -1,5 +1,6 @@
 import awsLambdaFastify from '@fastify/aws-lambda';
 import Fastify, { FastifyInstance } from 'fastify';
+import { randomUUID } from 'crypto';
 
 import { app, options } from './app.js';
 
@@ -48,6 +49,7 @@ const fastify: FastifyInstance = Fastify({
       },
     },
     redact: ['req.headers.authorization'],
+    genReqId: () => randomUUID(),
   },
 });
 
