@@ -11,7 +11,7 @@ export default fp(async (fastify) => {
       reqId: traceId,
       traceId: traceId,
     });
-    console.log(`Generated request id ${request.id}`);
+    request.log.info(`Generated request id ${request.id}`);
     reply.header('x-go-trace-id', request.id);
   });
 });

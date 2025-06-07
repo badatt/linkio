@@ -16,20 +16,6 @@ const fastify: FastifyInstance = Fastify({
     },
     timestamp: false,
     serializers: {
-      req(req) {
-        return {
-          traceId: req.id,
-          method: req.method,
-          url: req.url,
-        };
-      },
-      res(res) {
-        return {
-          traceId: res.getHeader?.('x-go-trace-id'),
-          statusCode: res.statusCode,
-          elapsed: res.elapsedTime,
-        };
-      },
       err(err) {
         return {
           statusCode: err.statusCode,
@@ -41,6 +27,7 @@ const fastify: FastifyInstance = Fastify({
     },
     redact: ['req.headers.authorization'],
   },
+  disableRequestLogging: true,
 });
 
 fastify.register(app, options);
