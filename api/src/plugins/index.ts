@@ -4,4 +4,4 @@ import auth from './firebase-auth.plugin.js';
 import sensible from './sensible.plugin.js';
 import tracer from './tracer.plugin.js';
 
-export default [ajv, auth, sensible, errorHandler, tracer];
+export default [tracer, ajv, auth, sensible, errorHandler];

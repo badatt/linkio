@@ -1,26 +1,17 @@
 import awsLambdaFastify from '@fastify/aws-lambda';
 import Fastify, { FastifyInstance } from 'fastify';
-import { randomUUID } from 'crypto';
 
 import { app, options } from './app.js';
 
 const fastify: FastifyInstance = Fastify({
   logger: {
     level: 'info',
-    messageKey: 'msg',
     formatters: {
       level(label) {
         return { level: label };
       },
       bindings() {
         return {};
-      },
-      log(object) {
-        return {
-          traceId: object.reqId ?? object.traceId,
-          message: object.msg,
-          ...object,
-        };
       },
     },
     timestamp: false,
@@ -49,11 +40,6 @@ const fastify: FastifyInstance = Fastify({
       },
     },
     redact: ['req.headers.authorization'],
-    genReqId: () => {
-      const id = randomUUID();
-      console.log(`Generated request ID ${id}`);
-      return id;
-    },
   },
 });
 

@@ -24,7 +24,7 @@ const createLinkHandler = async (
   } while (exists);
 
   await s3.putLinkObject(bucketName, slug, new URL(request.body.url));
-  request.log.info(`Generated slug ${slug}`);
+  request.log.info(`${request.id} Generated slug ${slug}`);
   return reply.code(201).header('Location', `/${slug}`).send({ slug });
 };
 
