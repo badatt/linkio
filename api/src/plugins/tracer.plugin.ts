@@ -14,7 +14,6 @@ export default fp(async (fastify) => {
       originalUrl: request.originalUrl,
       method: request.method,
       params: request.params,
-      body: request.body,
       raw: {
         httpVersion: request.raw.httpVersion,
         hostname: request.hostname,
@@ -22,7 +21,6 @@ export default fp(async (fastify) => {
         ip: request.ip,
         userAgent: request.headers['user-agent'],
         xAmznTraceID: request.headers['x-amzn-trace-id'],
-        xForwardedFor: request.headers.forwarded,
         contentType: request.headers['content-type'],
       },
     });
