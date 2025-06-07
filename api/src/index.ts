@@ -33,8 +33,8 @@ const fastify: FastifyInstance = Fastify({
       },
       res(res) {
         return {
+          traceId: res.getHeader?.('x-go-trace-id'),
           statusCode: res.statusCode,
-          status: res.status,
           elapsed: res.elapsedTime,
         };
       },

@@ -6,7 +6,7 @@ export default fp(async (fastify) => {
   fastify.addHook('onRequest', async (request: FastifyRequest, reply: FastifyReply) => {
     const traceId = randomUUID();
     request.traceId = traceId;
-    request.log = request.log.child({ traceId });
+    request.id = traceId;
     reply.header('x-go-trace-id', traceId);
   });
 });
