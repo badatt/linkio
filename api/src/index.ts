@@ -4,9 +4,6 @@ import Fastify, { FastifyInstance } from 'fastify';
 import { app, options } from './app.js';
 
 const fastify: FastifyInstance = Fastify({
-  genReqId: (req) => {
-    return req.traceID;
-  },
   logger: {
     level: 'info',
     messageKey: 'msg',
