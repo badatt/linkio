@@ -51,6 +51,7 @@ const api = {
       process: 'readonly',
       require: 'readonly',
       module: 'readonly',
+      console: 'readonly',
       __dirname: 'readonly',
     },
   },

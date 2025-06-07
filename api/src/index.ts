@@ -49,7 +49,11 @@ const fastify: FastifyInstance = Fastify({
       },
     },
     redact: ['req.headers.authorization'],
-    genReqId: () => randomUUID(),
+    genReqId: () => {
+      const id = randomUUID();
+      console.log(`Generated request ID ${id}`);
+      return id;
+    },
   },
 });
 
