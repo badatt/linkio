@@ -22,7 +22,7 @@ export default fp(async (fastify) => {
         userAgent: request.headers['user-agent'],
         xAmznTraceID: request.headers['x-amzn-trace-id'],
         xForwardedFor: request.headers.forwarded,
-        contentType: request.headers['content-type']
+        contentType: request.headers['content-type'],
       },
     });
   });
