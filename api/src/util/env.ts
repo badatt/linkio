@@ -16,4 +16,5 @@ export default {
   FIREBASE_PROJECT_ID: getEnvVar('FirebaseProjectId'),
   FIREBASE_CLIENT_EMAIL: getEnvVar('FirebaseClientEmail'),
   FIREBASE_PRIVATE_KEY: getEnvVar('FirebasePrivateKey'),
+  RECAPTCHA_SECRET_KEY: getEnvVar('GoogleRecaptchaSecretKey'),
 };

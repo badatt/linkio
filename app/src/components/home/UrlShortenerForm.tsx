@@ -53,7 +53,7 @@ export default function () {
       {isError && (
         <FlexItem>
           <Alert status="danger" isSharp>
-            {error.response?.data.message}
+            {error.response?.data.message ?? error.message}
           </Alert>
         </FlexItem>
       )}

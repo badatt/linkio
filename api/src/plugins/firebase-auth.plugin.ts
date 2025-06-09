@@ -4,6 +4,16 @@ import admin from 'firebase-admin';
 import env from '../util/env.js';
 import { ApiError } from '../model/error.js';
 
+declare module 'fastify' {
+  interface FastifyInstance {
+    verifyFirebaseToken(token: string): Promise<admin.auth.DecodedIdToken>;
+    authPreHandler: (request: FastifyRequest) => Promise<void>;
+  }
+  interface FastifyRequest {
+    user?: admin.auth.DecodedIdToken;
+  }
+}
+
 export default fp(async (fastify) => {
   if (!admin.apps.length) {
     admin.initializeApp({
@@ -33,13 +43,3 @@ export default fp(async (fastify) => {
     request.user = decoded;
   });
 });
-
-declare module 'fastify' {
-  interface FastifyInstance {
-    verifyFirebaseToken(token: string): Promise<admin.auth.DecodedIdToken>;
-    authPreHandler: (request: FastifyRequest) => Promise<void>;
-  }
-  interface FastifyRequest {
-    user?: admin.auth.DecodedIdToken;
-  }
-}

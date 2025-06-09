@@ -5,7 +5,11 @@ import { createLinkHandler } from './create.handler.js';
 import { readLinkHandler } from './read.handler.js';
 
 const handlers: FastifyPluginAsync = async (fastify: FastifyInstance): Promise<void> => {
-  fastify.post<CreateLinkRequest>('/', { schema: CreateLinkSchema }, createLinkHandler);
+  fastify.post<CreateLinkRequest>(
+    '/',
+    { schema: CreateLinkSchema, preHandler: [await fastify.verifyRecaptchaPreHandler({ action: 'CreateLink' })] },
+    createLinkHandler,
+  );
   fastify.get<ReadLinkRequest>('/:slug', { schema: ReadLinkSchema }, readLinkHandler);
 };
 
