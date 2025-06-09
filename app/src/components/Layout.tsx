@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Container, DividerEnhanced, FlexBox, FlexItem, styled, Text } from '@tidy-ui/all';
 
-import Header from './Header';
+import { Header } from './header';
 import Footer from './Footer';
 
 const Layout = styled.div`

@@ -1,5 +1,7 @@
 import * as React from 'react';
-import { Button, FlexBox, Loader } from '@tidy-ui/all';
+import { Button, FlexBox, IconButton, Loader } from '@tidy-ui/all';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut, User } from 'firebase/auth';
 
 import { auth } from '@/util';
@@ -39,9 +41,14 @@ export default function () {
     <FlexBox ali="center">
       {isPending && <Loader girth="sm" />}
       {user && !isError && !isPending && (
-        <Button tone="danger" variant="simple" onClick={handleSignOut}>
+        <IconButton
+          icon={<FontAwesomeIcon icon={faArrowRightFromBracket} />}
+          placement="right"
+          tone="danger"
+          onClick={handleSignOut}
+        >
           Signout
-        </Button>
+        </IconButton>
       )}
       {!user && !isSuccess && !isPending && (
         <Button tone="major" variant="outlined" onClick={handleSignIn}>

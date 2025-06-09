@@ -8,6 +8,7 @@ const getEnvVar = (name: string): string => {
 
 export default {
   APP_NAME: getEnvVar('AppName'),
+  IS_LOCAL_ENV: process.env['AppIsLocalEnv'],
   AWS_DEFAULT_REGION: getEnvVar('AWS_DEFAULT_REGION'),
   LINKS_STORAGE_BUCKET_NAME: getEnvVar('LinksStorageBucketName'),
   ALLOWED_ORIGINS: getEnvVar('AllowedOrigins'),

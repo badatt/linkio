@@ -24,6 +24,9 @@ declare module 'fastify' {
 }
 
 const verifyRecaptcha = async (request: FastifyRequest, options?: RecaptchaVerifyOptions): Promise<void> => {
+  if (env.IS_LOCAL_ENV) {
+    return;
+  }
   const minScore = 0.5;
   const token = request.headers['x-recaptcha-token'];
 

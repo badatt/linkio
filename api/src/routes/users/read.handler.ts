@@ -12,6 +12,22 @@ const readUserHandler = async (request: FastifyRequest, reply: FastifyReply<Read
     throw new ApiError(400, 'Missing identity in the access token');
   }
 
+  if (env.IS_LOCAL_ENV) {
+    return reply.code(200).send({
+      uid: user.sub,
+      email: user.email,
+      name: user.name,
+      picture: user.picture,
+      emailVerified: user.email_verified,
+      firebase: {
+        signInProvider: user.firebase.sign_in_provider,
+      },
+      isAnonymous: false,
+      createdAt: 0,
+      lastLoginAt: 0,
+    });
+  }
+
   const userItem = await ddb.get<UserItem>(env.USERS_TABLE, user.sub);
   return reply.code(200).send(userItem);
 };
