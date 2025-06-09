@@ -23,7 +23,7 @@ on:
         required: true
         type: string
     secrets:
-      google_captcha_secret_key:
+      google_recaptcha_secret_key:
         description: 'Google reCAPTCHA secret key'
         required: true
       firebase_private_key:
@@ -61,7 +61,7 @@ jobs:
         env:
           API_FUNCTION_ARN: ${{ inputs.api_function_arn }}
           APP_NAME: ${{ vars.APP_NAME }}
-          GOOGLE_CAPTCHA_SECRET_KEY: ${{ secrets.google_captcha_secret_key }}
+          GOOGLE_RECAPTCHA_SECRET_KEY: ${{ secrets.GOOGLE_RECAPTCHA_SECRET_KEY }}
           ALLOWED_ORIGINS: https://go.${{ vars.ROOT_DOMAIN }}
           FIREBASE_PROJECT_ID: ${{ vars.FIREBASE_PROJECT_ID }}
           FIREBASE_CLIENT_EMAIL: ${{ vars.FIREBASE_CLIENT_EMAIL }}

@@ -8,14 +8,14 @@ aws lambda update-function-code --function-name $API_FUNCTION_ARN --zip-file fil
 
 NEW_ENV_VARS_TO_ADD=$(jq -n \
   --arg AppName "$APP_NAME" \
-  --arg CaptchaKey "$GOOGLE_CAPTCHA_SECRET_KEY" \
+  --arg GoogleRecaptchaSecretKey "$GOOGLE_RECAPTCHA_SECRET_KEY" \
   --arg AllowedOrigins "$ALLOWED_ORIGINS" \
   --arg FirebaseProjectId "$FIREBASE_PROJECT_ID" \
   --arg FirebaseClientEmail "$FIREBASE_CLIENT_EMAIL" \
   --arg FirebasePrivateKey "$FIREBASE_PRIVATE_KEY" \
   '{
     AppName: $AppName,
-    GoogleCaptchaSecretKey: $CaptchaKey,
+    GoogleRecaptchaSecretKey: $GoogleRecaptchaSecretKey,
     AllowedOrigins: $AllowedOrigins,
     FirebaseProjectId: $FirebaseProjectId,
     FirebaseClientEmail: $FirebaseClientEmail,
