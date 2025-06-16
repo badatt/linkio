@@ -20,7 +20,7 @@ export default function () {
                         <code>/{link.uid}</code>
                       </Tooltip>
                     </Text.H6>
-                    <Anchor href={`${window.location.host}/${link.uid}`} canLaunch girth="lg" />
+                    <Anchor href={`/${link.uid}`} canLaunch girth="lg" />
                   </FlexBox>
                 </PanelHeader>
                 <PanelBody>
