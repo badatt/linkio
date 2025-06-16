@@ -1,7 +1,5 @@
 import * as React from 'react';
-import { Button, FlexBox, IconButton, Loader } from '@tidy-ui/all';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import { Button, FlexBox, Loader } from '@tidy-ui/all';
 import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut, User } from 'firebase/auth';
 
 import { auth } from '@/util';
@@ -9,7 +7,7 @@ import { useCreateUser } from '@/hooks';
 
 export default function () {
   const [user, setUser] = React.useState<User | null>(null);
-  const { mutate, isError, isSuccess, isPending, error, data, reset } = useCreateUser();
+  const { mutate, isError, isSuccess, isPending, error, data } = useCreateUser();
 
   React.useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, setUser);
@@ -26,35 +24,25 @@ export default function () {
     }
   };
 
-  const handleSignOut = () => {
-    signOut(auth);
-    reset();
-  };
-
   React.useEffect(() => {
     if (isError) {
       signOut(auth);
     }
   }, [isSuccess, isError, data, error]);
 
-  return (
-    <FlexBox ali="center">
-      {isPending && <Loader girth="sm" />}
-      {user && !isError && !isPending && (
-        <IconButton
-          icon={<FontAwesomeIcon icon={faArrowRightFromBracket} />}
-          placement="right"
-          tone="danger"
-          onClick={handleSignOut}
-        >
-          Signout
-        </IconButton>
-      )}
-      {!user && !isSuccess && !isPending && (
+  if (isPending)
+    return (
+      <FlexBox>
+        <Loader girth="sm" />
+      </FlexBox>
+    );
+
+  if (!user && !isSuccess && !isPending)
+    return (
+      <FlexBox>
         <Button tone="major" variant="outlined" onClick={handleSignIn}>
           Sign in with Google
         </Button>
-      )}
-    </FlexBox>
-  );
+      </FlexBox>
+    );
 }

@@ -1,9 +1,9 @@
 import { AxiosError } from 'axios';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 
 import { api } from '@/util';
-import { FastifyErrorResponse, Link } from '@/types';
+import { FastifyErrorResponse, Link, MyLinks } from '@/types';
 
 type CreateLinkRequest = {
   url: string;
@@ -34,4 +34,16 @@ const useCreateLink = () => {
   });
 };
 
-export { useCreateLink };
+const useGetMyLinks = () => {
+  const queryFun = async () => {
+    const response = await api.get('/links');
+    return response.data;
+  };
+
+  return useQuery<MyLinks, AxiosError<FastifyErrorResponse>>({
+    queryKey: ['my-links'],
+    queryFn: queryFun,
+  });
+};
+
+export { useCreateLink, useGetMyLinks };
