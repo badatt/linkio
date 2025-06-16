@@ -16,7 +16,7 @@ export default function () {
           </Text.H6>
         </FlexItem>
         <FlexItem>
-          <FlexBox gap="1rem">
+          <FlexBox ali="center">
             <Menu />
             <SignIn />
             <ThemeSwitcher />

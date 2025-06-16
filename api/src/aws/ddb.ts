@@ -54,9 +54,15 @@ const get = async <T>(tableName: string, uid: string): Promise<T | undefined> =>
   }
 };
 
-const query = async <T>(tableName: string, condition: string, values: Record<string, any>): Promise<Array<T>> => {
+const query = async <T>(
+  tableName: string,
+  condition: string,
+  values: Record<string, any>,
+  indexName?: string,
+): Promise<Array<T>> => {
   const command = new QueryCommand({
     TableName: tableName,
+    IndexName: indexName,
     KeyConditionExpression: condition,
     ExpressionAttributeValues: values,
   });

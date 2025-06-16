@@ -18,7 +18,7 @@ const Layout = styled.div`
 export default function ({ children }: { children: React.ReactNode }) {
   return (
     <Layout>
-      <Container maxWidth="md">
+      <Container maxWidth="lg">
         <FlexBox fld="column" nowrap>
           <FlexItem fuw>
             <Header />

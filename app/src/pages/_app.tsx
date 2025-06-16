@@ -11,7 +11,16 @@ import { Head, Layout } from '@/components';
 config.autoAddCss = false;
 
 export default function ({ Component, pageProps }: AppProps) {
-  const [queryClient] = useState(() => new QueryClient());
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            retry: false,
+          },
+        },
+      }),
+  );
   const [isHydrated, setIsHydrated] = useState(false);
 
   React.useEffect(() => {

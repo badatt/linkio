@@ -7,10 +7,14 @@ import { readUserHandler } from './read.handler.js';
 const handlers: FastifyPluginAsync = async (fastify: FastifyInstance): Promise<void> => {
   fastify.post<UpsertUserRequest>(
     '/',
-    { schema: UpsertUserSchema, preHandler: fastify.authPreHandler },
+    { schema: UpsertUserSchema, preHandler: [await fastify.authPreHandler()] },
     upsertUserHandler,
   );
-  fastify.get<ReadUserRequest>('/me', { schema: ReadUserSchema, preHandler: fastify.authPreHandler }, readUserHandler);
+  fastify.get<ReadUserRequest>(
+    '/me',
+    { schema: ReadUserSchema, preHandler: [await fastify.authPreHandler()] },
+    readUserHandler,
+  );
 };
 
 const route: FastifyPluginAsync = async (fastify): Promise<void> => {

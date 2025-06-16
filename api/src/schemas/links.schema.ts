@@ -82,4 +82,53 @@ interface ReadLinkResponse {
   Reply: ReadLinkReply;
 }
 
-export { CreateLinkSchema, CreateLinkRequest, CreateLinkResponse, ReadLinkSchema, ReadLinkRequest, ReadLinkResponse };
+/* Read all links schema */
+const LinkItemSchema = Type.Object({
+  uid: Type.String(),
+  createdByEmail: Type.String(),
+  createdByUid: Type.Optional(Type.String()),
+  createdAt: Type.Number(),
+});
+
+type LinkItem = Static<typeof LinkItemSchema>;
+
+const ReadAllLinksResponseSchema = Type.Object(
+  {
+    count: Type.Number(),
+    items: Type.Array(LinkItemSchema),
+  },
+  {
+    title: 'Read all link response schema',
+  },
+);
+
+const ReadAllLinksSchema: FastifySchema = {
+  response: {
+    200: ReadAllLinksResponseSchema,
+    ...errorSchemas([404]),
+  },
+};
+
+type ReadAllLinksReply = Static<typeof ReadAllLinksResponseSchema>;
+
+interface ReadAllLinksRequest {
+  Reply: ReadAllLinksReply;
+}
+
+interface ReadAllLinksResponse {
+  Reply: ReadAllLinksReply;
+}
+
+export {
+  LinkItem,
+  CreateLinkSchema,
+  CreateLinkRequest,
+  CreateLinkResponse,
+  ReadAllLinksSchema,
+  ReadAllLinksReply,
+  ReadAllLinksRequest,
+  ReadAllLinksResponse,
+  ReadLinkSchema,
+  ReadLinkRequest,
+  ReadLinkResponse,
+};
